@@ -53,13 +53,9 @@ module.exports = {
     [
       {
         test: /\.(jsx?|babel|es6)$/,
-        include: '/Users/hua/Documents/其他项目/ddv-cms',
+        include: dirRoot,
         exclude: /node_modules|bower_components/,
-        loader: 'buble-loader',
-        query: {
-          objectAssign: 'Object.assign',
-          jsx: 'h'
-        }
+        loader: 'babel-loader'
       },
       {
         test: /\.json$/,
