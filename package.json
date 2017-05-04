@@ -57,9 +57,6 @@
     "webpack-dev-server": "^2.4.2"
   },
   "description": "ddv-ui让你直接使用cms后台布局，省去后台布局时间",
-  "directories": {
-    "bin": "./bin"
-  },
   "engines": {
     "node": ">=4.0.0"
   },
