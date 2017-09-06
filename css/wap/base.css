@@ -41,7 +41,6 @@ body {
   .wechat-page button {
     outline: 0;
     border: 0;
-    background: transparent;
     padding: 0;
     width: initial; }
   .wechat-page select {
