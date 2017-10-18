@@ -6,6 +6,7 @@
 }*/
 
 * {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -56,6 +57,7 @@ select{
   width:100%;
   background: transparent;
   direction: rtl;
+  -webkit-box-sizing:border-box;
   box-sizing:border-box;
 }
 a, button, input[type="text"], textarea {
@@ -489,7 +491,8 @@ button {
 .text-overflow {
   overflow: hidden !important;
   white-space: nowrap !important;
-  text-overflow: ellipsis !important;
+  -o-text-overflow: ellipsis !important;
+     text-overflow: ellipsis !important;
 }
 
 ::-webkit-input-placeholder {
