@@ -48,3 +48,5 @@ lib
 src/components.js
 
 yarn.lock
+
+package-lock.json
