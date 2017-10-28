@@ -21,6 +21,7 @@
     "cross-spawn": "~5.1.0",
     "chokidar": "~1.6.1",
     "qrcode": "~0.9.0",
+    "async-validator": "~1.8.1",
     "element-ui": "^1.4.7",
     "mint-ui": "^2.2.9"
   },
