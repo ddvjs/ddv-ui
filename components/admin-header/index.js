@@ -1,4 +1,4 @@
-import adminHeader from './src/main'
+import adminHeader from './src/ddv-ui-main'
 
 /* istanbul ignore next */
 adminHeader.install = function VueUseInstall (Vue) {

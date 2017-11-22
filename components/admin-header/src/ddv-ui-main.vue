@@ -1,6 +1,6 @@
 <template>
-  <el-col :span="24" class="panel-top">
-    <el-col :span="20" class="f24">
+  <ddv-ui-col :span="24" class="panel-top">
+    <ddv-ui-col :span="18" class="f24">
       <div class="navbar-header pull-left pl20">
         <img :src="logo" alt="" class="logo round">
         <span>
@@ -11,20 +11,29 @@
       <div class="pull-left pl20 pr20 pointer f20 navbar-header-btn" @click="fullTodo">
         <i class="el-icon-menu"></i>
       </div>
-    </el-col>
-    <el-col :span="4">
-      <div class="clearfix pull-right pointer" @click="logout">
+    </ddv-ui-col>
+    <ddv-ui-col :span="6">
+      <div class="clearfix pull-right pointer admin-logout" @click="logout">
         {{user}}
-        <el-tooltip class="item tip-logout pl10" effect="dark" content="退出" placement="bottom">
-          <i class="fa fa-sign-out" aria-hidden="true"></i>
-        </el-tooltip>
+        <span>退出</span>
       </div>
-    </el-col>
-  </el-col>
+    </ddv-ui-col>
+  </ddv-ui-col>
 </template>
 
+<style>
+.admin-logout{
+  margin-right: 50px;
+}
+</style>
+
 <script>
+  import ddvUiCol from './ddv-ui-col'
 export default{
+    components:{
+      ddvUiCol,
+//      ddvUiTooltip
+    },
   name: 'adminHeader',
   props: {
     'fullTodo': {

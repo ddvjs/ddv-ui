@@ -1,15 +1,22 @@
 <template>
   <div class="sidebars sidebars-main pull-left" :class="{'active':isFullScreen}">
-    <el-row class="tac">
-      <el-col :span="24">
+    <ddv-ui-row class="tac">
+      <ddv-ui-col :span="24">
         <slot></slot>
-      </el-col>
-    </el-row>
+      </ddv-ui-col>
+    </ddv-ui-row>
   </div>
 </template>
 
 <script>
-export default {
+  import ddvUiCol from './ddv-ui-col'
+  import ddvUiRow from './ddv-ui-row'
+
+  export default {
+    components:{
+      ddvUiCol,
+      ddvUiRow
+    },
   name: 'adminSidebar',
   props: {
     'isFullScreen': {
