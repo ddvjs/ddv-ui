@@ -6,7 +6,8 @@
 </template>
 
 <script>
-const QRCode = require('qrcode')
+var QRCode
+
 export default {
   name: 'ddvUiQrcode',
   props: {
@@ -51,6 +52,7 @@ export default {
     }
   },
   mounted () {
+    QRCode = require('qrcode')
     this.toDataURL()
   }
 }

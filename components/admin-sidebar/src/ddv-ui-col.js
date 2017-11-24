@@ -41,8 +41,8 @@ export default {
       if (this[prop]) {
         classList.push(
           prop !== 'span'
-          ? `el-col-${prop}-${this[prop]}`
-          : `el-col-${this[prop]}`
+            ? `el-col-${prop}-${this[prop]}`
+            : `el-col-${this[prop]}`
         )
       }
     });
