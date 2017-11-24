@@ -5,27 +5,27 @@
 </template>
 <script>
   export default {
-//    name: 'ddvuiBreadcrumbItem',
+    name: 'ddvUiBreadcrumbItem',
     props: {
       to: {},
       replace: Boolean
     },
-    data() {
+    data () {
       return {
         separator: ''
-      };
+      }
     },
-    mounted() {
-      this.separator = this.$parent.separator;
-      var self = this;
+    mounted () {
+      this.separator = this.$parent.separator
+      var self = this
       if (this.to) {
-        let link = this.$refs.link;
+        let link = this.$refs.link
         link.addEventListener('click', _ => {
-          let to = this.to;
+          let to = this.to
           self.replace ? self.$router.replace(to)
-            : self.$router.push(to);
-        });
+            : self.$router.push(to)
+        })
       }
     }
-  };
+  }
 </script>

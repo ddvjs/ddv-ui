@@ -1,8 +1,21 @@
 module.exports = {
   plugins: [
-    require('postcss-bem')({
-      defaultNamespace: undefined, // default namespace to use, none by default
-      style: 'suit' // suit or bem, suit by default
+    require('postcss-salad')({
+      'browsers': ['last 3 versions'],
+      'features': {
+        'autoprefixer': false,
+        'bem': {
+          'shortcuts': {
+            'component': 'b',
+            'modifier': 'm',
+            'descendent': 'e'
+          },
+          'separators': {
+            'descendent': '__',
+            'modifier': '--'
+          }
+        }
+      }
     }),
     require('postcss-cssnext')({
       browsers: ['last 3 versions']

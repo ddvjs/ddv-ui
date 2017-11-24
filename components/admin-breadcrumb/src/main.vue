@@ -22,8 +22,8 @@
 </template>
 
 <script>
-  import ddvUiBreadcrumb from './ddv-ui-breadcrumb'
-  import ddvUiBreadcrumbItem from './ddv-ui-breadcrumb-item'
+import ddvUiBreadcrumb from './ddv-ui-breadcrumb'
+import ddvUiBreadcrumbItem from './ddv-ui-breadcrumb-item'
 export default {
   name: 'adminBreadcrumb',
   props: {
@@ -38,7 +38,7 @@ export default {
       default: []
     }
   },
-  components:{
+  components: {
     ddvUiBreadcrumb,
     ddvUiBreadcrumbItem
   }

@@ -7,13 +7,13 @@
 
 <script>
   export default {
-//    name: 'ddvuireadcrumb',
+    name: 'ddvUireadcrumb',
     props: {
       separator: {
         type: String,
         default: '/'
       }
     }
-  };
+  }
 </script>
 

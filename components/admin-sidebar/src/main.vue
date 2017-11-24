@@ -9,15 +9,15 @@
 </template>
 
 <script>
-  import ddvUiCol from './ddv-ui-col'
-  import ddvUiRow from './ddv-ui-row'
+import ddvUiCol from './ddv-ui-col'
+import ddvUiRow from './ddv-ui-row'
 
-  export default {
-    components:{
-      ddvUiCol,
-      ddvUiRow
-    },
+export default {
   name: 'adminSidebar',
+  components: {
+    ddvUiCol,
+    ddvUiRow
+  },
   props: {
     'isFullScreen': {
       type: Boolean
