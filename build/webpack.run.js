@@ -19,9 +19,9 @@ logger.log('isDev : ' + (isDev ? 'true' : 'false'))
 const entryStyle22 = {
   'admin/base': ['./style/admin/base.css'],
   'admin/colors': ['./style/admin/colors.css'],
-  'admin/components': ['./style/admin/components.scss'],
-  'admin/core': ['./style/admin/core.scss'],
-  'wap/base': ['./style/wap/base.scss']
+  'admin/components': ['./style/admin/components.css'],
+  'admin/core': ['./style/admin/core.css'],
+  'wap/base': ['./style/wap/base.css']
 }
 // Hack: remove extract-text-webpack-plugin log
 const cleanStats = function (stats) {
