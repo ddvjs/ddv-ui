@@ -81,5 +81,5 @@
     "type": "git",
     "url": "git+https://github.com/ddvjs/ddv-ui.git"
   },
-  "version": "0.1.0"
+  "version": "0.1.1"
 }
