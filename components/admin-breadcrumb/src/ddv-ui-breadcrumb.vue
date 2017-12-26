@@ -6,14 +6,14 @@
 <style src="./ddv-ui-breadcrumb.css"/>
 
 <script>
-  export default {
-    name: 'ddvUireadcrumb',
-    props: {
-      separator: {
-        type: String,
-        default: '/'
-      }
+export default {
+  name: 'ddvUireadcrumb',
+  props: {
+    separator: {
+      type: String,
+      default: '/'
     }
   }
+}
 </script>
 

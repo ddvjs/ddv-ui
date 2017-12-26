@@ -30,10 +30,11 @@
 <script>
 import ddvUiCol from './ddv-ui-col'
 export default{
-  name: 'adminHeader',
   components: {
     ddvUiCol
+    // ddvUiTooltip
   },
+  name: 'adminHeader',
   props: {
     'fullTodo': {
       type: Function,

@@ -2,6 +2,7 @@
 @import "./common/var.css";
 
 @component-namespace ddvui {
+
   @b breadcrumb {
     font-size:13px;
     line-height: 1;
@@ -26,19 +27,19 @@
       }
     }
 
-    &:last-child {
-      .el-breadcrumb__item__inner,
-      .el-breadcrumb__item__inner a {
-    &, &:hover {
-          color: var(--color-light-silver);
-          cursor: text;
-        }
-    }
-
-    .el-breadcrumb__separator {
-      display: none;
-    }
+  &:last-child {
+    .el-breadcrumb__item__inner,
+    .el-breadcrumb__item__inner a {
+  &, &:hover {
+        color: var(--color-light-silver);
+        cursor: text;
+      }
   }
+
+  .el-breadcrumb__separator {
+    display: none;
+  }
+}
 }
 }
 }

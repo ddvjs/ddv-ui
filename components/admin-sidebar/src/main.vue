@@ -13,11 +13,11 @@ import ddvUiCol from './ddv-ui-col'
 import ddvUiRow from './ddv-ui-row'
 
 export default {
-  name: 'adminSidebar',
   components: {
     ddvUiCol,
     ddvUiRow
   },
+  name: 'adminSidebar',
   props: {
     'isFullScreen': {
       type: Boolean

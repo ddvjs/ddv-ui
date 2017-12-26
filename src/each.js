@@ -1,5 +1,3 @@
-'use strict'
-
 module.exports = each
 
 function each (objs, fn) {
