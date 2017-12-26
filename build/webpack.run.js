@@ -39,35 +39,35 @@ if (isDev) {
 } else {
   // production
   getEntry()
-  .then(entry => {
-    config.entry = entry
-    compiler = webpack(config)
-    compiler.plugin('done', stats => {
-      cleanStats(stats)
-      logger.success('完成')
-    })
-    compiler.run(function (err, stats) {
-      if (err) {
-        logger.fatal(err)
-      }
+    .then(entry => {
+      config.entry = entry
+      compiler = webpack(config)
+      compiler.plugin('done', stats => {
+        cleanStats(stats)
+        logger.success('完成')
+      })
+      compiler.run(function (err, stats) {
+        if (err) {
+          logger.fatal(err)
+        }
 
-      var config = {
-        colors: true,
-        progress: true,
-        chunks: false,
-        hash: false,
-        version: false
-      }
-      if (stats.hasErrors()) {
-        logger.fatal(stats.toString(config))
-      }
+        var config = {
+          colors: true,
+          progress: true,
+          chunks: false,
+          hash: false,
+          version: false
+        }
+        if (stats.hasErrors()) {
+          logger.fatal(stats.toString(config))
+        }
 
-      logger.success('info\n' + stats.toString(config))
+        logger.success('info\n' + stats.toString(config))
+      })
     })
-  })
-  .catch(err => {
-    console.log(err)
-  })
+    .catch(err => {
+      console.log(err)
+    })
 }
 function watchChangeDev () {
   new Promise(function (resolve, reject) {
@@ -82,39 +82,39 @@ function watchChangeDev () {
       resolve()
     }
   })
-  .then(function () {
-    return getEntry()
-  })
-  .then(function (entry) {
-    // 获取入口列表
-    config.entry = entry
-    console.log('config.entry', config.entry)
-    logger.log('webpack watch runing...')
-    // 实例化webpack
-    compiler = webpack(config)
-
-    compiler.plugin('done', stats => {
-      cleanStats(stats)
-      console.log('完成')
+    .then(function () {
+      return getEntry()
     })
-    compilerWatch = compiler.watch({}, (err, stats) => {
-      if (err) {
-        return logger.error(err)
-      }
+    .then(function (entry) {
+    // 获取入口列表
+      config.entry = entry
+      console.log('config.entry', config.entry)
+      logger.log('webpack watch runing...')
+      // 实例化webpack
+      compiler = webpack(config)
 
-      var config = {
-        colors: true,
-        progress: true,
-        chunks: false,
-        hash: false,
-        version: false
-      }
-      logger.log('webpack info \n' + stats.toString(config))
+      compiler.plugin('done', stats => {
+        cleanStats(stats)
+        console.log('完成')
+      })
+      compilerWatch = compiler.watch({}, (err, stats) => {
+        if (err) {
+          return logger.error(err)
+        }
+
+        var config = {
+          colors: true,
+          progress: true,
+          chunks: false,
+          hash: false,
+          version: false
+        }
+        logger.log('webpack info \n' + stats.toString(config))
       // stats = stats.toJson()
       // stats.errors.forEach(err => console.error(err))
       // stats.warnings.forEach(err => console.warn(err))
+      })
     })
-  })
 }
 // 获取入口列表
 function getEntry (entryStyleInput, entryComponentsInput) {
@@ -125,7 +125,7 @@ function getEntry (entryStyleInput, entryComponentsInput) {
       var res = entryStyleInput || entry.style
       if ((!res) || util.isEmptyObject(res)) {
         Promise.resolve(entryStyle22)
-        .then(resolve, reject)
+          .then(resolve, reject)
         entry.style = entryStyle22
       } else {
         resolve(res)
@@ -136,20 +136,20 @@ function getEntry (entryStyleInput, entryComponentsInput) {
       var res = entryComponentsInput || entry.components
       if ((!res) || util.isEmptyObject(res)) {
         componentsLists
-        .getComponentsListsByPath(componentsPath)
-        .then(componentsListsSave)
-        .then(() => (entry.components))
-        .then(resolve, reject)
+          .getComponentsListsByPath(componentsPath)
+          .then(componentsListsSave)
+          .then(() => (entry.components))
+          .then(resolve, reject)
       } else {
         resolve(res)
       }
       resolve = reject = res = void 0
     })
   ])
-  .then(([base, style, components]) => {
-    logger.log('webpack config.entry success')
-    return Object.assign(Object.create(null), base, style, components)
-  })
+    .then(([base, style, components]) => {
+      logger.log('webpack config.entry success')
+      return Object.assign(Object.create(null), base, style, components)
+    })
 }
 function componentsListsSave ({importComponents, entryComponents, errorNames}) {
   errorNames && errorNames.length > 0 && logger.error('errorNames', errorNames)
