@@ -1,19 +1,37 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// 1. Use plugin.
-// This installs <router-view> and <router-link>,
-// and injects $router and $route to all router-enabled child components
+import Tree from './components/tree.vue'
 Vue.use(VueRouter)
+
+const Index = {
+  render (h) {
+    return h('h1', {
+      style: {
+        textAlign: 'center',
+        marginTop: '50%',
+        transform: 'translateY(-30px)',
+        lineHeight: '60px',
+        fontSize: '50px'
+      }
+    }, 'ddv-ui Examples')
+  }
+}
 
 const router = new VueRouter({
   mode: 'history',
   base: __dirname,
-  routes: []
+  routes: [
+    {
+      path: '/',
+      component: Index
+    },
+    {
+      path: '/tree',
+      component: Tree
+    }
+  ]
 })
 
-// 4. Create and mount root instance.
-// Make sure to inject the router.
-// Route components will be rendered inside <router-view>.
 new Vue({
   router,
   template: `<router-view class="view"></router-view>`,

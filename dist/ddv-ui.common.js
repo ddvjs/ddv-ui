@@ -3,6 +3,8 @@
   * (c) 2018 861883474@qq.com
   * @license MIT
   */
+'use strict';
+
 //
 //
 //
@@ -43,8 +45,9 @@ __vue_render__._withStripped = true;
   ) {
     var component = (typeof script$$1 === 'function' ? script$$1.options : script$$1) || {};
 
-    // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/tree/src/tree.vue";
+    {
+      component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/tree/src/tree.vue";
+    }
 
     if (!component.render) {
       component.render = template.render;
@@ -153,4 +156,3 @@ module.exports = {
 };
 
 module.exports.default = module.exports;
-//# sourceMappingURL=ddv-ui.esm.js.map
