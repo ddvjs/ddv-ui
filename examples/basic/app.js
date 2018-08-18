@@ -8,8 +8,7 @@ const Index = {
     return h('h1', {
       style: {
         textAlign: 'center',
-        marginTop: '50%',
-        transform: 'translateY(-30px)',
+        marginTop: '250px',
         lineHeight: '60px',
         fontSize: '50px'
       }
