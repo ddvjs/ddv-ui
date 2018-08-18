@@ -4,11 +4,6 @@
   * @license MIT
   */
 //
-//
-//
-//
-//
-//
 
 var script = {
   name: 'ddv-tree'
