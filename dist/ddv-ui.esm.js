@@ -1,6 +1,6 @@
 /*!
-  * ddv-multi-window v0.1.0
-  * (c) 2018 yuchonghua@163.com
+  * ddv-ui v0.1.0
+  * (c) 2018 861883474@qq.com
   * @license MIT
   */
 //
@@ -154,4 +154,4 @@ module.exports = {
 };
 
 module.exports.default = module.exports;
-//# sourceMappingURL=ddv-multi-window.esm.js.map
+//# sourceMappingURL=ddv-ui.esm.js.map

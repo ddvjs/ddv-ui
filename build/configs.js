@@ -9,8 +9,8 @@ const postcss = require('rollup-plugin-postcss')
 const version = process.env.VERSION || require('../package.json').version
 const banner =
 `/*!
-  * ddv-multi-window v${version}
-  * (c) ${new Date().getFullYear()} yuchonghua@163.com
+  * ddv-ui v${version}
+  * (c) ${new Date().getFullYear()} 861883474@qq.com
   * @license MIT
   */`
 
@@ -19,21 +19,21 @@ const resolve = _path => path.resolve(__dirname, '../', _path)
 module.exports = [
   // browser dev
   {
-    file: resolve('dist/ddv-multi-window.js'),
+    file: resolve('dist/ddv-ui.js'),
     format: 'umd',
     env: 'development'
   },
   {
-    file: resolve('dist/ddv-multi-window.min.js'),
+    file: resolve('dist/ddv-ui.min.js'),
     format: 'umd',
     env: 'production'
   },
   {
-    file: resolve('dist/ddv-multi-window.common.js'),
+    file: resolve('dist/ddv-ui.common.js'),
     format: 'cjs'
   },
   {
-    file: resolve('dist/ddv-multi-window.esm.js'),
+    file: resolve('dist/ddv-ui.esm.js'),
     format: 'es'
   }
 ].map(genConfig)
@@ -47,7 +47,7 @@ function genConfig (opts) {
         getDefault(postcss)(
           {
             minimize: true,
-            extract: resolve('dist/style/ddv-multi-window.css')
+            extract: resolve('dist/style/ddv-ui.css')
           }
         ),
         flow(),
