@@ -47,7 +47,7 @@ function genConfig (opts) {
         getDefault(postcss)(
           {
             minimize: true,
-            extract: resolve('dist/style/ddv-ui.css')
+            extract: resolve('dist/style/index.css')
           }
         ),
         flow(),
