@@ -11,6 +11,7 @@ Vue.prototype.$message = Message
 export default {
   mounted () {
 		this.$message({
+			client: 'wap',
 			message: 'ppp',
 			type: 'success',
 			el: this.$refs.messageWrap

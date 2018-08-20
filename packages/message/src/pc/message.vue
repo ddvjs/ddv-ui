@@ -1,11 +1,22 @@
 <template>
   <div class="ddv-ui">
-    <div class="ddv-message" :class="classType">
-      <span><i class="iconfont" :class="icon"></i></span>
-      <span class="ddv-message__text">{{message}}</span>
-    </div>
+    <transition name="el-message-fade">
+      <div class="ddv-message" :class="classType" v-show="visible">
+        <span><i class="iconfont" :class="icon"></i></span>
+        <span class="ddv-message__text">{{message}}</span>
+      </div>
+    </transition>  
   </div>
 </template>
+<style>
+.el-message-fade-enter,
+.el-message-fade-leave-active {
+  opacity: 0;
+  transform: translate(-50%, -100%);
+}
+
+</style>
+
 
 <script>
 import '../../../style/src/base.css'
@@ -28,11 +39,15 @@ export default {
     duration: {
       type: Number,
       default: 3000
+    },
+    onClose: {
+      type: Function
     }
   },
   data () {
     return {
-      isClose: false
+      isClose: false,
+      visible: false
     }
   },
   computed: {
@@ -51,6 +66,37 @@ export default {
     classType () {
       return `ddv-message__${this.type}`
     }
+  },
+  methods: {
+    close () {
+      this.isClose = true
+      if (typeof this.onClose === 'function') {
+        this.onClose(this)
+      }
+    },
+    startTimer () {
+      if (this.duration > 0) {
+        this.timer = setTimeout(() => {
+          if (!this.isClose) {
+            this.close()
+          }
+        }, this.duration)
+      }
+    }
+  },
+  watch: {
+    isClose (val) {
+      if (val) {
+        this.visible = false
+        setTimeout(() => {
+          this.$destroy()
+        },  this.duration + 500)
+      }
+    }
+  },
+  mounted () {
+    this.visible = true
+    this.startTimer()
   }
 }
 </script>

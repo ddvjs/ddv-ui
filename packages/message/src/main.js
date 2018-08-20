@@ -6,7 +6,8 @@ export default type => {
     functional: true,
     render (h) {
       let props = {
-        message: this.message
+        message: this.message,
+        onClose: this.onClose
       }
 
       if (this.type) {
