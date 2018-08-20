@@ -5,3 +5,4 @@ node_modules
 *.scss
 *.woff
 *.ttf
+examples/basic/app.js
