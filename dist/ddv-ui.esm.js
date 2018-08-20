@@ -269,7 +269,7 @@ var script$1 = {
             node: item.node,
             data: item.data,
             level: level,
-            indent: this$1.indent * (level - 1)
+            indent: this$1.indent
           }
         }, slotRender);
         renderList.push(render);
@@ -8541,7 +8541,7 @@ var __vue_render__$1 = function() {
     "div",
     { staticClass: "ddv-ui" },
     [
-      _c("transition", { attrs: { name: "el-message-fade" } }, [
+      _c("transition", { attrs: { name: "ddv-message-fade" } }, [
         _c(
           "div",
           {
@@ -8573,11 +8573,7 @@ var __vue_staticRenderFns__$1 = [];
 __vue_render__$1._withStripped = true;
 
   /* style */
-  var __vue_inject_styles__$2 = function (inject) {
-    if (!inject) { return }
-    inject("data-v-747c401d_0", { source: "\n.el-message-fade-enter,\n.el-message-fade-leave-active {\n  opacity: 0;\n  transform: translate(-50%, -100%);\n}\n\n", map: {"version":3,"sources":["/Users/sicmouse/Documents/GitHub/ddv-ui/packages/message/src/pc/message.vue"],"names":[],"mappings":";AAWA;;EAEA,WAAA;EACA,kCAAA;CACA","file":"message.vue","sourcesContent":["<template>\n  <div class=\"ddv-ui\">\n    <transition name=\"el-message-fade\">\n      <div class=\"ddv-message\" :class=\"classType\" v-show=\"visible\">\n        <span><i class=\"iconfont\" :class=\"icon\"></i></span>\n        <span class=\"ddv-message__text\">{{message}}</span>\n      </div>\n    </transition>  \n  </div>\n</template>\n<style>\n.el-message-fade-enter,\n.el-message-fade-leave-active {\n  opacity: 0;\n  transform: translate(-50%, -100%);\n}\n\n</style>\n\n\n<script>\nimport '../../../style/src/base.css'\nimport '../../../style/src/message.css'\nimport '../../../style/src/iconfont/iconfont.css'\n\nexport default {\n  name: 'DdvMessage',\n  props: {\n    type: {\n      type: String,\n      default: 'info',\n      validator (value) {\n        return ['info', 'error', 'success', 'warning'].indexOf(value) > -1\n      }\n    },\n    message: {\n      type: String\n    },\n    duration: {\n      type: Number,\n      default: 3000\n    },\n    onClose: {\n      type: Function\n    }\n  },\n  data () {\n    return {\n      isClose: false,\n      visible: false\n    }\n  },\n  computed: {\n    icon () {\n      switch (this.type) {\n        case 'info':\n          return 'icon-info'\n        case 'error':\n          return 'icon-danger'\n        case 'success':\n          return 'icon-success'\n        case 'warning':\n          return 'icon-warning'\n      }\n    },\n    classType () {\n      return `ddv-message__${this.type}`\n    }\n  },\n  methods: {\n    close () {\n      this.isClose = true\n      if (typeof this.onClose === 'function') {\n        this.onClose(this)\n      }\n    },\n    startTimer () {\n      if (this.duration > 0) {\n        this.timer = setTimeout(() => {\n          if (!this.isClose) {\n            this.close()\n          }\n        }, this.duration)\n      }\n    }\n  },\n  watch: {\n    isClose (val) {\n      if (val) {\n        this.visible = false\n        setTimeout(() => {\n          this.$destroy()\n        },  this.duration + 500)\n      }\n    }\n  },\n  mounted () {\n    this.visible = true\n    this.startTimer()\n  }\n}\n</script>\n\n"]}, media: undefined });
-
-  };
+  var __vue_inject_styles__$2 = undefined;
   /* scoped */
   var __vue_scope_id__$2 = undefined;
   /* module identifier */
@@ -8605,29 +8601,7 @@ __vue_render__$1._withStripped = true;
 
     component._scopeId = scope;
 
-    {
-      var hook;
-      if (style) {
-        hook = function(context) {
-          style.call(this, createInjector(context));
-        };
-      }
-
-      if (hook !== undefined) {
-        if (component.functional) {
-          // register for functional component in vue file
-          var originalRender = component.render;
-          component.render = function renderWithStyleInjection(h, context) {
-            hook.call(context);
-            return originalRender(h, context)
-          };
-        } else {
-          // inject component registration as beforeCreate hook
-          var existing = component.beforeCreate;
-          component.beforeCreate = existing ? [].concat(existing, hook) : [hook];
-        }
-      }
-    }
+    
 
     return component
   }
@@ -8728,7 +8702,7 @@ var script$3 = {
     },
     position: {
       type: String,
-      default: middle,
+      default: 'middle',
       validator: function validator (value) {
         return ['top', 'bottom', 'middle'].indexOf(value) > -1
       }

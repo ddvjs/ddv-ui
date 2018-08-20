@@ -11,11 +11,16 @@ Vue.prototype.$message = Message
 export default {
   mounted () {
 		this.$message({
-			client: 'wap',
 			message: 'ppp',
 			type: 'success',
 			el: this.$refs.messageWrap
 		})
+		setTimeout(() => {
+			this.$message({
+				message: 'adsadsad',
+				el: this.$refs.messageWrap
+			})
+		}, 1000);
 	}
 }
 </script>

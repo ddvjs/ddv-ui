@@ -60,3 +60,9 @@
 .ddv-message__text {
   margin-left: 10px;
 }
+
+.ddv-message-fade-enter,
+.ddv-message-fade-leave-active {
+  opacity: 0;
+  transform: translate(-50%, -100%);
+}

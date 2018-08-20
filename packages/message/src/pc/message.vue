@@ -1,6 +1,6 @@
 <template>
   <div class="ddv-ui">
-    <transition name="el-message-fade">
+    <transition name="ddv-message-fade">
       <div class="ddv-message" :class="classType" v-show="visible">
         <span><i class="iconfont" :class="icon"></i></span>
         <span class="ddv-message__text">{{message}}</span>
@@ -8,15 +8,6 @@
     </transition>  
   </div>
 </template>
-<style>
-.el-message-fade-enter,
-.el-message-fade-leave-active {
-  opacity: 0;
-  transform: translate(-50%, -100%);
-}
-
-</style>
-
 
 <script>
 import '../../../style/src/base.css'

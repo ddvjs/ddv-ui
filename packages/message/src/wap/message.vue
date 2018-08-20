@@ -23,7 +23,7 @@ export default {
     },
     position: {
       type: String,
-      default: middle,
+      default: 'middle',
       validator (value) {
         return ['top', 'bottom', 'middle'].indexOf(value) > -1
       }

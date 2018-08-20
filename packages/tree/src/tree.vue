@@ -74,7 +74,7 @@ export default {
             node: item.node,
             data: item.data,
             level: level,
-            indent: this.indent * (level - 1)
+            indent: this.indent
           }
         }, slotRender)
         renderList.push(render)
