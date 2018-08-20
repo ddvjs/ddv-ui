@@ -1,7 +1,10 @@
 import Tree from '../packages/tree/index.js'
+import Message from '../packages/Message/index.js'
+import Vue from 'vue'
 
 const components = [
-  Tree
+  Tree,
+  Message
 ]
 
 const install = (Vue, opts = {}) => {
@@ -10,10 +13,13 @@ const install = (Vue, opts = {}) => {
   })
 }
 
+Vue.prototype.$message = Message
+
 module.exports = {
   version: '0.2.0',
   install,
-  Tree
+  Tree,
+  Message
 }
 
 module.exports.default = module.exports
