@@ -1,0 +1,25 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+ul, li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+a, button, input[type="text"], textarea {
+	-ms-touch-action: none;
+	-webkit-appearance: none;
+	-webkit-tap-highlight-color: transparent;
+}
+
+button {
+	outline: 0;
+	border: 0;
+}

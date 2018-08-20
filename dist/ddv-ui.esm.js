@@ -4,11 +4,6 @@
   * @license MIT
   */
 //
-//
-//
-//
-//
-//
 
 var script = {
   name: 'ddv-tree'
@@ -22,7 +17,7 @@ var __vue_render__ = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("div", [_vm._v("\n  sdads\n")])
+  return _c("div", { staticClass: "ddv-ui" }, [_vm._v("\n  sdads\n")])
 };
 var __vue_staticRenderFns__ = [];
 __vue_render__._withStripped = true;
