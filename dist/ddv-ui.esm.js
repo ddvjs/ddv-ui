@@ -404,6 +404,9 @@ var script$2 = {
         case 'warning':
           return 'icon-warning'
       }
+    },
+    classType: function classType () {
+      return ("ddv-message__" + (this.type))
     }
   }
 }
@@ -417,7 +420,7 @@ var __vue_render__$1 = function() {
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
   return _c("div", { staticClass: "ddv-ui" }, [
-    _c("div", { staticClass: "ddv-message", class: _vm.type }, [
+    _c("div", { staticClass: "ddv-message", class: _vm.classType }, [
       _c("span", [_c("i", { staticClass: "iconfont", class: _vm.icon })]),
       _vm._v(" "),
       _c("span", [_vm._v("asdsadasdsads")])

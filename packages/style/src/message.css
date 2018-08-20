@@ -2,12 +2,10 @@
   min-width: 380px;
   box-sizing: border-box;
   border-radius: 4px;
-  border: 1px solid #ebeef5;
   position: fixed;
   left: 50%;
   top: 0;
   transform: translateX(-50%);
-  background-color: #edf2fc;
   transition: opacity .5s,transform .10s;
   overflow: hidden;
   padding: 15px 15px 15px 20px;
@@ -15,18 +13,26 @@
   font-size: 14px;
   align-items: center;
 }
-.success{
+.ddv-message__info {
+  background-color: #edf2fc;
+  border: 1px solid #ebeef5;
+}
+.ddv-message__success {
   color: #67c23a;
   background-color: #f0f9eb;
   border-color: #e1f3d8;
 }
-.warning{
+.ddv-message__warning {
   color: #e6a23c;
   background-color: #fdf6ec;
   border-color: #faecd8;
 }
-.error{
+.ddv-message__error {
   color:#f56c6c;
   background-color: #fef0f0;
   border-color: #fde2e2;
+}
+
+.ddv-message__text {
+  margin-left: 10px;
 }

@@ -1,8 +1,8 @@
 <template>
   <div class="ddv-ui">
-    <div class="ddv-message" :class="type">
+    <div class="ddv-message" :class="classType">
       <span><i class="iconfont" :class="icon"></i></span>
-      <span>asdsadasdsads</span>
+      <span class="ddv-message__text">{{message}}</span>
     </div>
   </div>
 </template>
@@ -17,7 +17,10 @@ export default {
   props: {
     type: {
       type: String,
-      default: 'info'
+      default: 'info',
+      validator (value) {
+        return ['info', 'error', 'success', 'warning'].indexOf(value) > -1
+      }
     },
     message: {
       type: String
@@ -35,6 +38,9 @@ export default {
         case 'warning':
           return 'icon-warning'
       }
+    },
+    classType () {
+      return `ddv-message__${this.type}`
     }
   }
 }
