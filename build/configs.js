@@ -5,7 +5,7 @@ const cjs = require('rollup-plugin-commonjs')
 const node = require('rollup-plugin-node-resolve')
 const replace = require('rollup-plugin-replace')
 const vue = require('rollup-plugin-vue')
-const postcss = require('rollup-plugin-postcss')
+// const postcss = require('rollup-plugin-postcss')
 const version = process.env.VERSION || require('../package.json').version
 const banner =
 `/*!
