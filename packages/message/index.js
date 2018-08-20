@@ -33,7 +33,7 @@ const Message = function (opts) {
 
   if (opts.el) {
     opts.el.appendChild(instance.vm.$el)
-  } else {
+  } else if (!Vue.prototype.$sisServer) {
     document.body.appendChild(instance.vm.$el)
   }
   instance.vm.visible = true

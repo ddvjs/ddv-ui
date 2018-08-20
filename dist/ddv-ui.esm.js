@@ -8464,11 +8464,15 @@ var script$2 = {
     duration: {
       type: Number,
       default: 3000
+    },
+    onClose: {
+      type: Function
     }
   },
   data: function data () {
     return {
-      isClose: false
+      isClose: false,
+      visible: false
     }
   },
   computed: {
@@ -8487,6 +8491,41 @@ var script$2 = {
     classType: function classType () {
       return ("ddv-message__" + (this.type))
     }
+  },
+  methods: {
+    close: function close () {
+      this.isClose = true;
+      if (typeof this.onClose === 'function') {
+        this.onClose(this);
+      }
+    },
+    startTimer: function startTimer () {
+      var this$1 = this;
+
+      if (this.duration > 0) {
+        this.timer = setTimeout(function () {
+          if (!this$1.isClose) {
+            this$1.close();
+          }
+        }, this.duration);
+      }
+    }
+  },
+  watch: {
+    isClose: function isClose (val) {
+      var this$1 = this;
+
+      if (val) {
+        this.visible = false;
+        setTimeout(function () {
+          this$1.$destroy();
+        },  this.duration + 500);
+      }
+    }
+  },
+  mounted: function mounted () {
+    this.visible = true;
+    this.startTimer();
   }
 }
 
@@ -8498,21 +8537,47 @@ var __vue_render__$1 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("div", { staticClass: "ddv-ui" }, [
-    _c("div", { staticClass: "ddv-message", class: _vm.classType }, [
-      _c("span", [_c("i", { staticClass: "iconfont", class: _vm.icon })]),
-      _vm._v(" "),
-      _c("span", { staticClass: "ddv-message__text" }, [
-        _vm._v(_vm._s(_vm.message))
+  return _c(
+    "div",
+    { staticClass: "ddv-ui" },
+    [
+      _c("transition", { attrs: { name: "el-message-fade" } }, [
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.visible,
+                expression: "visible"
+              }
+            ],
+            staticClass: "ddv-message",
+            class: _vm.classType
+          },
+          [
+            _c("span", [_c("i", { staticClass: "iconfont", class: _vm.icon })]),
+            _vm._v(" "),
+            _c("span", { staticClass: "ddv-message__text" }, [
+              _vm._v(_vm._s(_vm.message))
+            ])
+          ]
+        )
       ])
-    ])
-  ])
+    ],
+    1
+  )
 };
 var __vue_staticRenderFns__$1 = [];
 __vue_render__$1._withStripped = true;
 
   /* style */
-  var __vue_inject_styles__$2 = undefined;
+  var __vue_inject_styles__$2 = function (inject) {
+    if (!inject) { return }
+    inject("data-v-747c401d_0", { source: "\n.el-message-fade-enter,\n.el-message-fade-leave-active {\n  opacity: 0;\n  transform: translate(-50%, -100%);\n}\n\n", map: {"version":3,"sources":["/Users/sicmouse/Documents/GitHub/ddv-ui/packages/message/src/pc/message.vue"],"names":[],"mappings":";AAWA;;EAEA,WAAA;EACA,kCAAA;CACA","file":"message.vue","sourcesContent":["<template>\n  <div class=\"ddv-ui\">\n    <transition name=\"el-message-fade\">\n      <div class=\"ddv-message\" :class=\"classType\" v-show=\"visible\">\n        <span><i class=\"iconfont\" :class=\"icon\"></i></span>\n        <span class=\"ddv-message__text\">{{message}}</span>\n      </div>\n    </transition>  \n  </div>\n</template>\n<style>\n.el-message-fade-enter,\n.el-message-fade-leave-active {\n  opacity: 0;\n  transform: translate(-50%, -100%);\n}\n\n</style>\n\n\n<script>\nimport '../../../style/src/base.css'\nimport '../../../style/src/message.css'\nimport '../../../style/src/iconfont/iconfont.css'\n\nexport default {\n  name: 'DdvMessage',\n  props: {\n    type: {\n      type: String,\n      default: 'info',\n      validator (value) {\n        return ['info', 'error', 'success', 'warning'].indexOf(value) > -1\n      }\n    },\n    message: {\n      type: String\n    },\n    duration: {\n      type: Number,\n      default: 3000\n    },\n    onClose: {\n      type: Function\n    }\n  },\n  data () {\n    return {\n      isClose: false,\n      visible: false\n    }\n  },\n  computed: {\n    icon () {\n      switch (this.type) {\n        case 'info':\n          return 'icon-info'\n        case 'error':\n          return 'icon-danger'\n        case 'success':\n          return 'icon-success'\n        case 'warning':\n          return 'icon-warning'\n      }\n    },\n    classType () {\n      return `ddv-message__${this.type}`\n    }\n  },\n  methods: {\n    close () {\n      this.isClose = true\n      if (typeof this.onClose === 'function') {\n        this.onClose(this)\n      }\n    },\n    startTimer () {\n      if (this.duration > 0) {\n        this.timer = setTimeout(() => {\n          if (!this.isClose) {\n            this.close()\n          }\n        }, this.duration)\n      }\n    }\n  },\n  watch: {\n    isClose (val) {\n      if (val) {\n        this.visible = false\n        setTimeout(() => {\n          this.$destroy()\n        },  this.duration + 500)\n      }\n    }\n  },\n  mounted () {\n    this.visible = true\n    this.startTimer()\n  }\n}\n</script>\n\n"]}, media: undefined });
+
+  };
   /* scoped */
   var __vue_scope_id__$2 = undefined;
   /* module identifier */
@@ -8540,7 +8605,29 @@ __vue_render__$1._withStripped = true;
 
     component._scopeId = scope;
 
-    
+    {
+      var hook;
+      if (style) {
+        hook = function(context) {
+          style.call(this, createInjector(context));
+        };
+      }
+
+      if (hook !== undefined) {
+        if (component.functional) {
+          // register for functional component in vue file
+          var originalRender = component.render;
+          component.render = function renderWithStyleInjection(h, context) {
+            hook.call(context);
+            return originalRender(h, context)
+          };
+        } else {
+          // inject component registration as beforeCreate hook
+          var existing = component.beforeCreate;
+          component.beforeCreate = existing ? [].concat(existing, hook) : [hook];
+        }
+      }
+    }
 
     return component
   }
@@ -8622,12 +8709,31 @@ __vue_render__$1._withStripped = true;
 //
 //
 //
-//
-//
-//
 
 var script$3 = {
-  name: 'DdvMessage'
+  name: 'DdvMessage',
+  props: {
+    type: {
+      type: String,
+      validator: function validator (value) {
+        return ['info', 'error', 'success', 'warning', 'loading'].indexOf(value) > -1
+      }
+    },
+    message: {
+      type: String
+    },
+    duration: {
+      type: Number,
+      default: 3000
+    },
+    position: {
+      type: String,
+      default: middle,
+      validator: function validator (value) {
+        return ['top', 'bottom', 'middle'].indexOf(value) > -1
+      }
+    }
+  }
 }
 
 /* script */
@@ -8638,15 +8744,7 @@ var __vue_render__$2 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("div", { staticClass: "ddv-ui" }, [
-    _vm.type
-      ? _c("div", { staticClass: "ddv-message", class: _vm.type }, [
-          _c("span", [_c("i", { staticClass: "iconfont", class: _vm.icon })]),
-          _vm._v(" "),
-          _c("span", { staticClass: "ml10" }, [_vm._v(_vm._s(_vm.message))])
-        ])
-      : _vm._e()
-  ])
+  return _c("div", { staticClass: "ddv-ui" }, [_vm._v("\n  eeee\n")])
 };
 var __vue_staticRenderFns__$2 = [];
 __vue_render__$2._withStripped = true;
@@ -8761,7 +8859,8 @@ function Main (type) {
     functional: true,
     render: function render (h) {
       var props = {
-        message: this.message
+        message: this.message,
+        onClose: this.onClose
       };
 
       if (this.type) {
@@ -8818,7 +8917,7 @@ var Message = function (opts) {
 
   if (opts.el) {
     opts.el.appendChild(instance.vm.$el);
-  } else {
+  } else if (!Vue.prototype.$sisServer) {
     document.body.appendChild(instance.vm.$el);
   }
   instance.vm.visible = true;
