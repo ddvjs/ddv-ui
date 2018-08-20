@@ -221,7 +221,6 @@ var script$1 = {
       if ( renderList === void 0 ) renderList = [];
 
       lists.forEach(function (item) {
-        console.log(item);
         var slotRender = [];
 
         if (Array.isArray(item.node.children) && item.node.children.length) {
@@ -388,13 +387,13 @@ var script$2 = {
     icon: function icon () {
       switch (this.type) {
         case 'info':
-          return ''
+          return 'icon-info'
         case 'error':
-          return ''
+          return 'icon-danger'
         case 'success':
-          return ''
+          return 'icon-success'
         case 'warning':
-          return ''
+          return 'icon-warning'
       }
     }
   }
