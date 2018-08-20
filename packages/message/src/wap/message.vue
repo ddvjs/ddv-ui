@@ -8,10 +8,6 @@
 </template>
 
 <script>
-import '../../style/src/base.css'
-import '../../style/src/message.css'
-import '../../style/src/iconfont/iconfont.css'
-
 export default {
   name: 'DdvMessage'
 }

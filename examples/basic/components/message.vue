@@ -1,15 +1,20 @@
 <template>
-	<div>
-		<ddv-message></ddv-message>
+	<div ref="messageWrap">
 	</div>
 </template>
 
 <script>
+import Vue from 'vue'
 import { Message } from 'ddv-ui'
+Vue.prototype.$message = Message
 
 export default {
-  components: {
-		'ddv-message': Message
+  mounted () {
+		this.$message({
+			message: 'ppp',
+			type: 'success',
+			el: this.$refs.messageWrap
+		})
 	}
 }
 </script>
