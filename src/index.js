@@ -4,7 +4,7 @@ const components = [
   Tree
 ]
 
-const install = (Vue) => {
+const install = (Vue, opts = {}) => {
   components.forEach(component => {
     Vue.component(component.name, component)
   })

@@ -135,7 +135,9 @@ var components = [
   Tree
 ];
 
-var install = function (Vue) {
+var install = function (Vue, opts) {
+  if ( opts === void 0 ) opts = {};
+
   components.forEach(function (component) {
     Vue.component(component.name, component);
   });
