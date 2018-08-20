@@ -249,6 +249,15 @@ var script$1 = {
       }, treeNodes(1, this.lists))
     ])
   },
+  watch: {
+    props: function props () {
+      this.setProps();
+      this.setData();
+    },
+    data: function data () {
+      this.setData();
+    }
+  },
   created: function created () {
     this.setProps();
     this.setData();

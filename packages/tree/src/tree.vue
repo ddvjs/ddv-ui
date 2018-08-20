@@ -90,6 +90,15 @@ export default {
       }, treeNodes(1, this.lists))
     ])
   },
+  watch: {
+    props () {
+      this.setProps()
+      this.setData()
+    },
+    data () {
+      this.setData()
+    }
+  },
   created () {
     this.setProps()
     this.setData()
