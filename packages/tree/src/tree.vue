@@ -62,7 +62,6 @@ export default {
   render (h) {
     const treeNodes = (level, lists, renderList = []) => {
       lists.forEach((item) => {
-        console.log(item)
         var slotRender = []
 
         if (Array.isArray(item.node.children) && item.node.children.length) {

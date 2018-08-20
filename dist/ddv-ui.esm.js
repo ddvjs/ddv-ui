@@ -221,7 +221,6 @@ var script$1 = {
       if ( renderList === void 0 ) renderList = [];
 
       lists.forEach(function (item) {
-        console.log(item);
         var slotRender = [];
 
         if (Array.isArray(item.node.children) && item.node.children.length) {
