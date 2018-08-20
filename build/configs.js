@@ -44,12 +44,12 @@ function genConfig (opts) {
       input: resolve('src/index.js'),
       plugins: [
         getDefault(vue)(),
-        getDefault(postcss)(
-          {
-            minimize: true,
-            extract: resolve('dist/style/index.css')
-          }
-        ),
+        // getDefault(postcss)(
+        //   {
+        //     minimize: true,
+        //     extract: resolve('dist/style/index.css')
+        //   }
+        // ),
         flow(),
         node(),
         cjs(),
