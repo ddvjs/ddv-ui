@@ -30,7 +30,7 @@
   "scripts": {
     "dev": "node examples/server.js",
     "dev:dist": "rollup -wm -c build/rollup.dev.config.js",
-    "dev:es": "rollup -wm -c build/rollup.es.config.js && npm run build:style",
+    "dev:es": "rollup -wm -c build/rollup.es.config.js",
     "build": "node build/build.js",
     "build:style": "node build/bin/gen-cssfile && gulp build --gulpfile packages/style/gulpfile.js && cp-cli packages/style/lib dist/style",
     "lint": "eslint src examples",
