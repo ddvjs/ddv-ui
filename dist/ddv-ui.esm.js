@@ -8410,61 +8410,9 @@ if (inBrowser) {
   }, 0);
 }
 
-//
-
-var script$2 = {
-  name: 'DdvMessage',
-  props: {
-    type: {
-      type: String,
-      default: 'info',
-      validator: function validator (value) {
-        return ['info', 'error', 'success', 'warning'].indexOf(value) > -1
-      }
-    },
-    message: {
-      type: String
-    }
-  },
-  computed: {
-    icon: function icon () {
-      switch (this.type) {
-        case 'info':
-          return 'icon-info'
-        case 'error':
-          return 'icon-danger'
-        case 'success':
-          return 'icon-success'
-        case 'warning':
-          return 'icon-warning'
-      }
-    },
-    classType: function classType () {
-      return ("ddv-message__" + (this.type))
-    }
-  }
-}
-
 /* script */
-            var __vue_script__$2 = script$2;
-            
+
 /* template */
-var __vue_render__$1 = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c("div", { staticClass: "ddv-ui" }, [
-    _c("div", { staticClass: "ddv-message", class: _vm.classType }, [
-      _c("span", [_c("i", { staticClass: "iconfont", class: _vm.icon })]),
-      _vm._v(" "),
-      _c("span", { staticClass: "ddv-message__text" }, [
-        _vm._v(_vm._s(_vm.message))
-      ])
-    ])
-  ])
-};
-var __vue_staticRenderFns__$1 = [];
-__vue_render__$1._withStripped = true;
 
   /* style */
   var __vue_inject_styles__$2 = undefined;
@@ -8473,7 +8421,7 @@ __vue_render__$1._withStripped = true;
   /* module identifier */
   var __vue_module_identifier__$2 = undefined;
   /* functional template */
-  var __vue_is_functional_template__$2 = false;
+  var __vue_is_functional_template__$2 = undefined;
   /* component normalizer */
   function __vue_normalize__$2(
     template, style, script,
@@ -8561,9 +8509,9 @@ __vue_render__$1._withStripped = true;
 
   
   var PcMessage = __vue_normalize__$2(
-    { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
+    {},
     __vue_inject_styles__$2,
-    __vue_script__$2,
+    {},
     __vue_scope_id__$2,
     __vue_is_functional_template__$2,
     __vue_module_identifier__$2,
@@ -8581,15 +8529,15 @@ __vue_render__$1._withStripped = true;
 //
 //
 
-var script$3 = {
+var script$2 = {
   name: 'DdvMessage'
 }
 
 /* script */
-            var __vue_script__$3 = script$3;
+            var __vue_script__$2 = script$2;
             
 /* template */
-var __vue_render__$2 = function() {
+var __vue_render__$1 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -8603,8 +8551,8 @@ var __vue_render__$2 = function() {
       : _vm._e()
   ])
 };
-var __vue_staticRenderFns__$2 = [];
-__vue_render__$2._withStripped = true;
+var __vue_staticRenderFns__$1 = [];
+__vue_render__$1._withStripped = true;
 
   /* style */
   var __vue_inject_styles__$3 = undefined;
@@ -8701,9 +8649,9 @@ __vue_render__$2._withStripped = true;
 
   
   var WapMessage = __vue_normalize__$3(
-    { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
+    { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
     __vue_inject_styles__$3,
-    __vue_script__$3,
+    __vue_script__$2,
     __vue_scope_id__$3,
     __vue_is_functional_template__$3,
     __vue_module_identifier__$3,
@@ -8725,6 +8673,9 @@ function Main (type) {
       if (this.position) {
         props.position = this.position;
       }
+      if (this.duration || this.duration === 0) {
+        props.duration = this.duration;
+      }
       if (type === 'wap') {
         return h(WapMessage, {
           props: props
@@ -8739,7 +8690,9 @@ function Main (type) {
 
 var MessageConstructor;
 var instance;
+var instances = [];
 var seed = 1;
+var methods = ['success', 'warning', 'info', 'error'];
 
 var Message = function (opts) {
   opts = opts || {};
@@ -8773,7 +8726,38 @@ var Message = function (opts) {
   }
   instance.vm.visible = true;
   instance.dom = instance.vm.$el;
+  instances.push(instance);
   return instance.vm
+};
+
+methods.forEach(function (type) {
+  Message[type] = function (options) {
+    if (typeof options === 'string') {
+      options = {
+        message: options
+      };
+    }
+    options.type = type;
+    return Message(options)
+  };
+});
+
+Message.close = function (id, userOnClose) {
+  for (var i = 0, len = instances.length; i < len; i++) {
+    if (id === instances[i].id) {
+      if (typeof userOnClose === 'function') {
+        userOnClose(instances[i]);
+      }
+      instances.splice(i, 1);
+      break
+    }
+  }
+};
+
+Message.closeAll = function () {
+  for (var i = instances.length - 1; i >= 0; i--) {
+    instances[i].close();
+  }
 };
 
 var components = [

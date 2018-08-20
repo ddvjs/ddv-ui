@@ -4,6 +4,7 @@ let MessageConstructor
 let instance
 let instances = []
 let seed = 1
+let methods = ['success', 'warning', 'info', 'error']
 
 const Message = function (opts) {
   opts = opts || {}
@@ -39,6 +40,36 @@ const Message = function (opts) {
   instance.dom = instance.vm.$el
   instances.push(instance)
   return instance.vm
+}
+
+methods.forEach(type => {
+  Message[type] = options => {
+    if (typeof options === 'string') {
+      options = {
+        message: options
+      }
+    }
+    options.type = type
+    return Message(options)
+  }
+})
+
+Message.close = function (id, userOnClose) {
+  for (let i = 0, len = instances.length; i < len; i++) {
+    if (id === instances[i].id) {
+      if (typeof userOnClose === 'function') {
+        userOnClose(instances[i])
+      }
+      instances.splice(i, 1)
+      break
+    }
+  }
+}
+
+Message.closeAll = function () {
+  for (let i = instances.length - 1; i >= 0; i--) {
+    instances[i].close()
+  }
 }
 
 export default Message

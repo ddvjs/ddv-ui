@@ -24,6 +24,15 @@ export default {
     },
     message: {
       type: String
+    },
+    duration: {
+      type: Number,
+      default: 3000
+    }
+  },
+  data () {
+    return {
+      isClose: false
     }
   },
   computed: {

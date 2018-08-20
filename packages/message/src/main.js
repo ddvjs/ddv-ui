@@ -15,6 +15,9 @@ export default type => {
       if (this.position) {
         props.position = this.position
       }
+      if (this.duration || this.duration === 0) {
+        props.duration = this.duration
+      }
       if (type === 'wap') {
         return h(WapMessage, {
           props
