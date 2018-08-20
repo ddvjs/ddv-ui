@@ -47,7 +47,7 @@ export default {
             node: {}
           }
           obj.node[this.treeprops.children] = []
-          obj.node[this.treeprops.label] = item[this.treeprops.label]
+          obj.node.label = item[this.treeprops.label]
 
           if (Array.isArray(item[this.treeprops.children]) && item[this.treeprops.children].length) {
             childData(item[this.treeprops.children], obj.node[this.treeprops.children])
@@ -62,16 +62,18 @@ export default {
   render (h) {
     const treeNodes = (level, lists, renderList = []) => {
       lists.forEach((item) => {
+        console.log(item)
         var slotRender = []
 
-        if (Array.isArray(item.children) && item.children.length) {
+        if (Array.isArray(item.node.children) && item.node.children.length) {
           let childLevel = level
           childLevel += 1
-          slotRender = treeNodes(childLevel, item.children)
+          slotRender = treeNodes(childLevel, item.node.children)
         }
         var render = h(DdvTreeNode, {
           props: {
-            node: item,
+            node: item.node,
+            data: item.data,
             level: level,
             indent: this.indent * (level - 1)
           }
@@ -86,7 +88,7 @@ export default {
     },[
       h('div', {
         class: ['ddv-ui__tree']
-      }, treeNodes(1, this.data))
+      }, treeNodes(1, this.lists))
     ])
   },
   created () {

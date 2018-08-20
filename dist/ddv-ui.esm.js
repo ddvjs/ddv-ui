@@ -202,7 +202,7 @@ var script$1 = {
             node: {}
           };
           obj.node[this$1.treeprops.children] = [];
-          obj.node[this$1.treeprops.label] = item[this$1.treeprops.label];
+          obj.node.label = item[this$1.treeprops.label];
 
           if (Array.isArray(item[this$1.treeprops.children]) && item[this$1.treeprops.children].length) {
             childData(item[this$1.treeprops.children], obj.node[this$1.treeprops.children]);
@@ -221,16 +221,18 @@ var script$1 = {
       if ( renderList === void 0 ) renderList = [];
 
       lists.forEach(function (item) {
+        console.log(item);
         var slotRender = [];
 
-        if (Array.isArray(item.children) && item.children.length) {
+        if (Array.isArray(item.node.children) && item.node.children.length) {
           var childLevel = level;
           childLevel += 1;
-          slotRender = treeNodes(childLevel, item.children);
+          slotRender = treeNodes(childLevel, item.node.children);
         }
         var render = h(DdvTreeNode, {
           props: {
-            node: item,
+            node: item.node,
+            data: item.data,
             level: level,
             indent: this$1.indent * (level - 1)
           }
@@ -245,7 +247,7 @@ var script$1 = {
     },[
       h('div', {
         class: ['ddv-ui__tree']
-      }, treeNodes(1, this.data))
+      }, treeNodes(1, this.lists))
     ])
   },
   created: function created () {
