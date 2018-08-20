@@ -17,9 +17,18 @@ var __vue_render__ = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("div", { staticClass: "ddv-ui" }, [_vm._v("\n  sdads\n")])
+  return _vm._m(0)
 };
-var __vue_staticRenderFns__ = [];
+var __vue_staticRenderFns__ = [
+  function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("div", { staticClass: "ddv-ui" }, [
+      _c("div", { staticClass: "ddv-ui__tree" })
+    ])
+  }
+];
 __vue_render__._withStripped = true;
 
   /* style */
@@ -39,7 +48,7 @@ __vue_render__._withStripped = true;
     var component = (typeof script$$1 === 'function' ? script$$1.options : script$$1) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/tree/src/tree.vue";
+    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/tree/src/tree.vue";
 
     if (!component.render) {
       component.render = template.render;

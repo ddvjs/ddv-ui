@@ -1,6 +1,8 @@
 <template>
   <div class="ddv-ui">
-    sdads
+    <div class="ddv-ui__tree">
+
+    </div>
   </div>
 </template>
 
