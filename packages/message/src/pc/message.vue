@@ -2,7 +2,7 @@
   <div class="ddv-ui">
     <div class="ddv-message" :class="type">
       <span><i class="iconfont" :class="icon"></i></span>
-      <span class="ml10">{{message}}</span>
+      <span>asdsadasdsads</span>
     </div>
   </div>
 </template>
