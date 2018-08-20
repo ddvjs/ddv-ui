@@ -8,7 +8,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .ddv-tree{
   font-size:14px;
   color:#606266;
