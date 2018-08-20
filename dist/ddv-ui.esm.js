@@ -81,7 +81,7 @@ __vue_render__._withStripped = true;
     var component = (typeof script$$1 === 'function' ? script$$1.options : script$$1) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/tree/src/tree-node.vue";
+    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/tree/src/tree-node.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -323,7 +323,7 @@ var script$1 = {
     var component = (typeof script === 'function' ? script.options : script) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/tree/src/tree.vue";
+    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/tree/src/tree.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -414,181 +414,6 @@ var script$1 = {
 Tree.install = function (Vue) {
   Vue.component(Tree.name, Tree);
 };
-
-//
-
-var script$2 = {
-  name: 'DdvMessage',
-  props: {
-    type: {
-      type: String,
-      default: 'info',
-      validator: function validator (value) {
-        return ['info', 'error', 'success', 'warning'].indexOf(value) > -1
-      }
-    },
-    message: {
-      type: String
-    }
-  },
-  computed: {
-    icon: function icon () {
-      switch (this.type) {
-        case 'info':
-          return 'icon-info'
-        case 'error':
-          return 'icon-danger'
-        case 'success':
-          return 'icon-success'
-        case 'warning':
-          return 'icon-warning'
-      }
-    },
-    classType: function classType () {
-      return ("ddv-message__" + (this.type))
-    }
-  }
-}
-
-/* script */
-            var __vue_script__$2 = script$2;
-            
-/* template */
-var __vue_render__$1 = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c("div", { staticClass: "ddv-ui" }, [
-    _c("div", { staticClass: "ddv-message", class: _vm.classType }, [
-      _c("span", [_c("i", { staticClass: "iconfont", class: _vm.icon })]),
-      _vm._v(" "),
-      _c("span", { staticClass: "ddv-message__text" }, [
-        _vm._v(_vm._s(_vm.message))
-      ])
-    ])
-  ])
-};
-var __vue_staticRenderFns__$1 = [];
-__vue_render__$1._withStripped = true;
-
-  /* style */
-  var __vue_inject_styles__$2 = undefined;
-  /* scoped */
-  var __vue_scope_id__$2 = undefined;
-  /* module identifier */
-  var __vue_module_identifier__$2 = undefined;
-  /* functional template */
-  var __vue_is_functional_template__$2 = false;
-  /* component normalizer */
-  function __vue_normalize__$2(
-    template, style, script,
-    scope, functional, moduleIdentifier,
-    createInjector, createInjectorSSR
-  ) {
-    var component = (typeof script === 'function' ? script.options : script) || {};
-
-    // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/Message/src/pc/message.vue";
-
-    if (!component.render) {
-      component.render = template.render;
-      component.staticRenderFns = template.staticRenderFns;
-      component._compiled = true;
-
-      if (functional) { component.functional = true; }
-    }
-
-    component._scopeId = scope;
-
-    
-
-    return component
-  }
-  /* style inject */
-  function __vue_create_injector__$2() {
-    var head = document.head || document.getElementsByTagName('head')[0];
-    var styles = __vue_create_injector__$2.styles || (__vue_create_injector__$2.styles = {});
-    var isOldIE =
-      typeof navigator !== 'undefined' &&
-      /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
-
-    return function addStyle(id, css) {
-      if (document.querySelector('style[data-vue-ssr-id~="' + id + '"]')) { return } // SSR styles are present.
-
-      var group = isOldIE ? css.media || 'default' : id;
-      var style = styles[group] || (styles[group] = { ids: [], parts: [], element: undefined });
-
-      if (!style.ids.includes(id)) {
-        var code = css.source;
-        var index = style.ids.length;
-
-        style.ids.push(id);
-
-        if (isOldIE) {
-          style.element = style.element || document.querySelector('style[data-group=' + group + ']');
-        }
-
-        if (!style.element) {
-          var el = style.element = document.createElement('style');
-          el.type = 'text/css';
-
-          if (css.media) { el.setAttribute('media', css.media); }
-          if (isOldIE) {
-            el.setAttribute('data-group', group);
-            el.setAttribute('data-next-index', '0');
-          }
-
-          head.appendChild(el);
-        }
-
-        if (isOldIE) {
-          index = parseInt(style.element.getAttribute('data-next-index'));
-          style.element.setAttribute('data-next-index', index + 1);
-        }
-
-        if (style.element.styleSheet) {
-          style.parts.push(code);
-          style.element.styleSheet.cssText = style.parts
-            .filter(Boolean)
-            .join('\n');
-        } else {
-          var textNode = document.createTextNode(code);
-          var nodes = style.element.childNodes;
-          if (nodes[index]) { style.element.removeChild(nodes[index]); }
-          if (nodes.length) { style.element.insertBefore(textNode, nodes[index]); }
-          else { style.element.appendChild(textNode); }
-        }
-      }
-    }
-  }
-  /* style inject SSR */
-  
-
-  
-  var PcMessage = __vue_normalize__$2(
-    { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
-    __vue_inject_styles__$2,
-    __vue_script__$2,
-    __vue_scope_id__$2,
-    __vue_is_functional_template__$2,
-    __vue_module_identifier__$2,
-    __vue_create_injector__$2,
-    undefined
-  )
-
-var Message = {
-  functional: true,
-  render: function render (h, ref) {
-    var props = ref.props;
-
-    return h(PcMessage, {
-      props: props
-    })
-  },
-  install: function install (Vue) {
-    Vue.component(PcMessage.name, PcMessage);
-  }
-}
 
 /*!
  * Vue.js v2.5.17
@@ -8621,20 +8446,385 @@ if (inBrowser) {
   }, 0);
 }
 
+//
+
+var script$2 = {
+  name: 'DdvMessage',
+  props: {
+    type: {
+      type: String,
+      default: 'info',
+      validator: function validator (value) {
+        return ['info', 'error', 'success', 'warning'].indexOf(value) > -1
+      }
+    },
+    message: {
+      type: String
+    }
+  },
+  computed: {
+    icon: function icon () {
+      switch (this.type) {
+        case 'info':
+          return 'icon-info'
+        case 'error':
+          return 'icon-danger'
+        case 'success':
+          return 'icon-success'
+        case 'warning':
+          return 'icon-warning'
+      }
+    },
+    classType: function classType () {
+      return ("ddv-message__" + (this.type))
+    }
+  }
+}
+
+/* script */
+            var __vue_script__$2 = script$2;
+            
+/* template */
+var __vue_render__$1 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", { staticClass: "ddv-ui" }, [
+    _c("div", { staticClass: "ddv-message", class: _vm.classType }, [
+      _c("span", [_c("i", { staticClass: "iconfont", class: _vm.icon })]),
+      _vm._v(" "),
+      _c("span", { staticClass: "ddv-message__text" }, [
+        _vm._v(_vm._s(_vm.message))
+      ])
+    ])
+  ])
+};
+var __vue_staticRenderFns__$1 = [];
+__vue_render__$1._withStripped = true;
+
+  /* style */
+  var __vue_inject_styles__$2 = undefined;
+  /* scoped */
+  var __vue_scope_id__$2 = undefined;
+  /* module identifier */
+  var __vue_module_identifier__$2 = undefined;
+  /* functional template */
+  var __vue_is_functional_template__$2 = false;
+  /* component normalizer */
+  function __vue_normalize__$2(
+    template, style, script,
+    scope, functional, moduleIdentifier,
+    createInjector, createInjectorSSR
+  ) {
+    var component = (typeof script === 'function' ? script.options : script) || {};
+
+    // For security concerns, we use only base name in production mode.
+    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/message/src/pc/message.vue";
+
+    if (!component.render) {
+      component.render = template.render;
+      component.staticRenderFns = template.staticRenderFns;
+      component._compiled = true;
+
+      if (functional) { component.functional = true; }
+    }
+
+    component._scopeId = scope;
+
+    
+
+    return component
+  }
+  /* style inject */
+  function __vue_create_injector__$2() {
+    var head = document.head || document.getElementsByTagName('head')[0];
+    var styles = __vue_create_injector__$2.styles || (__vue_create_injector__$2.styles = {});
+    var isOldIE =
+      typeof navigator !== 'undefined' &&
+      /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
+
+    return function addStyle(id, css) {
+      if (document.querySelector('style[data-vue-ssr-id~="' + id + '"]')) { return } // SSR styles are present.
+
+      var group = isOldIE ? css.media || 'default' : id;
+      var style = styles[group] || (styles[group] = { ids: [], parts: [], element: undefined });
+
+      if (!style.ids.includes(id)) {
+        var code = css.source;
+        var index = style.ids.length;
+
+        style.ids.push(id);
+
+        if (isOldIE) {
+          style.element = style.element || document.querySelector('style[data-group=' + group + ']');
+        }
+
+        if (!style.element) {
+          var el = style.element = document.createElement('style');
+          el.type = 'text/css';
+
+          if (css.media) { el.setAttribute('media', css.media); }
+          if (isOldIE) {
+            el.setAttribute('data-group', group);
+            el.setAttribute('data-next-index', '0');
+          }
+
+          head.appendChild(el);
+        }
+
+        if (isOldIE) {
+          index = parseInt(style.element.getAttribute('data-next-index'));
+          style.element.setAttribute('data-next-index', index + 1);
+        }
+
+        if (style.element.styleSheet) {
+          style.parts.push(code);
+          style.element.styleSheet.cssText = style.parts
+            .filter(Boolean)
+            .join('\n');
+        } else {
+          var textNode = document.createTextNode(code);
+          var nodes = style.element.childNodes;
+          if (nodes[index]) { style.element.removeChild(nodes[index]); }
+          if (nodes.length) { style.element.insertBefore(textNode, nodes[index]); }
+          else { style.element.appendChild(textNode); }
+        }
+      }
+    }
+  }
+  /* style inject SSR */
+  
+
+  
+  var PcMessage = __vue_normalize__$2(
+    { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
+    __vue_inject_styles__$2,
+    __vue_script__$2,
+    __vue_scope_id__$2,
+    __vue_is_functional_template__$2,
+    __vue_module_identifier__$2,
+    __vue_create_injector__$2,
+    undefined
+  )
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var script$3 = {
+  name: 'DdvMessage'
+}
+
+/* script */
+            var __vue_script__$3 = script$3;
+            
+/* template */
+var __vue_render__$2 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", { staticClass: "ddv-ui" }, [
+    _vm.type
+      ? _c("div", { staticClass: "ddv-message", class: _vm.type }, [
+          _c("span", [_c("i", { staticClass: "iconfont", class: _vm.icon })]),
+          _vm._v(" "),
+          _c("span", { staticClass: "ml10" }, [_vm._v(_vm._s(_vm.message))])
+        ])
+      : _vm._e()
+  ])
+};
+var __vue_staticRenderFns__$2 = [];
+__vue_render__$2._withStripped = true;
+
+  /* style */
+  var __vue_inject_styles__$3 = undefined;
+  /* scoped */
+  var __vue_scope_id__$3 = undefined;
+  /* module identifier */
+  var __vue_module_identifier__$3 = undefined;
+  /* functional template */
+  var __vue_is_functional_template__$3 = false;
+  /* component normalizer */
+  function __vue_normalize__$3(
+    template, style, script,
+    scope, functional, moduleIdentifier,
+    createInjector, createInjectorSSR
+  ) {
+    var component = (typeof script === 'function' ? script.options : script) || {};
+
+    // For security concerns, we use only base name in production mode.
+    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/message/src/wap/message.vue";
+
+    if (!component.render) {
+      component.render = template.render;
+      component.staticRenderFns = template.staticRenderFns;
+      component._compiled = true;
+
+      if (functional) { component.functional = true; }
+    }
+
+    component._scopeId = scope;
+
+    
+
+    return component
+  }
+  /* style inject */
+  function __vue_create_injector__$3() {
+    var head = document.head || document.getElementsByTagName('head')[0];
+    var styles = __vue_create_injector__$3.styles || (__vue_create_injector__$3.styles = {});
+    var isOldIE =
+      typeof navigator !== 'undefined' &&
+      /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
+
+    return function addStyle(id, css) {
+      if (document.querySelector('style[data-vue-ssr-id~="' + id + '"]')) { return } // SSR styles are present.
+
+      var group = isOldIE ? css.media || 'default' : id;
+      var style = styles[group] || (styles[group] = { ids: [], parts: [], element: undefined });
+
+      if (!style.ids.includes(id)) {
+        var code = css.source;
+        var index = style.ids.length;
+
+        style.ids.push(id);
+
+        if (isOldIE) {
+          style.element = style.element || document.querySelector('style[data-group=' + group + ']');
+        }
+
+        if (!style.element) {
+          var el = style.element = document.createElement('style');
+          el.type = 'text/css';
+
+          if (css.media) { el.setAttribute('media', css.media); }
+          if (isOldIE) {
+            el.setAttribute('data-group', group);
+            el.setAttribute('data-next-index', '0');
+          }
+
+          head.appendChild(el);
+        }
+
+        if (isOldIE) {
+          index = parseInt(style.element.getAttribute('data-next-index'));
+          style.element.setAttribute('data-next-index', index + 1);
+        }
+
+        if (style.element.styleSheet) {
+          style.parts.push(code);
+          style.element.styleSheet.cssText = style.parts
+            .filter(Boolean)
+            .join('\n');
+        } else {
+          var textNode = document.createTextNode(code);
+          var nodes = style.element.childNodes;
+          if (nodes[index]) { style.element.removeChild(nodes[index]); }
+          if (nodes.length) { style.element.insertBefore(textNode, nodes[index]); }
+          else { style.element.appendChild(textNode); }
+        }
+      }
+    }
+  }
+  /* style inject SSR */
+  
+
+  
+  var WapMessage = __vue_normalize__$3(
+    { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
+    __vue_inject_styles__$3,
+    __vue_script__$3,
+    __vue_scope_id__$3,
+    __vue_is_functional_template__$3,
+    __vue_module_identifier__$3,
+    __vue_create_injector__$3,
+    undefined
+  )
+
+function Main (type) {
+  return {
+    functional: true,
+    render: function render (h) {
+      var props = {
+        message: this.message
+      };
+
+      if (this.type) {
+        props.type = this.type;
+      }
+      if (this.position) {
+        props.position = this.position;
+      }
+      if (type === 'wap') {
+        return h(WapMessage, {
+          props: props
+        })
+      }
+      return h(PcMessage, {
+        props: props
+      })
+    }
+  }
+}
+
+var MessageConstructor;
+var instance;
+var seed = 1;
+
+var Message = function (opts) {
+  opts = opts || {};
+
+  if (!MessageConstructor) {
+    MessageConstructor = Vue.extend(Main(typeof opts === 'object' ? opts.client : 'pc'));
+  }
+
+  if (typeof opts === 'string') {
+    opts = {
+      message: opts
+    };
+  }
+
+  var userOnClose = opts.onClose;
+  var id = 'message_' + seed++;
+  opts.onClose = function () {
+    Message.close(id, userOnClose);
+  };
+  instance = new MessageConstructor({
+    data: opts
+  });
+  instance.id = id;
+
+  instance.vm = instance.$mount();
+
+  if (opts.el) {
+    opts.el.appendChild(instance.vm.$el);
+  } else {
+    document.body.appendChild(instance.vm.$el);
+  }
+  instance.vm.visible = true;
+  instance.dom = instance.vm.$el;
+  return instance.vm
+};
+
 var components = [
-  Tree,
-  Message
+  Tree
 ];
 
-var install = function (Vue$$1, opts) {
+var install = function (Vue, opts) {
   if ( opts === void 0 ) opts = {};
 
   components.forEach(function (component) {
-    Vue$$1.component(component.name, component);
+    Vue.component(component.name, component);
   });
-};
 
-Vue.prototype.$message = Message;
+  Vue.prototype.$message = Message;
+};
 
 module.exports = {
   version: '0.2.0',

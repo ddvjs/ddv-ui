@@ -1,19 +1,17 @@
 import Tree from '../packages/tree/index.js'
-import Message from '../packages/Message/index.js'
-import Vue from 'vue'
+import Message from '../packages/message/index.js'
 
 const components = [
-  Tree,
-  Message
+  Tree
 ]
 
 const install = (Vue, opts = {}) => {
   components.forEach(component => {
     Vue.component(component.name, component)
   })
-}
 
-Vue.prototype.$message = Message
+  Vue.prototype.$message = Message
+}
 
 module.exports = {
   version: '0.2.0',
