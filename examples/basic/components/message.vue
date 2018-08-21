@@ -14,34 +14,34 @@ import { Message } from 'ddv-ui'
 Vue.prototype.$message = Message
 
 export default {
-	methods: {
-		error () {
-			this.$message.error('error')
-		},
-		success () {
-			this.$message.success('success')
-		},
-		warning () {
-			this.$message.warning('warning')
-		},
-		info () {
-			this.$message.info('info')
-		},
-		wap () {
-			this.$message({
-				client: 'wap',
-				message: '手机版'
-			})
-		}
-	},
+  methods: {
+    error () {
+      this.$message.error('error')
+    },
+    success () {
+      this.$message.success('success')
+    },
+    warning () {
+      this.$message.warning('warning')
+    },
+    info () {
+      this.$message.info('info')
+    },
+    wap () {
+      this.$message({
+        client: 'wap',
+        message: '手机版'
+      })
+    }
+  },
   mounted () {
-		setTimeout(() => {
-			this.$message({
-				message: '这是一条神秘的消息',
-				type: 'success'
-			})
-		}, 3000)
-	}
+    setTimeout(() => {
+      this.$message({
+        message: '这是一条神秘的消息',
+        type: 'success'
+      })
+    }, 3000)
+  }
 }
 </script>
 

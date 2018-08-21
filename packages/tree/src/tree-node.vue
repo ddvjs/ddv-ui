@@ -3,23 +3,34 @@
     :style="{
       paddingLeft: indent + 'px'
     }"
-    class="ddv-tree">
-    <div class="ddv-tree__content">
-      <span class="ddv-tree__icon">
+    class="ddv-tree_node">
+    <div class="ddv-tree_node__content" @click="xxx">
+      <span class="ddv-tree_node__icon">
         <i class="iconfont icon-arrow-right"></i>
       </span>
       <span>{{node.label}}</span>
     </div>
-    <slot></slot>
+    <ddv-collapse-transition>
+      <div class="ddv-tree_node__children" v-show="expanded">
+        <slot></slot>
+      </div>
+    </ddv-collapse-transition>
   </div>
 </template>
 
 <script>
+import DdvCollapseTransition from '../../../src/transitions/collapse-transition.js'
 
 export default {
   name: 'DdvTreeNode',
   props: {
     node: {
+      type: Object,
+      default () {
+        return {}
+      }
+    },
+    data: {
       type: Object,
       default () {
         return {}
@@ -33,8 +44,21 @@ export default {
       type: Number
     }
   },
+  components: {
+    DdvCollapseTransition
+  },
+  data () {
+    return {
+      expanded: false
+    }
+  },
+  methods: {
+    xxx () {
+      this.expanded = !this.expanded
+    }
+  },
   mounted () {
-    console.log(this.level, this.node.label, this.indent)
+    console.log(DdvCollapseTransition)
   }
 }
 </script>
