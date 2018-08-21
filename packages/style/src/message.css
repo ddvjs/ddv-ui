@@ -58,6 +58,10 @@
 /* 手机版 */
 .ddv-messageWap{
   height:100%;
+  font-size:14px;
+  color: #fff;
+  text-align: center;
+  transition: opacity .5s,transform .3s;
 }
 .ddv-messageWap__wrap{
   position: fixed;
@@ -65,12 +69,7 @@
   padding:10px 20px;
   border-radius: 5px;
   background: rgba(0, 0, 0, 0.7);
-  font-size:14px;
-  color: #fff;
   box-sizing: border-box;
-  text-align: center;
-  z-index: 1000;
-  transition: opacity .3s linear;
 }
 .ddv-messageWap__icon{
   margin-bottom:10px;

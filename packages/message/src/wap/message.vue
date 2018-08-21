@@ -1,8 +1,11 @@
 <template>
   <transition name="ddv-messageWap-fade">
     <div 
-    class="ddv-messageWap"
-    v-show="visible">
+      class="ddv-messageWap"
+      v-show="visible"
+      :style="{
+        'z-index': zIndex
+      }">
       <div class="ddv-messageWap__wrap" :class="place">
         <div class="ddv-messageWap__icon" v-show="type">
           <div class="ddv-messageWap__iconfont iconfont" :class="icon"></div>

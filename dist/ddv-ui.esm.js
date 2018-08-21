@@ -8451,6 +8451,10 @@ var mixin = {
     duration: {
       type: Number,
       default: 3000
+    },
+    zIndex: {
+      type: Number,
+      default: 2000
     }
   },
   data: function data () {
@@ -8478,7 +8482,6 @@ var mixin = {
       }
     },
     destroyElement: function destroyElement () {
-      console.log(2222);
       this.$el.removeEventListener('transitionend', this.destroyElement);
       this.$destroy(true);
       this.$el.parentNode.removeChild(this.$el);
@@ -8513,10 +8516,6 @@ var script$2 = {
     },
     onClose: {
       type: Function
-    },
-    zIndex: {
-      type: Number,
-      default: 2000
     }
   },
   computed: {
@@ -8750,7 +8749,10 @@ var __vue_render__$2 = function() {
             expression: "visible"
           }
         ],
-        staticClass: "ddv-messageWap"
+        staticClass: "ddv-messageWap",
+        style: {
+          "z-index": _vm.zIndex
+        }
       },
       [
         _c("div", { staticClass: "ddv-messageWap__wrap", class: _vm.place }, [

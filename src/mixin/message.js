@@ -6,6 +6,10 @@ export default {
     duration: {
       type: Number,
       default: 3000
+    },
+    zIndex: {
+      type: Number,
+      default: 2000
     }
   },
   data () {
@@ -31,7 +35,6 @@ export default {
       }
     },
     destroyElement () {
-      console.log(2222)
       this.$el.removeEventListener('transitionend', this.destroyElement)
       this.$destroy(true)
       this.$el.parentNode.removeChild(this.$el)

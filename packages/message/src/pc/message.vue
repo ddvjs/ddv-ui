@@ -32,10 +32,6 @@ export default {
     },
     onClose: {
       type: Function
-    },
-    zIndex: {
-      type: Number,
-      default: 2000
     }
   },
   computed: {

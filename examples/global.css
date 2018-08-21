@@ -61,19 +61,7 @@ textarea{
   -moz-appearance:button;
   -webkit-appearance:button;
 }
-select{
-  outline: none;
-  -webkit-appearance:none;
-  -moz-appearance:none;
-       appearance:none;
-  border:none;
-  display:block;
-  width:100%;
-  background: transparent;
-  direction: rtl;
-  -webkit-box-sizing:border-box;
-  box-sizing:border-box;
-}
+
 a, button, input[type="text"], textarea {
 	-ms-touch-action: none !important;
 	-webkit-appearance: none;
