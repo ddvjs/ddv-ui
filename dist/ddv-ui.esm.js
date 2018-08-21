@@ -8636,54 +8636,20 @@ Tree.install = function (Vue) {
   Vue.component(Tree.name, Tree);
 };
 
-//
-
-var script$2 = {
-  name: 'DdvMessage',
+var mixin = {
   props: {
-    type: {
-      type: String,
-      default: 'info',
-      validator: function validator (value) {
-        return ['info', 'error', 'success', 'warning'].indexOf(value) > -1
-      }
-    },
     message: {
       type: String
     },
     duration: {
       type: Number,
       default: 3000
-    },
-    onClose: {
-      type: Function
-    },
-    zIndex: {
-      type: Number,
-      default: 2000
     }
   },
   data: function data () {
     return {
-      isClose: false,
-      visible: false
-    }
-  },
-  computed: {
-    icon: function icon () {
-      switch (this.type) {
-        case 'info':
-          return 'icon-info'
-        case 'error':
-          return 'icon-danger'
-        case 'success':
-          return 'icon-success'
-        case 'warning':
-          return 'icon-warning'
-      }
-    },
-    classType: function classType () {
-      return ("ddv-message__" + (this.type))
+      visible: false,
+      isClose: false
     }
   },
   methods: {
@@ -8721,6 +8687,46 @@ var script$2 = {
   mounted: function mounted () {
     this.visible = true;
     this.startTimer();
+  }
+}
+
+//
+
+var script$2 = {
+  name: 'DdvMessage',
+  mixins: [mixin],
+  props: {
+    type: {
+      type: String,
+      default: 'info',
+      validator: function validator (value) {
+        return ['info', 'error', 'success', 'warning'].indexOf(value) > -1
+      }
+    },
+    onClose: {
+      type: Function
+    },
+    zIndex: {
+      type: Number,
+      default: 2000
+    }
+  },
+  computed: {
+    icon: function icon () {
+      switch (this.type) {
+        case 'info':
+          return 'icon-info'
+        case 'error':
+          return 'icon-danger'
+        case 'success':
+          return 'icon-success'
+        case 'warning':
+          return 'icon-warning'
+      }
+    },
+    classType: function classType () {
+      return ("ddv-message__" + (this.type))
+    }
   }
 }
 
@@ -8869,14 +8875,10 @@ __vue_render__$1._withStripped = true;
   )
 
 //
-//
-//
-//
-//
-//
 
 var script$3 = {
   name: 'DdvMessage',
+  mixins: [mixin],
   props: {
     type: {
       type: String,
@@ -8884,18 +8886,37 @@ var script$3 = {
         return ['info', 'error', 'success', 'warning', 'loading'].indexOf(value) > -1
       }
     },
-    message: {
-      type: String
-    },
-    duration: {
-      type: Number,
-      default: 3000
-    },
     position: {
       type: String,
       default: 'middle',
       validator: function validator (value) {
         return ['top', 'bottom', 'middle'].indexOf(value) > -1
+      }
+    }
+  },
+  computed: {
+    icon: function icon () {
+      switch (this.type) {
+        case 'info':
+          return 'icon-info1'
+        case 'error':
+          return 'icon-cha'
+        case 'success':
+          return 'icon-gou'
+        case 'warning':
+          return 'icon-warning1'
+        case 'loading':
+          return 'icon-loading'
+      }
+    },
+    place: function place () {
+      switch (this.position) {
+        case 'top':
+          return 'ddv-messageWap__placetop'
+        case 'bottom':
+          return 'ddv-messageWap__placebottom'
+        case 'middle':
+          return 'ddv-messageWap__placemiddle'
       }
     }
   }
@@ -8909,7 +8930,50 @@ var __vue_render__$2 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("div", { staticClass: "ddv-ui" }, [_vm._v("\n  eeee\n")])
+  return _c("transition", { attrs: { name: "ddv-messageWap-fade" } }, [
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.visible,
+            expression: "visible"
+          }
+        ],
+        staticClass: "ddv-messageWap"
+      },
+      [
+        _c("div", { staticClass: "ddv-messageWap__wrap", class: _vm.place }, [
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.type,
+                  expression: "type"
+                }
+              ],
+              staticClass: "ddv-messageWap__icon"
+            },
+            [
+              _c("div", {
+                staticClass: "ddv-messageWap__iconfont iconfont",
+                class: _vm.icon
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "ddv-messageWap__text" }, [
+            _vm._v(_vm._s(_vm.message))
+          ])
+        ])
+      ]
+    )
+  ])
 };
 var __vue_staticRenderFns__$2 = [];
 __vue_render__$2._withStripped = true;

@@ -31,7 +31,6 @@ export default {
       }
     },
     destroyElement () {
-      console.log(2222)
       this.$el.removeEventListener('transitionend', this.destroyElement)
       this.$destroy(true)
       this.$el.parentNode.removeChild(this.$el)
