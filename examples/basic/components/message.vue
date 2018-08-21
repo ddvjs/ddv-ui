@@ -4,6 +4,7 @@
 		<button @click="success" class="btn btn-success">success</button>
 		<button @click="warning" class="btn btn-warning">warning</button>
 		<button @click="info" class="btn btn-info">info</button>
+		<button @click="wap" class="btn btn-default">手机版</button>
 	</div>
 </template>
 
@@ -24,9 +25,12 @@ export default {
 			this.$message.warning('warning')
 		},
 		info () {
-			this.$message.info({
-				message: '手机端',
-				client: 'wap'
+			this.$message.info('info')
+		},
+		wap () {
+			this.$message({
+				client: 'wap',
+				message: '手机版'
 			})
 		}
 	},
