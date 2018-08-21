@@ -1,16 +1,20 @@
 import Vue from 'vue'
 import Main from './src/main.js'
-let MessageConstructor
 let instance
 let instances = []
 let seed = 1
 let methods = ['success', 'warning', 'info', 'error']
+let PcMessageConstructor = Vue.extend(Main('pc'))
+let WapMessageConstructor = Vue.extend(Main('wap'))
 
 const Message = function (opts) {
+  let MessageConstructor
   opts = opts || {}
 
-  if (!MessageConstructor) {
-    MessageConstructor = Vue.extend(Main(typeof opts === 'object' ? opts.client : 'pc'))
+  if (typeof opts === 'object' && opts.client === 'wap') {
+    MessageConstructor = WapMessageConstructor
+  } else {
+    MessageConstructor = PcMessageConstructor
   }
 
   if (typeof opts === 'string') {
@@ -29,6 +33,7 @@ const Message = function (opts) {
   instance = new MessageConstructor({
     data: opts
   })
+  MessageConstructor = void 0
   instance.id = id
 
   instance.vm = instance.$mount()

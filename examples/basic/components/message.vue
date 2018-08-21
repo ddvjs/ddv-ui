@@ -24,7 +24,10 @@ export default {
 			this.$message.warning('warning')
 		},
 		info () {
-			this.$message.info('info')
+			this.$message.info({
+				message: '手机端',
+				client: 'wap'
+			})
 		}
 	},
   mounted () {

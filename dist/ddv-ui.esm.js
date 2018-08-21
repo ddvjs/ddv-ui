@@ -8858,17 +8858,21 @@ function Main (type) {
   }
 }
 
-var MessageConstructor;
 var instance;
 var instances = [];
 var seed = 1;
 var methods = ['success', 'warning', 'info', 'error'];
+var PcMessageConstructor = Vue.extend(Main('pc'));
+var WapMessageConstructor = Vue.extend(Main('wap'));
 
 var Message = function (opts) {
+  var MessageConstructor;
   opts = opts || {};
 
-  if (!MessageConstructor) {
-    MessageConstructor = Vue.extend(Main(typeof opts === 'object' ? opts.client : 'pc'));
+  if (typeof opts === 'object' && opts.client === 'wap') {
+    MessageConstructor = WapMessageConstructor;
+  } else {
+    MessageConstructor = PcMessageConstructor;
   }
 
   if (typeof opts === 'string') {
@@ -8887,6 +8891,7 @@ var Message = function (opts) {
   instance = new MessageConstructor({
     data: opts
   });
+  MessageConstructor = void 0;
   instance.id = id;
 
   instance.vm = instance.$mount();
