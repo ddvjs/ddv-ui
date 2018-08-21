@@ -81,20 +81,29 @@ export default {
           }
         }, this.duration)
       }
+    },
+    destroyElement () {
+      this.$el.removeEventListener('transitionend', this.destroyElement)
+      this.$destroy(true)
+      this.$el.parentNode.removeChild(this.$el)
     }
   },
   watch: {
     isClose (val) {
       if (val) {
         this.visible = false
-        setTimeout(() => {
-          this.$destroy()
-        },  this.duration + 500)
+        this.$el.addEventListener('transitionend', this.destroyElement)
       }
     }
   },
+  created () {
+    
+  },
   mounted () {
+    this.$nextTick(() => {
     this.visible = true
+
+    })
     this.startTimer()
   }
 }

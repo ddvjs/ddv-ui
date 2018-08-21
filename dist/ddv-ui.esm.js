@@ -8513,22 +8513,31 @@ var script$2 = {
           }
         }, this.duration);
       }
+    },
+    destroyElement: function destroyElement () {
+      this.$el.removeEventListener('transitionend', this.destroyElement);
+      this.$destroy(true);
+      this.$el.parentNode.removeChild(this.$el);
     }
   },
   watch: {
     isClose: function isClose (val) {
-      var this$1 = this;
-
       if (val) {
         this.visible = false;
-        setTimeout(function () {
-          this$1.$destroy();
-        },  this.duration + 500);
+        this.$el.addEventListener('transitionend', this.destroyElement);
       }
     }
   },
+  created: function created () {
+    
+  },
   mounted: function mounted () {
-    this.visible = true;
+    var this$1 = this;
+
+    this.$nextTick(function () {
+    this$1.visible = true;
+
+    });
     this.startTimer();
   }
 }

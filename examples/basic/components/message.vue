@@ -28,10 +28,13 @@ export default {
 		}
 	},
   mounted () {
-		this.$message({
-			message: 'ppp',
-			type: 'success'
-		})
+		setTimeout(() => {
+			this.$message({
+				message: 'ppp',
+				type: 'success'
+			})
+		}, 3000);
+		
 	}
 }
 </script>
