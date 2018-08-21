@@ -9245,8 +9245,260 @@ Message.closeAll = function () {
   }
 };
 
+//
+
+var script$4 = {
+  props: {
+    list: {
+      type: Array
+    },
+    value: {
+      type: String
+    },
+    props: {
+      type: Object,
+      default: function default$1 () {
+        return {}
+      }
+    }
+  },
+  data: function data () {
+    return {
+      isShow: false,
+      arrow: '',
+      selectprops: {
+        value: 'value',
+        label: 'label'
+      },
+      selectList: []
+    }
+  },
+  methods: {
+    showItem: function showItem () {
+      this.isShow = !this.isShow;
+    },
+    selectItem: function selectItem (value) {
+      this.isShow = false;
+      this.$emit('update:value', value);
+    },
+    init: function init () {
+      var this$1 = this;
+
+      this.selectprops = Object.assign(this.selectprops, this.props);
+      this.list.forEach(function (item) {
+        var obj = {
+          label: item[this$1.selectprops.label],
+          value: item[this$1.selectprops.value]
+        };
+        this$1.selectList.push(obj);
+      });
+    }
+  },
+  mounted: function mounted () {
+    this.init();
+  }
+}
+
+/* script */
+            var __vue_script__$4 = script$4;
+            
+/* template */
+var __vue_render__$4 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    { staticClass: "ddv-select" },
+    [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.value,
+            expression: "value"
+          }
+        ],
+        staticClass: "ddv-select__input",
+        class: { "ddv-select__border": _vm.isShow },
+        attrs: {
+          type: "text",
+          placeholder: "请选择",
+          autocomplete: "off",
+          readonly: "readonly"
+        },
+        domProps: { value: _vm.value },
+        on: {
+          click: _vm.showItem,
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.value = $event.target.value;
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "ddv-select__icon",
+          class: { "ddv-select__up": _vm.isShow }
+        },
+        [_c("i", { staticClass: "ddv-select__iconfont iconfont icon-jiantou" })]
+      ),
+      _vm._v(" "),
+      _c("transition", { attrs: { name: "ddv-select-fade" } }, [
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.isShow,
+                expression: "isShow"
+              }
+            ],
+            staticClass: "ddv-select__dropdown"
+          },
+          _vm._l(_vm.selectList, function(item) {
+            return _c(
+              "div",
+              {
+                key: item.value,
+                staticClass: "el-select__dropdown__item",
+                on: {
+                  click: function($event) {
+                    _vm.selectItem(item.label);
+                  }
+                }
+              },
+              [_vm._v("\n        " + _vm._s(item.label) + "\n      ")]
+            )
+          })
+        )
+      ])
+    ],
+    1
+  )
+};
+var __vue_staticRenderFns__$4 = [];
+__vue_render__$4._withStripped = true;
+
+  /* style */
+  var __vue_inject_styles__$4 = undefined;
+  /* scoped */
+  var __vue_scope_id__$4 = undefined;
+  /* module identifier */
+  var __vue_module_identifier__$4 = undefined;
+  /* functional template */
+  var __vue_is_functional_template__$4 = false;
+  /* component normalizer */
+  function __vue_normalize__$4(
+    template, style, script,
+    scope, functional, moduleIdentifier,
+    createInjector, createInjectorSSR
+  ) {
+    var component = (typeof script === 'function' ? script.options : script) || {};
+
+    // For security concerns, we use only base name in production mode.
+    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/select/src/select.vue";
+
+    if (!component.render) {
+      component.render = template.render;
+      component.staticRenderFns = template.staticRenderFns;
+      component._compiled = true;
+
+      if (functional) { component.functional = true; }
+    }
+
+    component._scopeId = scope;
+
+    
+
+    return component
+  }
+  /* style inject */
+  function __vue_create_injector__$4() {
+    var head = document.head || document.getElementsByTagName('head')[0];
+    var styles = __vue_create_injector__$4.styles || (__vue_create_injector__$4.styles = {});
+    var isOldIE =
+      typeof navigator !== 'undefined' &&
+      /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
+
+    return function addStyle(id, css) {
+      if (document.querySelector('style[data-vue-ssr-id~="' + id + '"]')) { return } // SSR styles are present.
+
+      var group = isOldIE ? css.media || 'default' : id;
+      var style = styles[group] || (styles[group] = { ids: [], parts: [], element: undefined });
+
+      if (!style.ids.includes(id)) {
+        var code = css.source;
+        var index = style.ids.length;
+
+        style.ids.push(id);
+
+        if (isOldIE) {
+          style.element = style.element || document.querySelector('style[data-group=' + group + ']');
+        }
+
+        if (!style.element) {
+          var el = style.element = document.createElement('style');
+          el.type = 'text/css';
+
+          if (css.media) { el.setAttribute('media', css.media); }
+          if (isOldIE) {
+            el.setAttribute('data-group', group);
+            el.setAttribute('data-next-index', '0');
+          }
+
+          head.appendChild(el);
+        }
+
+        if (isOldIE) {
+          index = parseInt(style.element.getAttribute('data-next-index'));
+          style.element.setAttribute('data-next-index', index + 1);
+        }
+
+        if (style.element.styleSheet) {
+          style.parts.push(code);
+          style.element.styleSheet.cssText = style.parts
+            .filter(Boolean)
+            .join('\n');
+        } else {
+          var textNode = document.createTextNode(code);
+          var nodes = style.element.childNodes;
+          if (nodes[index]) { style.element.removeChild(nodes[index]); }
+          if (nodes.length) { style.element.insertBefore(textNode, nodes[index]); }
+          else { style.element.appendChild(textNode); }
+        }
+      }
+    }
+  }
+  /* style inject SSR */
+  
+
+  
+  var Select = __vue_normalize__$4(
+    { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
+    __vue_inject_styles__$4,
+    __vue_script__$4,
+    __vue_scope_id__$4,
+    __vue_is_functional_template__$4,
+    __vue_module_identifier__$4,
+    __vue_create_injector__$4,
+    undefined
+  )
+
+Select.install = function (Vue) {
+  Vue.component(Select.name, Select);
+};
+
 var components = [
-  Tree
+  Tree,
+  Select
 ];
 
 var install = function (Vue, opts) {
@@ -9271,7 +9523,8 @@ module.exports = {
   version: '0.2.0',
   install: install,
   Tree: Tree,
-  Message: Message
+  Message: Message,
+  Select: Select
 };
 
 module.exports.default = module.exports;

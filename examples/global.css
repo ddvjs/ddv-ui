@@ -72,15 +72,19 @@ button {
 	border: 0;
 }
 ::-webkit-input-placeholder {
+  font-size:14px;
 	color: #999;
 }
 :-moz-placeholder {
+  font-size:14px;
 	color: #999;
 }
 ::-moz-placeholder {
+  font-size:14px;
 	color: #999;
 }
 :-ms-input-placeholder {
+  font-size:14px;
 	color: #888;
 }
 /*圆形*/

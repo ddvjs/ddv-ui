@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Tree from './components/tree.vue'
 import Message from './components/Message.vue'
+import Select from './components/select.vue'
+
 Vue.use(VueRouter)
 
 const Index = {
@@ -32,6 +34,10 @@ const router = new VueRouter({
     {
       path: '/message',
       component: Message
+    },
+    {
+      path: '/select',
+      component: Select
     }
   ]
 })
