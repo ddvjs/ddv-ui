@@ -9197,11 +9197,58 @@ Message.closeAll = function () {
 
 var script$4 = {
   props: {
-    label: {
+    list: {
+      type: Array
+    },
+    value: {
       type: String
+    },
+    props: {
+      type: Object,
+      default: function default$1 () {
+        return {}
+      }
+    }
+  },
+  data: function data () {
+    return {
+      isShow: false,
+      arrow: '',
+      selectprops: {
+        value: 'value',
+        label: 'label'
+      },
+      selectList: []
+    }
+  },
+  methods: {
+    showItem: function showItem () {
+      this.isShow = !this.isShow;
+      if (this.isShow) {
+        this.arrow = 'ddv-select__up';
+      } else {
+        this.arrow = '';
+      }
+    },
+    selectItem: function selectItem (value) {
+      this.isShow = false;
+      this.$emit('update:value', value);
+    },
+    init: function init () {
+      var this$1 = this;
+
+      this.selectprops = Object.assign(this.selectprops, this.props);
+      this.list.forEach(function (item) {
+        var obj = {
+          label: item[this$1.selectprops.label],
+          value: item[this$1.selectprops.value]
+        };
+        this$1.selectList.push(obj);
+      });
     }
   },
   mounted: function mounted () {
+    this.init();
   }
 }
 
@@ -9213,28 +9260,79 @@ var __vue_render__$3 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _vm._m(0)
-};
-var __vue_staticRenderFns__$3 = [
-  function() {
-    var _vm = this;
-    var _h = _vm.$createElement;
-    var _c = _vm._self._c || _h;
-    return _c("div", { staticClass: "ddv-select" }, [
+  return _c(
+    "div",
+    { staticClass: "ddv-select" },
+    [
       _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.value,
+            expression: "value"
+          }
+        ],
         staticClass: "ddv-select__input",
+        class: { ddvSelectBorder: _vm.isShow },
         attrs: {
           type: "text",
           placeholder: "请选择",
           autocomplete: "off",
           readonly: "readonly"
+        },
+        domProps: { value: _vm.value },
+        on: {
+          click: _vm.showItem,
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.value = $event.target.value;
+          }
         }
       }),
       _vm._v(" "),
-      _c("i", { staticClass: "iconfont " })
-    ])
-  }
-];
+      _c("div", { staticClass: "ddv-select__icon", class: _vm.arrow }, [
+        _c("i", { staticClass: "ddv-select__iconfont iconfont icon-jiantou" })
+      ]),
+      _vm._v(" "),
+      _c("transition", { attrs: { name: "ddv-select-fade" } }, [
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.isShow,
+                expression: "isShow"
+              }
+            ],
+            staticClass: "ddv-select__dropdown"
+          },
+          _vm._l(_vm.selectList, function(item) {
+            return _c(
+              "div",
+              {
+                key: item.value,
+                staticClass: "el-select__dropdown__item",
+                on: {
+                  click: function($event) {
+                    _vm.selectItem(item.label);
+                  }
+                }
+              },
+              [_vm._v("\n        " + _vm._s(item.label) + "\n      ")]
+            )
+          })
+        )
+      ])
+    ],
+    1
+  )
+};
+var __vue_staticRenderFns__$3 = [];
 __vue_render__$3._withStripped = true;
 
   /* style */

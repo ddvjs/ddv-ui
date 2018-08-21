@@ -1,5 +1,11 @@
 <template>
-  <ddv-select></ddv-select>
+  <div>
+    <ddv-select 
+      :list="options" 
+      :value.sync="value" 
+      :props="defaultProps">
+      </ddv-select>
+  </div>
 </template>
 
 <script>
@@ -13,20 +19,24 @@ export default {
     return {
       options: [{
         value: '选项1',
-        label: '黄金糕'
+        name: '黄金糕'
       }, {
         value: '选项2',
-        label: '双皮奶'
+        name: '双皮奶'
       }, {
         value: '选项3',
-        label: '蚵仔煎'
+        name: '蚵仔煎'
       }, {
         value: '选项4',
-        label: '龙须面'
+        name: '龙须面'
       }, {
         value: '选项5',
-        label: '北京烤鸭'
+        name: '北京烤鸭'
       }],
+      defaultProps: {
+        value: 'value',
+        label: 'name'
+      },
       value: ''
     }
   }
