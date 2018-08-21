@@ -96,14 +96,8 @@ export default {
       }
     }
   },
-  created () {
-    
-  },
   mounted () {
-    this.$nextTick(() => {
     this.visible = true
-
-    })
     this.startTimer()
   }
 }

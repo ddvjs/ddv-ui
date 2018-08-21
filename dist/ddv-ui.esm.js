@@ -8528,16 +8528,8 @@ var script$2 = {
       }
     }
   },
-  created: function created () {
-    
-  },
   mounted: function mounted () {
-    var this$1 = this;
-
-    this.$nextTick(function () {
-    this$1.visible = true;
-
-    });
+    this.visible = true;
     this.startTimer();
   }
 }
