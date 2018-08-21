@@ -1,3 +1,4 @@
+import isBrowser from './utils/isBrowser.js'
 import Tree from '../packages/tree/index.js'
 import Message from '../packages/message/index.js'
 
@@ -10,7 +11,15 @@ const install = (Vue, opts = {}) => {
     Vue.component(component.name, component)
   })
 
+  Vue.prototype.$DDVUI = {
+    client: opts.client || 'pc'
+  }
+
   Vue.prototype.$message = Message
+}
+
+if (isBrowser && window.Vue) {
+  install(window.Vue)
 }
 
 module.exports = {
