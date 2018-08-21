@@ -193,7 +193,7 @@ var script$1 = {
   props: {
     data: {
       type: Array,
-      default: (function () { return []; })
+      default: function () { return []; }
     },
     indent: {
       type: Number,
@@ -276,7 +276,7 @@ var script$1 = {
 
     return h('div', {
       class: ['ddv-ui']
-    },[
+    }, [
       h('div', {
         class: ['ddv-ui__tree']
       }, treeNodes(1, this.lists))
