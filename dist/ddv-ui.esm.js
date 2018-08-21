@@ -76,7 +76,9 @@ var __vue_staticRenderFns__ = [
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
-    return _c("span", [_c("i", { staticClass: "iconfont icon-arrow-right" })])
+    return _c("span", { staticClass: "ddv-tree__icon" }, [
+      _c("i", { staticClass: "iconfont icon-arrow-right" })
+    ])
   }
 ];
 __vue_render__._withStripped = true;
@@ -8840,6 +8842,13 @@ function Main (type) {
       if (type === 'wap') {
         return h(WapMessage, {
           props: props
+        })
+      } else if (type === 'wechaApp') {
+        return h(WapMessage, {
+          props: {
+            message: '暂不支持小程序组件',
+            type: 'error'
+          }
         })
       }
       return h(PcMessage, {

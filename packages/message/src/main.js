@@ -18,6 +18,13 @@ export default type => {
         return h(WapMessage, {
           props
         })
+      } else if (type === 'wechaApp') {
+        return h(WapMessage, {
+          props: {
+            message: '暂不支持小程序组件',
+            type: 'error'
+          }
+        })
       }
       return h(PcMessage, {
         props
