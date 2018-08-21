@@ -71,7 +71,6 @@ export default {
       this.$message.info('info')
     },
     wap () {
-<<<<<<< HEAD
       if (this.type === 'none' || this.type === '') {
         this.$message({
           client: 'wap',
@@ -87,21 +86,6 @@ export default {
         })
       }
     }
-=======
-      this.$message({
-        client: 'wap',
-        message: '手机版'
-      })
-    }
-  },
-  mounted () {
-    setTimeout(() => {
-      this.$message({
-        message: '这是一条神秘的消息',
-        type: 'success'
-      })
-    }, 3000)
->>>>>>> origin/dev
   }
 }
 </script>
