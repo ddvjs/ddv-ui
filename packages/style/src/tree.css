@@ -14,13 +14,28 @@
   line-height: 36px;
   cursor: pointer;
 }
+.ddv-tree_node__content:hover {
+  background: #ebebeb;
+}
 .ddv-tree_node__label {
   font-size: 14px;
+  margin-left: 10px;
+  display: inline-block;
 }
 .ddv-tree_node__icon {
-  margin-right: 10px; 
+  transition: all .3s;
   font-size: 12px;
   color: #c0c4cc;
+  display: inline-block;
+}
+.ddv-tree_node__icon__rotate {
+  transform: rotate(90deg);
+}
+.ddv-tree_node__icon__noChild {
+  color: transparent;
+  cursor: default;
+  visibility: hidden;
+  opacity: 0;
 }
 
 .collapse-transition {

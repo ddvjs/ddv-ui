@@ -8212,6 +8212,7 @@ var DdvCollapseTransition = {
 
 var script = {
   name: 'DdvTreeNode',
+  componentName: 'DdvTreeNodes',
   props: {
     node: {
       type: Object,
@@ -8234,17 +8235,54 @@ var script = {
     }
   },
   components: {
-    DdvCollapseTransition: DdvCollapseTransition
+    DdvCollapseTransition: DdvCollapseTransition,
+    nodeContent: {
+      props: {
+        node: {
+          required: true
+        }
+      },
+      render: function render (h) {
+        var parent = this.$parent;
+        var tree = parent.tree;
+        var node = this.node;
+        var data = node.data;
+        var store = node.store;
+        // return (
+        //   parent.renderContent
+        //     ? parent.renderContent.call(parent._renderProxy, h, { _self: tree.$vnode.context, node, data, store })
+        //     : tree.$scopedSlots.default
+        //       ? tree.$scopedSlots.default({ node, data })
+        //       : <span class="el-tree-node__label">{ node.label }</span>
+        // )
+      }
+    }
   },
   data: function data () {
     return {
-      expanded: false
+      expanded: false,
+      childNodeRendered: false
     }
   },
   methods: {
-    xxx: function xxx () {
+    handleClick: function handleClick () {
       this.expanded = !this.expanded;
     }
+  },
+  created: function created () {
+    var parent = this.$parent;
+
+    if (parent.isTree) {
+      this.tree = parent;
+    } else {
+      this.tree = parent.tree;
+    }
+
+    var tree = this.tree;
+    if (!tree) {
+      console.warn('Can not find node\'s tree.');
+    }
+    this.childNodeRendered = true;
   },
   mounted: function mounted () {}
 }
@@ -8259,23 +8297,38 @@ var __vue_render__ = function() {
   var _c = _vm._self._c || _h;
   return _c(
     "div",
-    {
-      staticClass: "ddv-tree_node",
-      style: {
-        paddingLeft: _vm.indent + "px"
-      }
-    },
+    { staticClass: "ddv-tree_node" },
     [
       _c(
         "div",
-        { staticClass: "ddv-tree_node__content", on: { click: _vm.xxx } },
+        {
+          staticClass: "ddv-tree_node__content",
+          style: {
+            paddingLeft: _vm.indent + "px"
+          },
+          on: { click: _vm.handleClick }
+        },
         [
-          _vm._m(0),
+          _c(
+            "span",
+            {
+              staticClass: "ddv-tree_node__icon",
+              class: {
+                "ddv-tree_node__icon__noChild":
+                  !_vm.node.children || _vm.node.children.length === 0,
+                "ddv-tree_node__icon__rotate": _vm.expanded
+              }
+            },
+            [_c("i", { staticClass: "iconfont icon-arrow-right" })]
+          ),
           _vm._v(" "),
           _c("span", { staticClass: "ddv-tree_node__label" }, [
             _vm._v(_vm._s(_vm.node.label))
-          ])
-        ]
+          ]),
+          _vm._v(" "),
+          _c("node-content", { attrs: { node: _vm.node } })
+        ],
+        1
       ),
       _vm._v(" "),
       _c("ddv-collapse-transition", [
@@ -8292,24 +8345,26 @@ var __vue_render__ = function() {
             ],
             staticClass: "ddv-tree_node__children"
           },
-          [_vm._t("default")],
-          2
+          _vm._l(_vm.node.children, function(item) {
+            return _vm.childNodeRendered
+              ? _c("ddv-tree-node", {
+                  key: item.nodeKey,
+                  attrs: {
+                    node: item.node,
+                    data: item.data,
+                    level: item.level,
+                    indent: item.indent
+                  }
+                })
+              : _vm._e()
+          })
         )
       ])
     ],
     1
   )
 };
-var __vue_staticRenderFns__ = [
-  function() {
-    var _vm = this;
-    var _h = _vm.$createElement;
-    var _c = _vm._self._c || _h;
-    return _c("span", { staticClass: "ddv-tree_node__icon" }, [
-      _c("i", { staticClass: "iconfont icon-arrow-right" })
-    ])
-  }
-];
+var __vue_staticRenderFns__ = [];
 __vue_render__._withStripped = true;
 
   /* style */
@@ -8417,6 +8472,8 @@ __vue_render__._withStripped = true;
     undefined
   )
 
+//
+
 var script$1 = {
   name: 'DdvTree',
   props: {
@@ -8455,61 +8512,31 @@ var script$1 = {
       var this$1 = this;
 
       this.lists = [];
-      var childData = function (lists, childNoteLists) {
+      var childData = function (level, lists, childNoteLists) {
         if ( childNoteLists === void 0 ) childNoteLists = [];
 
-        lists.forEach(function (item) {
+        lists.forEach(function (item, index) {
           var obj = {
             data: item,
-            node: {}
+            node: {},
+            level: level,
+            indent: this$1.indent * level,
+            nodeKey: index + '-' + level
           };
-          obj.node[this$1.treeprops.children] = [];
+          obj.node.children = [];
           obj.node.label = item[this$1.treeprops.label];
 
           if (Array.isArray(item[this$1.treeprops.children]) && item[this$1.treeprops.children].length) {
-            childData(item[this$1.treeprops.children], obj.node[this$1.treeprops.children]);
+            var childLevel = level;
+            childLevel += 1;
+            childData(childLevel, item[this$1.treeprops.children], obj.node.children);
           }
           childNoteLists.push(obj);
         });
         return childNoteLists
       };
-      this.lists = childData(this.data);
+      this.lists = childData(1, this.data);
     }
-  },
-  render: function render (h) {
-    var this$1 = this;
-
-    var treeNodes = function (level, lists, renderList) {
-      if ( renderList === void 0 ) renderList = [];
-
-      lists.forEach(function (item) {
-        var slotRender = [];
-
-        if (Array.isArray(item.node.children) && item.node.children.length) {
-          var childLevel = level;
-          childLevel += 1;
-          slotRender = treeNodes(childLevel, item.node.children);
-        }
-        var render = h(DdvTreeNode, {
-          props: {
-            node: item.node,
-            data: item.data,
-            level: level,
-            indent: this$1.indent
-          }
-        }, slotRender);
-        renderList.push(render);
-      });
-      return renderList
-    };
-
-    return h('div', {
-      class: ['ddv-ui']
-    }, [
-      h('div', {
-        class: ['ddv-ui__tree']
-      }, treeNodes(1, this.lists))
-    ])
   },
   watch: {
     props: function props () {
@@ -8521,6 +8548,7 @@ var script$1 = {
     }
   },
   created: function created () {
+    this.isTree = true;
     this.setProps();
     this.setData();
   },
@@ -8531,6 +8559,30 @@ var script$1 = {
             var __vue_script__$1 = script$1;
             
 /* template */
+var __vue_render__$1 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", { staticClass: "ddv-ui" }, [
+    _c(
+      "div",
+      { staticClass: "ddv-ui__tree" },
+      _vm._l(_vm.lists, function(node) {
+        return _c("ddv-tree-node", {
+          key: node.nodeKey,
+          attrs: {
+            node: node.node,
+            data: node.data,
+            level: node.level,
+            indent: node.indent
+          }
+        })
+      })
+    )
+  ])
+};
+var __vue_staticRenderFns__$1 = [];
+__vue_render__$1._withStripped = true;
 
   /* style */
   var __vue_inject_styles__$1 = undefined;
@@ -8539,7 +8591,7 @@ var script$1 = {
   /* module identifier */
   var __vue_module_identifier__$1 = undefined;
   /* functional template */
-  var __vue_is_functional_template__$1 = undefined;
+  var __vue_is_functional_template__$1 = false;
   /* component normalizer */
   function __vue_normalize__$1(
     template, style, script,
@@ -8627,7 +8679,7 @@ var script$1 = {
 
   
   var Tree = __vue_normalize__$1(
-    {},
+    { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
     __vue_inject_styles__$1,
     __vue_script__$1,
     __vue_scope_id__$1,
@@ -8739,7 +8791,7 @@ var script$2 = {
             var __vue_script__$2 = script$2;
             
 /* template */
-var __vue_render__$1 = function() {
+var __vue_render__$2 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -8771,8 +8823,8 @@ var __vue_render__$1 = function() {
     )
   ])
 };
-var __vue_staticRenderFns__$1 = [];
-__vue_render__$1._withStripped = true;
+var __vue_staticRenderFns__$2 = [];
+__vue_render__$2._withStripped = true;
 
   /* style */
   var __vue_inject_styles__$2 = undefined;
@@ -8869,7 +8921,7 @@ __vue_render__$1._withStripped = true;
 
   
   var PcMessage = __vue_normalize__$2(
-    { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
+    { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
     __vue_inject_styles__$2,
     __vue_script__$2,
     __vue_scope_id__$2,
@@ -8931,7 +8983,7 @@ var script$3 = {
             var __vue_script__$3 = script$3;
             
 /* template */
-var __vue_render__$2 = function() {
+var __vue_render__$3 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -8983,8 +9035,8 @@ var __vue_render__$2 = function() {
     )
   ])
 };
-var __vue_staticRenderFns__$2 = [];
-__vue_render__$2._withStripped = true;
+var __vue_staticRenderFns__$3 = [];
+__vue_render__$3._withStripped = true;
 
   /* style */
   var __vue_inject_styles__$3 = undefined;
@@ -9081,7 +9133,7 @@ __vue_render__$2._withStripped = true;
 
   
   var WapMessage = __vue_normalize__$3(
-    { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
+    { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
     __vue_inject_styles__$3,
     __vue_script__$3,
     __vue_scope_id__$3,

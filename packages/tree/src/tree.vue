@@ -1,3 +1,17 @@
+<template>
+  <div class="ddv-ui">
+    <div class="ddv-ui__tree">
+      <ddv-tree-node
+        v-for="node in lists"
+        :key="node.nodeKey"
+        :node="node.node"
+        :data="node.data"
+        :level="node.level"
+        :indent="node.indent"/>
+    </div>
+  </div>
+</template>
+
 <script>
 import '../../style/src/base.css'
 import '../../style/src/tree.css'
@@ -40,55 +54,29 @@ export default {
     },
     setData () {
       this.lists = []
-      const childData = (lists, childNoteLists = []) => {
-        lists.forEach(item => {
+      const childData = (level, lists, childNoteLists = []) => {
+        lists.forEach((item, index) => {
           let obj = {
             data: item,
-            node: {}
+            node: {},
+            level,
+            indent: this.indent * level,
+            nodeKey: index + '-' + level
           }
-          obj.node[this.treeprops.children] = []
+          obj.node.children = []
           obj.node.label = item[this.treeprops.label]
 
           if (Array.isArray(item[this.treeprops.children]) && item[this.treeprops.children].length) {
-            childData(item[this.treeprops.children], obj.node[this.treeprops.children])
+            let childLevel = level
+            childLevel += 1
+            childData(childLevel, item[this.treeprops.children], obj.node.children)
           }
           childNoteLists.push(obj)
         })
         return childNoteLists
       }
-      this.lists = childData(this.data)
+      this.lists = childData(1, this.data)
     }
-  },
-  render (h) {
-    const treeNodes = (level, lists, renderList = []) => {
-      lists.forEach((item) => {
-        var slotRender = []
-
-        if (Array.isArray(item.node.children) && item.node.children.length) {
-          let childLevel = level
-          childLevel += 1
-          slotRender = treeNodes(childLevel, item.node.children)
-        }
-        var render = h(DdvTreeNode, {
-          props: {
-            node: item.node,
-            data: item.data,
-            level: level,
-            indent: this.indent
-          }
-        }, slotRender)
-        renderList.push(render)
-      })
-      return renderList
-    }
-
-    return h('div', {
-      class: ['ddv-ui']
-    }, [
-      h('div', {
-        class: ['ddv-ui__tree']
-      }, treeNodes(1, this.lists))
-    ])
   },
   watch: {
     props () {
@@ -100,6 +88,7 @@ export default {
     }
   },
   created () {
+    this.isTree = true
     this.setProps()
     this.setData()
   },
