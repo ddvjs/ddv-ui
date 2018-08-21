@@ -3,13 +3,13 @@
     <input 
       type="text" 
       class="ddv-select__input" 
-      :class="{ddvSelectBorder:isShow}"
+      :class="{'ddv-select__border':isShow}"
       placeholder="请选择" 
       autocomplete="off" 
       readonly="readonly"
       v-model="value"
       @click="showItem">
-      <div class="ddv-select__icon" :class="arrow">
+      <div class="ddv-select__icon" :class="{'ddv-select__up':isShow}">
         <i class="ddv-select__iconfont iconfont icon-jiantou"></i>
       </div>
 
@@ -62,15 +62,9 @@ export default {
   methods: {
     showItem () {
       this.isShow = !this.isShow
-      if (this.isShow) {
-        this.arrow = 'ddv-select__up'
-      } else {
-        this.arrow = ''
-      }
     },
     selectItem (value) {
       this.isShow = false
-      this.arrow = ''
       this.$emit('update:value', value)
     },
     init () {

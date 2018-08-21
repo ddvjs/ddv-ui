@@ -9224,15 +9224,9 @@ var script$4 = {
   methods: {
     showItem: function showItem () {
       this.isShow = !this.isShow;
-      if (this.isShow) {
-        this.arrow = 'ddv-select__up';
-      } else {
-        this.arrow = '';
-      }
     },
     selectItem: function selectItem (value) {
       this.isShow = false;
-      this.arrow = '';
       this.$emit('update:value', value);
     },
     init: function init () {
@@ -9294,9 +9288,14 @@ var __vue_render__$3 = function() {
         }
       }),
       _vm._v(" "),
-      _c("div", { staticClass: "ddv-select__icon", class: _vm.arrow }, [
-        _c("i", { staticClass: "ddv-select__iconfont iconfont icon-jiantou" })
-      ]),
+      _c(
+        "div",
+        {
+          staticClass: "ddv-select__icon",
+          class: { "ddv-select__up": _vm.isShow }
+        },
+        [_c("i", { staticClass: "ddv-select__iconfont iconfont icon-jiantou" })]
+      ),
       _vm._v(" "),
       _c("transition", { attrs: { name: "ddv-select-fade" } }, [
         _c(
