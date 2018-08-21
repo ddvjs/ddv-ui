@@ -5,20 +5,15 @@ export default type => {
   return {
     functional: true,
     render (h) {
-      let props = {
-        message: this.message,
-        onClose: this.onClose
-      }
+      let props = Object.assign({}, this.$data)
+      let keys = Object.keys(props)
 
-      if (this.type) {
-        props.type = this.type
-      }
-      if (this.position) {
-        props.position = this.position
-      }
-      if (this.duration || this.duration === 0) {
-        props.duration = this.duration
-      }
+      keys.forEach(key => {
+        if (typeof props[key] === typeof void 0) {
+          delete props[key]
+        }
+      })
+
       if (type === 'wap') {
         return h(WapMessage, {
           props

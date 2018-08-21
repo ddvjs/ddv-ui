@@ -8832,20 +8832,15 @@ function Main (type) {
   return {
     functional: true,
     render: function render (h) {
-      var props = {
-        message: this.message,
-        onClose: this.onClose
-      };
+      var props = Object.assign({}, this.$data);
+      var keys = Object.keys(props);
 
-      if (this.type) {
-        props.type = this.type;
-      }
-      if (this.position) {
-        props.position = this.position;
-      }
-      if (this.duration || this.duration === 0) {
-        props.duration = this.duration;
-      }
+      keys.forEach(function (key) {
+        if (typeof props[key] === typeof void 0) {
+          delete props[key];
+        }
+      });
+
       if (type === 'wap') {
         return h(WapMessage, {
           props: props
