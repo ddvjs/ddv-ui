@@ -1,0 +1,34 @@
+<template>
+  <ddv-select></ddv-select>
+</template>
+
+<script>
+import { Select } from 'ddv-ui'
+
+export default {
+  components: {
+    'ddv-select': Select
+  },
+  data () {
+    return {
+      options: [{
+        value: '选项1',
+        label: '黄金糕'
+      }, {
+        value: '选项2',
+        label: '双皮奶'
+      }, {
+        value: '选项3',
+        label: '蚵仔煎'
+      }, {
+        value: '选项4',
+        label: '龙须面'
+      }, {
+        value: '选项5',
+        label: '北京烤鸭'
+      }],
+      value: ''
+    }
+  }
+}
+</script>
