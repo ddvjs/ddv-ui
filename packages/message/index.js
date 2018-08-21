@@ -4,18 +4,10 @@ let instance
 let instances = []
 let seed = 1
 let methods = ['success', 'warning', 'info', 'error']
-let PcMessageConstructor = Vue.extend(Main('pc'))
-let WapMessageConstructor = Vue.extend(Main('wap'))
 
 const Message = function (opts) {
-  let MessageConstructor
   opts = opts || {}
-
-  if (typeof opts === 'object' && opts.client === 'wap') {
-    MessageConstructor = WapMessageConstructor
-  } else {
-    MessageConstructor = PcMessageConstructor
-  }
+  let MessageConstructor = Vue.extend(Main(opts.client))
 
   if (typeof opts === 'string') {
     opts = {
@@ -40,7 +32,7 @@ const Message = function (opts) {
 
   if (opts.el && typeof opts.el.appendChild === 'function') {
     opts.el.appendChild(instance.vm.$el)
-  } else if (!Vue.prototype.$sisServer) {
+  } else if (!Vue.prototype.$isServer) {
     document.body.appendChild(instance.vm.$el)
   }
   instances.push(instance)

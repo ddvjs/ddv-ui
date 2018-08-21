@@ -5,6 +5,7 @@ export default type => {
   return {
     functional: true,
     render (h) {
+      type = type || (this.$DDVUI ? this.$DDVUI.client : 'pc')
       let props = Object.assign({}, this.$data)
       let keys = Object.keys(props)
 

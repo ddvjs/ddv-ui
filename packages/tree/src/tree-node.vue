@@ -8,7 +8,7 @@
       <span class="ddv-tree_node__icon">
         <i class="iconfont icon-arrow-right"></i>
       </span>
-      <span>{{node.label}}</span>
+      <span class="ddv-tree_node__label">{{node.label}}</span>
     </div>
     <ddv-collapse-transition>
       <div class="ddv-tree_node__children" v-show="expanded">
@@ -57,8 +57,6 @@ export default {
       this.expanded = !this.expanded
     }
   },
-  mounted () {
-    console.log(DdvCollapseTransition)
-  }
+  mounted () {}
 }
 </script>

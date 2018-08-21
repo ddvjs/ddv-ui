@@ -67,13 +67,10 @@ class Transition {
 export default {
   name: 'DdvCollapseTransition',
   functional: true,
-  render (h, {
-    children
-  }) {
+  render (h, { children }) {
     const data = {
       on: new Transition()
     }
-
     return h('transition', data, children)
   }
 }

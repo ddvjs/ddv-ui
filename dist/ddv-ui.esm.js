@@ -3,6 +3,8 @@
   * (c) 2018 861883474@qq.com
   * @license MIT
   */
+var isBrowser = typeof window !== 'undefined'
+
 /*!
  * Vue.js v2.5.17
  * (c) 2014-2018 Evan You
@@ -8202,7 +8204,6 @@ var DdvCollapseTransition = {
     var data = {
       on: new Transition$1()
     };
-
     return h('transition', data, children)
   }
 }
@@ -8245,9 +8246,7 @@ var script = {
       this.expanded = !this.expanded;
     }
   },
-  mounted: function mounted () {
-    console.log(DdvCollapseTransition);
-  }
+  mounted: function mounted () {}
 }
 
 /* script */
@@ -8270,7 +8269,13 @@ var __vue_render__ = function() {
       _c(
         "div",
         { staticClass: "ddv-tree_node__content", on: { click: _vm.xxx } },
-        [_vm._m(0), _vm._v(" "), _c("span", [_vm._v(_vm._s(_vm.node.label))])]
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("span", { staticClass: "ddv-tree_node__label" }, [
+            _vm._v(_vm._s(_vm.node.label))
+          ])
+        ]
       ),
       _vm._v(" "),
       _c("ddv-collapse-transition", [
@@ -9090,6 +9095,7 @@ function Main (type) {
   return {
     functional: true,
     render: function render (h) {
+      type = type || (this.$DDVUI ? this.$DDVUI.client : 'pc');
       var props = Object.assign({}, this.$data);
       var keys = Object.keys(props);
 
@@ -9122,18 +9128,10 @@ var instance;
 var instances = [];
 var seed = 1;
 var methods = ['success', 'warning', 'info', 'error'];
-var PcMessageConstructor = Vue.extend(Main('pc'));
-var WapMessageConstructor = Vue.extend(Main('wap'));
 
 var Message = function (opts) {
-  var MessageConstructor;
   opts = opts || {};
-
-  if (typeof opts === 'object' && opts.client === 'wap') {
-    MessageConstructor = WapMessageConstructor;
-  } else {
-    MessageConstructor = PcMessageConstructor;
-  }
+  var MessageConstructor = Vue.extend(Main(opts.client));
 
   if (typeof opts === 'string') {
     opts = {
@@ -9158,7 +9156,7 @@ var Message = function (opts) {
 
   if (opts.el && typeof opts.el.appendChild === 'function') {
     opts.el.appendChild(instance.vm.$el);
-  } else if (!Vue.prototype.$sisServer) {
+  } else if (!Vue.prototype.$isServer) {
     document.body.appendChild(instance.vm.$el);
   }
   instances.push(instance);
@@ -9360,8 +9358,16 @@ var install = function (Vue, opts) {
     Vue.component(component.name, component);
   });
 
+  Vue.prototype.$DDVUI = {
+    client: opts.client || 'pc'
+  };
+
   Vue.prototype.$message = Message;
 };
+
+if (isBrowser && window.Vue) {
+  install(window.Vue);
+}
 
 module.exports = {
   version: '0.2.0',

@@ -6,19 +6,23 @@
   overflow: hidden;
 }
 .ddv-tree_node {
-  font-size:14px;
-  color:#606266;
+  font-size: 14px;
+  color: #606266;
 }
 .ddv-tree_node__content {
   height: 36px;
   line-height: 36px;
   cursor: pointer;
 }
+.ddv-tree_node__label {
+  font-size: 14px;
+}
 .ddv-tree_node__icon {
   margin-right: 10px; 
   font-size: 12px;
   color: #c0c4cc;
 }
+
 .collapse-transition {
   transition: 0.3s height ease-in-out, 0.3s padding-top ease-in-out, 0.3s padding-bottom ease-in-out;
 }
