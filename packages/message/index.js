@@ -21,6 +21,8 @@ const Message = function (opts) {
 
   let userOnClose = opts.onClose
   let id = 'message_' + seed++
+  opts.zIndex = 2000 + seed
+
   opts.onClose = function () {
     Message.close(id, userOnClose)
   }
@@ -31,13 +33,11 @@ const Message = function (opts) {
 
   instance.vm = instance.$mount()
 
-  if (opts.el) {
+  if (opts.el && typeof opts.el.appendChild === 'function') {
     opts.el.appendChild(instance.vm.$el)
   } else if (!Vue.prototype.$sisServer) {
     document.body.appendChild(instance.vm.$el)
   }
-  instance.vm.visible = true
-  instance.dom = instance.vm.$el
   instances.push(instance)
   return instance.vm
 }

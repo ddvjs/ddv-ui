@@ -1,4 +1,9 @@
-.ddv-message{
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+.ddv-message {
   min-width: 380px;
   box-sizing: border-box;
   border-radius: 4px;
@@ -13,7 +18,7 @@
   font-size: 14px;
   align-items: center;
 }
-.ddv-message__button{
+.ddv-message__button {
   display: inline-block;
   line-height: 1;
   white-space: nowrap;
@@ -33,7 +38,7 @@
   font-size: 14px;
   border-radius: 4px;
 }
-.ddv-message__button:hover{
+.ddv-message__button:hover {
   color: rgb(64, 158, 255);
   border-color: rgb(64, 158, 255);
 }

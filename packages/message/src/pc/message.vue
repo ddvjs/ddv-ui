@@ -1,12 +1,16 @@
 <template>
-  <div class="ddv-ui">
-    <transition name="ddv-message-fade">
-      <div class="ddv-message" :class="classType" v-show="visible">
-        <span><i class="iconfont" :class="icon"></i></span>
-        <span class="ddv-message__text">{{message}}</span>
-      </div>
-    </transition>  
-  </div>
+  <transition name="ddv-message-fade">
+    <div
+      class="ddv-message"
+      :class="classType"
+      v-show="visible"
+      :style="{
+        'z-index': zIndex
+      }">
+      <span><i class="iconfont" :class="icon"></i></span>
+      <span class="ddv-message__text">{{message}}</span>
+    </div>
+  </transition>  
 </template>
 
 <script>
@@ -33,6 +37,10 @@ export default {
     },
     onClose: {
       type: Function
+    },
+    zIndex: {
+      type: Number,
+      default: 2000
     }
   },
   data () {

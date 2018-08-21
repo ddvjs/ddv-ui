@@ -8467,6 +8467,10 @@ var script$2 = {
     },
     onClose: {
       type: Function
+    },
+    zIndex: {
+      type: Number,
+      default: 2000
     }
   },
   data: function data () {
@@ -8537,37 +8541,33 @@ var __vue_render__$1 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c(
-    "div",
-    { staticClass: "ddv-ui" },
-    [
-      _c("transition", { attrs: { name: "ddv-message-fade" } }, [
-        _c(
-          "div",
+  return _c("transition", { attrs: { name: "ddv-message-fade" } }, [
+    _c(
+      "div",
+      {
+        directives: [
           {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.visible,
-                expression: "visible"
-              }
-            ],
-            staticClass: "ddv-message",
-            class: _vm.classType
-          },
-          [
-            _c("span", [_c("i", { staticClass: "iconfont", class: _vm.icon })]),
-            _vm._v(" "),
-            _c("span", { staticClass: "ddv-message__text" }, [
-              _vm._v(_vm._s(_vm.message))
-            ])
-          ]
-        )
-      ])
-    ],
-    1
-  )
+            name: "show",
+            rawName: "v-show",
+            value: _vm.visible,
+            expression: "visible"
+          }
+        ],
+        staticClass: "ddv-message",
+        class: _vm.classType,
+        style: {
+          "z-index": _vm.zIndex
+        }
+      },
+      [
+        _c("span", [_c("i", { staticClass: "iconfont", class: _vm.icon })]),
+        _vm._v(" "),
+        _c("span", { staticClass: "ddv-message__text" }, [
+          _vm._v(_vm._s(_vm.message))
+        ])
+      ]
+    )
+  ])
 };
 var __vue_staticRenderFns__$1 = [];
 __vue_render__$1._withStripped = true;
@@ -8874,6 +8874,8 @@ var Message = function (opts) {
 
   var userOnClose = opts.onClose;
   var id = 'message_' + seed++;
+  opts.zIndex = 2000 + seed;
+
   opts.onClose = function () {
     Message.close(id, userOnClose);
   };
@@ -8884,13 +8886,11 @@ var Message = function (opts) {
 
   instance.vm = instance.$mount();
 
-  if (opts.el) {
+  if (opts.el && typeof opts.el.appendChild === 'function') {
     opts.el.appendChild(instance.vm.$el);
   } else if (!Vue.prototype.$sisServer) {
     document.body.appendChild(instance.vm.$el);
   }
-  instance.vm.visible = true;
-  instance.dom = instance.vm.$el;
   instances.push(instance);
   return instance.vm
 };
