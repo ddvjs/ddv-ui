@@ -9,7 +9,7 @@ export default {
   props: {
     data: {
       type: Array,
-      default: (() => [])
+      default: () => []
     },
     indent: {
       type: Number,
@@ -84,7 +84,7 @@ export default {
 
     return h('div', {
       class: ['ddv-ui']
-    },[
+    }, [
       h('div', {
         class: ['ddv-ui__tree']
       }, treeNodes(1, this.lists))
