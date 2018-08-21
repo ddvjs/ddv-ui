@@ -7,7 +7,7 @@
       :style="{
         'z-index': zIndex
       }">
-      <span><i class="iconfont" :class="icon"></i></span>
+      <i class="iconfont" :class="icon"></i>
       <span class="ddv-message__text">{{message}}</span>
     </div>
   </transition>  

@@ -8560,7 +8560,7 @@ var __vue_render__$1 = function() {
         }
       },
       [
-        _c("span", [_c("i", { staticClass: "iconfont", class: _vm.icon })]),
+        _c("i", { staticClass: "iconfont", class: _vm.icon }),
         _vm._v(" "),
         _c("span", { staticClass: "ddv-message__text" }, [
           _vm._v(_vm._s(_vm.message))
