@@ -30,11 +30,10 @@ export default {
   mounted () {
 		setTimeout(() => {
 			this.$message({
-				message: 'ppp',
+				message: '这是一条神秘的消息',
 				type: 'success'
 			})
-		}, 3000);
-		
+		}, 3000)
 	}
 }
 </script>
