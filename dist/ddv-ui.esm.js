@@ -4,6 +4,22 @@
   * @license MIT
   */
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 var script = {
   name: 'DdvTreeNode',
@@ -37,7 +53,12 @@ var __vue_render__ = function() {
   var _c = _vm._self._c || _h;
   return _c(
     "div",
-    { staticClass: "ddv-tree", style: { paddingLeft: _vm.indent + "px" } },
+    {
+      staticClass: "ddv-tree",
+      style: {
+        paddingLeft: _vm.indent + "px"
+      }
+    },
     [
       _c("div", { staticClass: "ddv-tree__content" }, [
         _vm._m(0),
@@ -61,13 +82,9 @@ var __vue_staticRenderFns__ = [
 __vue_render__._withStripped = true;
 
   /* style */
-  var __vue_inject_styles__ = function (inject) {
-    if (!inject) { return }
-    inject("data-v-dcbadfd6_0", { source: "\n.ddv-tree[data-v-dcbadfd6]{\n  font-size:14px;\n  color:#606266;\n}\n.ddv-tree__content[data-v-dcbadfd6]{\n  height: 36px;\n  line-height: 36px;\n}\n.iconfont[data-v-dcbadfd6]{\n  margin-right:10px; \n  font-size:12px;\n  color:#c0c4cc;\n}\n", map: {"version":3,"sources":["/Users/sicmouse/Documents/GitHub/ddv-ui/packages/tree/src/tree-node.vue"],"names":[],"mappings":";AAWA;EACA,eAAA;EACA,cAAA;CACA;AACA;EACA,aAAA;EACA,kBAAA;CACA;AACA;EACA,kBAAA;EACA,eAAA;EACA,cAAA;CACA","file":"tree-node.vue","sourcesContent":["<template>\n  <div :style=\"{paddingLeft:indent+'px'}\" class=\"ddv-tree\">\n    <div class=\"ddv-tree__content\"> \n      <span ><i class=\"iconfont icon-arrow-right\"></i></span>\n      <span>{{node.label}}</span>\n    </div>\n    <slot></slot>\n  </div>\n</template>\n\n<style scoped>\n.ddv-tree{\n  font-size:14px;\n  color:#606266;\n}\n.ddv-tree__content{\n  height: 36px;\n  line-height: 36px;\n}\n.iconfont{\n  margin-right:10px; \n  font-size:12px;\n  color:#c0c4cc;\n}\n</style>\n\n\n<script>\nimport '../../style/src/iconfont/iconfont.css'\n\nexport default {\n  name: 'DdvTreeNode',\n  props: {\n    node: {\n      type: Object,\n      default () {\n        return {}\n      }\n    },\n    level: {\n      type: Number,\n      default: 0\n    },\n    indent: {\n      type: Number\n    }\n  },\n  mounted () {\n    console.log(this.level, this.node.label, this.indent)\n  }\n}\n</script>\n\n"]}, media: undefined });
-
-  };
+  var __vue_inject_styles__ = undefined;
   /* scoped */
-  var __vue_scope_id__ = "data-v-dcbadfd6";
+  var __vue_scope_id__ = undefined;
   /* module identifier */
   var __vue_module_identifier__ = undefined;
   /* functional template */
@@ -93,29 +110,7 @@ __vue_render__._withStripped = true;
 
     component._scopeId = scope;
 
-    {
-      var hook;
-      if (style) {
-        hook = function(context) {
-          style.call(this, createInjector(context));
-        };
-      }
-
-      if (hook !== undefined) {
-        if (component.functional) {
-          // register for functional component in vue file
-          var originalRender = component.render;
-          component.render = function renderWithStyleInjection(h, context) {
-            hook.call(context);
-            return originalRender(h, context)
-          };
-        } else {
-          // inject component registration as beforeCreate hook
-          var existing = component.beforeCreate;
-          component.beforeCreate = existing ? [].concat(existing, hook) : [hook];
-        }
-      }
-    }
+    
 
     return component
   }
