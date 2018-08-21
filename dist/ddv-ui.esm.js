@@ -9232,6 +9232,7 @@ var script$4 = {
     },
     selectItem: function selectItem (value) {
       this.isShow = false;
+      this.arrow = '';
       this.$emit('update:value', value);
     },
     init: function init () {

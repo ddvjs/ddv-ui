@@ -24,7 +24,7 @@
         </div>
       </div>
     </transition>
-    
+
   </div>
 </template>
 
@@ -70,6 +70,7 @@ export default {
     },
     selectItem (value) {
       this.isShow = false
+      this.arrow = ''
       this.$emit('update:value', value)
     },
     init () {
