@@ -6,8 +6,7 @@
         :key="node.nodeKey"
         :node="node.node"
         :data="node.data"
-        :level="node.level"
-        :indent="node.indent"/>
+        :show-icon="showIcon"/>
     </div>
   </div>
 </template>
@@ -37,10 +36,22 @@ export default {
         return {}
       }
     },
+    // 是否默认展开
     defaultExpandAll: {
       type: Boolean,
       default: false
-    }
+    },
+    // 默认展开的key
+    defaultExpandedKeys: {
+      type: Array,
+      default: () => []
+    },
+    showIcon: {
+      type: Boolean,
+      default: true
+    },
+    nodeKey: String,
+    lazy: Boolean
   },
   data () {
     return {
@@ -65,12 +76,19 @@ export default {
           let obj = {
             data: item,
             node: {},
-            level,
-            indent: this.indent * level,
-            nodeKey: index + '-' + level
+            nodeKey: this.nodeKey ? item[this.nodeKey] : index + '-' + level
           }
           obj.node.children = []
           obj.node.label = item[this.treeprops.label]
+          obj.node.level = level
+          obj.node.indent = this.indent * level
+          obj.node.expanded = this.defaultExpandAll
+          this.xx[obj.nodeKey] = []
+          this.xx[obj.nodeKey].push(obj.nodeKey)
+
+          if (!obj.node.expanded && this.defaultExpandedKeys.length) {
+            obj.node.expanded = this.defaultExpandedKeys.indexOf(obj.nodeKey) > -1
+          }
 
           if (Array.isArray(item[this.treeprops.children]) && item[this.treeprops.children].length) {
             let childLevel = level
@@ -81,7 +99,9 @@ export default {
         })
         return childNoteLists
       }
+      this.xx = {}
       this.lists = childData(1, this.data)
+      // console.log(this.xx)
     }
   },
   watch: {
@@ -89,8 +109,11 @@ export default {
       this.setProps()
       this.setData()
     },
-    data () {
-      this.setData()
+    data: {
+      deep: true,
+      handler () {
+        this.setData()
+      }
     }
   },
   created () {
