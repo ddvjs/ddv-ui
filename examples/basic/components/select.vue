@@ -26,17 +26,9 @@ export default {
         xx: '选项2',
         name: '双皮奶'
       }, {
-<<<<<<< HEAD
-<<<<<<< HEAD
         value: '选项3',
         name: '蚵仔煎',
         disabled: true
-=======
-=======
->>>>>>> origin/dev
-        xx: '选项3',
-        name: '蚵仔煎'
->>>>>>> origin/dev
       }, {
         xx: '选项4',
         name: '龙须面'
