@@ -17,6 +17,9 @@
 .ddv-tree_node__content:hover {
   background: #ebebeb;
 }
+.ddv-tree_node__content > * {
+  display: inline-block
+}
 .ddv-tree_node__label {
   font-size: 14px;
   margin-left: 10px;

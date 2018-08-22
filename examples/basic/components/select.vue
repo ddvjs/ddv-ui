@@ -2,9 +2,11 @@
   <div>
     <ddv-select 
       :list="options" 
+      :multiple="multiple"
       :value.sync="value" 
       :props="defaultProps">
       </ddv-select>
+      <!-- :disabled="disabled" -->
   </div>
 </template>
 
@@ -18,26 +20,34 @@ export default {
   data () {
     return {
       options: [{
-        value: '选项1',
+        xx: '选项1',
         name: '黄金糕'
       }, {
-        value: '选项2',
+        xx: '选项2',
         name: '双皮奶'
       }, {
+<<<<<<< HEAD
         value: '选项3',
+        name: '蚵仔煎',
+        disabled: true
+=======
+        xx: '选项3',
         name: '蚵仔煎'
+>>>>>>> origin/dev
       }, {
-        value: '选项4',
+        xx: '选项4',
         name: '龙须面'
       }, {
-        value: '选项5',
+        xx: '选项5',
         name: '北京烤鸭'
       }],
       defaultProps: {
-        value: 'value',
+        value: 'xx',
         label: 'name'
       },
-      value: ''
+      value: [],
+      multiple: true
+      // disabled: true
     }
   }
 }

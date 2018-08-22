@@ -1,9 +1,9 @@
 <template>
   <div>
     <ddv-tree :data="data" :props="defaultProps">
-      <template class="sdasdsad" slot-scope="data">
-        sdasdsad
-      </template>
+      <span slot-scope="{node, data}" class="dddd">
+        {{node.label}}
+      </span>
     </ddv-tree>
   </div>
 </template>

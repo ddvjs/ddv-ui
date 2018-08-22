@@ -8240,21 +8240,21 @@ var script = {
       props: {
         node: {
           required: true
+        },
+        data: {
+          required: true
         }
       },
       render: function render (h) {
         var parent = this.$parent;
         var tree = parent.tree;
-        var node = this.node;
-        var data = node.data;
-        var store = node.store;
-        // return (
-        //   parent.renderContent
-        //     ? parent.renderContent.call(parent._renderProxy, h, { _self: tree.$vnode.context, node, data, store })
-        //     : tree.$scopedSlots.default
-        //       ? tree.$scopedSlots.default({ node, data })
-        //       : <span class="el-tree-node__label">{ node.label }</span>
-        // )
+        return (
+          tree.$scopedSlots.default
+            ? tree.$scopedSlots.default({ node: this.node, data: this.data })
+            : h('span', {
+              class: ['ddv-tree_node__label']
+            }, this.node.label)
+        )
       }
     }
   },
@@ -8322,11 +8322,7 @@ var __vue_render__ = function() {
             [_c("i", { staticClass: "iconfont icon-arrow-right" })]
           ),
           _vm._v(" "),
-          _c("span", { staticClass: "ddv-tree_node__label" }, [
-            _vm._v(_vm._s(_vm.node.label))
-          ]),
-          _vm._v(" "),
-          _c("node-content", { attrs: { node: _vm.node } })
+          _c("node-content", { attrs: { node: _vm.node, data: _vm.data } })
         ],
         1
       ),
@@ -8384,7 +8380,7 @@ __vue_render__._withStripped = true;
     var component = (typeof script$$1 === 'function' ? script$$1.options : script$$1) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/tree/src/tree-node.vue";
+    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/tree/src/tree-node.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -8477,10 +8473,12 @@ __vue_render__._withStripped = true;
 var script$1 = {
   name: 'DdvTree',
   props: {
+    // 数据
     data: {
       type: Array,
       default: function () { return []; }
     },
+    // 偏移值
     indent: {
       type: Number,
       default: 16
@@ -8490,6 +8488,10 @@ var script$1 = {
       default: function default$1 () {
         return {}
       }
+    },
+    defaultExpandAll: {
+      type: Boolean,
+      default: false
     }
   },
   data: function data () {
@@ -8601,7 +8603,7 @@ __vue_render__$1._withStripped = true;
     var component = (typeof script === 'function' ? script.options : script) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/tree/src/tree.vue";
+    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/tree/src/tree.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -8843,7 +8845,7 @@ __vue_render__$2._withStripped = true;
     var component = (typeof script === 'function' ? script.options : script) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/message/src/pc/message.vue";
+    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/message/src/pc/message.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -9055,7 +9057,7 @@ __vue_render__$3._withStripped = true;
     var component = (typeof script === 'function' ? script.options : script) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/message/src/wap/message.vue";
+    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/message/src/wap/message.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -9253,7 +9255,11 @@ var script$4 = {
       type: Array
     },
     value: {
-      type: String
+      type: [String, Array]
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     },
     props: {
       type: Object,
@@ -9265,6 +9271,7 @@ var script$4 = {
   data: function data () {
     return {
       isShow: false,
+      isIconShow: false,
       arrow: '',
       selectprops: {
         value: 'value',
@@ -9274,12 +9281,24 @@ var script$4 = {
     }
   },
   methods: {
-    showItem: function showItem () {
-      this.isShow = !this.isShow;
+    iconShow: function iconShow () {
+      if (this.value) {
+        this.isIconShow = true;
+      }
     },
-    selectItem: function selectItem (value) {
-      this.isShow = false;
-      this.$emit('update:value', value);
+    emptyValue: function emptyValue () {
+      this.$emit('update:value', '');
+    },
+    showItem: function showItem () {
+      if (!this.disabled) {
+        this.isShow = !this.isShow;
+      }
+    },
+    selectItem: function selectItem (item) {
+      if (!item.disabled) {
+        this.isShow = false;
+        this.$emit('update:value', item.label);
+      }
     },
     init: function init () {
       var this$1 = this;
@@ -9290,12 +9309,17 @@ var script$4 = {
           label: item[this$1.selectprops.label],
           value: item[this$1.selectprops.value]
         };
+        if (item.disabled) {
+          obj.disabled = item.disabled;
+        }
         this$1.selectList.push(obj);
       });
     }
   },
-  mounted: function mounted () {
+  created: function created () {
     this.init();
+  },
+  mounted: function mounted () {
   }
 }
 
@@ -9311,6 +9335,8 @@ var __vue_render__$4 = function() {
     "div",
     { staticClass: "ddv-select" },
     [
+      _c("div", [_vm._v("\n    adsasadasdasda\n  ")]),
+      _vm._v(" "),
       _c("input", {
         directives: [
           {
@@ -9321,7 +9347,10 @@ var __vue_render__$4 = function() {
           }
         ],
         staticClass: "ddv-select__input",
-        class: { "ddv-select__border": _vm.isShow },
+        class: {
+          "ddv-select__disabled": _vm.disabled,
+          "ddv-select__border": _vm.isShow && !_vm.disabled
+        },
         attrs: {
           type: "text",
           placeholder: "请选择",
@@ -9330,6 +9359,10 @@ var __vue_render__$4 = function() {
         },
         domProps: { value: _vm.value },
         on: {
+          mouseenter: _vm.iconShow,
+          mouseleave: function($event) {
+            _vm.isIconShow = false;
+          },
           click: _vm.showItem,
           input: function($event) {
             if ($event.target.composing) {
@@ -9344,9 +9377,44 @@ var __vue_render__$4 = function() {
         "div",
         {
           staticClass: "ddv-select__icon",
-          class: { "ddv-select__up": _vm.isShow }
+          class: {
+            "ddv-select__notAllowed": _vm.disabled,
+            "ddv-select__pointer": !_vm.disabled,
+            "ddv-select__up": _vm.isShow && !_vm.isIconShow
+          },
+          on: {
+            mouseenter: _vm.iconShow,
+            mouseleave: function($event) {
+              _vm.isIconShow = false;
+            }
+          }
         },
-        [_c("i", { staticClass: "ddv-select__iconfont iconfont icon-jiantou" })]
+        [
+          _c("i", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: !_vm.isIconShow,
+                expression: "!isIconShow"
+              }
+            ],
+            staticClass: "ddv-select__iconfont iconfont icon-jiantou"
+          }),
+          _vm._v(" "),
+          _c("i", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.isIconShow,
+                expression: "isIconShow"
+              }
+            ],
+            staticClass: "ddv-select__iconfont iconfont icon-danger",
+            on: { click: _vm.emptyValue }
+          })
+        ]
       ),
       _vm._v(" "),
       _c("transition", { attrs: { name: "ddv-select-fade" } }, [
@@ -9369,9 +9437,13 @@ var __vue_render__$4 = function() {
               {
                 key: item.value,
                 staticClass: "el-select__dropdown__item",
+                class: {
+                  "el-select__highlight": _vm.value === item.label,
+                  "el-select__disabled": item.disabled
+                },
                 on: {
                   click: function($event) {
-                    _vm.selectItem(item.label);
+                    _vm.selectItem(item);
                   }
                 }
               },
@@ -9404,7 +9476,7 @@ __vue_render__$4._withStripped = true;
     var component = (typeof script === 'function' ? script.options : script) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/select/src/select.vue";
+    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/select/src/select.vue";
 
     if (!component.render) {
       component.render = template.render;

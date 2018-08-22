@@ -14,8 +14,7 @@
         }">
         <i class="iconfont icon-arrow-right"></i>
       </span>
-      <span class="ddv-tree_node__label">{{node.label}}</span>
-      <node-content :node="node"></node-content>
+      <node-content :node="node" :data="data"></node-content>
     </div>
     <ddv-collapse-transition>
       <div class="ddv-tree_node__children" v-show="expanded">
@@ -65,20 +64,21 @@ export default {
       props: {
         node: {
           required: true
+        },
+        data: {
+          required: true
         }
       },
       render (h) {
         const parent = this.$parent
         const tree = parent.tree
-        const node = this.node
-        const { data, store } = node
-        // return (
-        //   parent.renderContent
-        //     ? parent.renderContent.call(parent._renderProxy, h, { _self: tree.$vnode.context, node, data, store })
-        //     : tree.$scopedSlots.default
-        //       ? tree.$scopedSlots.default({ node, data })
-        //       : <span class="el-tree-node__label">{ node.label }</span>
-        // )
+        return (
+          tree.$scopedSlots.default
+            ? tree.$scopedSlots.default({ node: this.node, data: this.data })
+            : h('span', {
+              class: ['ddv-tree_node__label']
+            }, this.node.label)
+        )
       }
     }
   },
