@@ -9,9 +9,13 @@
       readonly="readonly"
       v-model="value"
       @click="showItem">
-      <div class="ddv-select__icon" :class="{'ddv-select__up':isShow}">
-        <i class="ddv-select__iconfont iconfont icon-jiantou"></i>
-      </div>
+    <div
+      class="ddv-select__icon"
+      :class="{
+        'ddv-select__up': isShow
+      }">
+      <i class="ddv-select__iconfont iconfont icon-jiantou"></i>
+    </div>
 
     <transition name="ddv-select-fade">
       <div class="ddv-select__dropdown" v-show="isShow">
@@ -24,7 +28,6 @@
         </div>
       </div>
     </transition>
-
   </div>
 </template>
 
@@ -78,7 +81,7 @@ export default {
       })
     }
   },
-  mounted () {
+  created () {
     this.init()
   }
 }
