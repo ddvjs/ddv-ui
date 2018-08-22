@@ -27,10 +27,13 @@ export default {
         name: '双皮奶'
       }, {
 <<<<<<< HEAD
+<<<<<<< HEAD
         value: '选项3',
         name: '蚵仔煎',
         disabled: true
 =======
+=======
+>>>>>>> origin/dev
         xx: '选项3',
         name: '蚵仔煎'
 >>>>>>> origin/dev
