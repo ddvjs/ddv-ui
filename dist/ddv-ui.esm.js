@@ -8240,21 +8240,21 @@ var script = {
       props: {
         node: {
           required: true
+        },
+        data: {
+          required: true
         }
       },
       render: function render (h) {
         var parent = this.$parent;
         var tree = parent.tree;
-        var node = this.node;
-        var data = node.data;
-        var store = node.store;
-        // return (
-        //   parent.renderContent
-        //     ? parent.renderContent.call(parent._renderProxy, h, { _self: tree.$vnode.context, node, data, store })
-        //     : tree.$scopedSlots.default
-        //       ? tree.$scopedSlots.default({ node, data })
-        //       : <span class="el-tree-node__label">{ node.label }</span>
-        // )
+        return (
+          tree.$scopedSlots.default
+            ? tree.$scopedSlots.default({ node: this.node, data: this.data })
+            : h('span', {
+              class: ['ddv-tree_node__label']
+            }, this.node.label)
+        )
       }
     }
   },
@@ -8322,11 +8322,7 @@ var __vue_render__ = function() {
             [_c("i", { staticClass: "iconfont icon-arrow-right" })]
           ),
           _vm._v(" "),
-          _c("span", { staticClass: "ddv-tree_node__label" }, [
-            _vm._v(_vm._s(_vm.node.label))
-          ]),
-          _vm._v(" "),
-          _c("node-content", { attrs: { node: _vm.node } })
+          _c("node-content", { attrs: { node: _vm.node, data: _vm.data } })
         ],
         1
       ),
@@ -8477,10 +8473,12 @@ __vue_render__._withStripped = true;
 var script$1 = {
   name: 'DdvTree',
   props: {
+    // 数据
     data: {
       type: Array,
       default: function () { return []; }
     },
+    // 偏移值
     indent: {
       type: Number,
       default: 16
@@ -8490,6 +8488,10 @@ var script$1 = {
       default: function default$1 () {
         return {}
       }
+    },
+    defaultExpandAll: {
+      type: Boolean,
+      default: false
     }
   },
   data: function data () {
@@ -9294,7 +9296,7 @@ var script$4 = {
       });
     }
   },
-  mounted: function mounted () {
+  created: function created () {
     this.init();
   }
 }
@@ -9344,7 +9346,9 @@ var __vue_render__$4 = function() {
         "div",
         {
           staticClass: "ddv-select__icon",
-          class: { "ddv-select__up": _vm.isShow }
+          class: {
+            "ddv-select__up": _vm.isShow
+          }
         },
         [_c("i", { staticClass: "ddv-select__iconfont iconfont icon-jiantou" })]
       ),

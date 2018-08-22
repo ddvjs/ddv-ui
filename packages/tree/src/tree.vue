@@ -21,10 +21,12 @@ import DdvTreeNode from './tree-node.vue'
 export default {
   name: 'DdvTree',
   props: {
+    // 数据
     data: {
       type: Array,
       default: () => []
     },
+    // 偏移值
     indent: {
       type: Number,
       default: 16
@@ -34,6 +36,10 @@ export default {
       default () {
         return {}
       }
+    },
+    defaultExpandAll: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
