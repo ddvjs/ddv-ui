@@ -1,32 +1,79 @@
 <template>
-  <div class="ddv-select">
-    <input 
+  <div 
+    class="ddv-select"
+    :class="{
+      'ddv-select__disabled': disabled,
+      'ddv-select__border': isShow && !disabled
+    }"  
+    @click="showItem">
+    <div v-if="multiple">
+      <span 
+        class="ddv-select__text" 
+        v-show="!multipleList.length">
+        请选择
+      </span>
+      <span 
+        class="ddv-select__tag" 
+        v-for="(item,index) in multipleList" 
+        :key="item.id">
+        <span class="ddv-select__tag__text">{{item.name}}</span>
+        <span @click.stop="delMultipleItem(index)">
+          <i class="ddv-select__tag iconfont icon-danger"></i>
+        </span>
+      </span>
+    </div>
+
+    <input
+      v-if="!multiple"
       type="text" 
-      class="ddv-select__input" 
-      :class="{'ddv-select__border':isShow}"
+      class="ddv-select__input"
+      :class="{'ddv-select__disabled': disabled}"
       placeholder="请选择" 
       autocomplete="off" 
       readonly="readonly"
       v-model="value"
-      @click="showItem">
-    <div
-      class="ddv-select__icon"
-      :class="{
-        'ddv-select__up': isShow
-      }">
-      <i class="ddv-select__iconfont iconfont icon-jiantou"></i>
-    </div>
+      @mouseenter="iconShow"
+      @mouseleave="isIconShow=false">
+        <div 
+        class="ddv-select__icon"
+        :class="{
+          'ddv-select__notAllowed': disabled,
+          'ddv-select__pointer': !disabled,
+        }"
+        @mouseenter="iconShow"
+        @mouseleave="isIconShow=false">
+          <div 
+            class="ddv-select__transition"
+            :class="{'ddv-select__up': isShow && !isIconShow}">
+            <i 
+              class="ddv-select__iconfont iconfont icon-jiantou" 
+              v-show="!isIconShow">
+            </i>
+            <i 
+              class="ddv-select__iconfont iconfont icon-danger" 
+              v-show="isIconShow" 
+              @click.stop="emptyValue">
+            </i>
+          </div>
+        </div>
 
     <transition name="ddv-select-fade">
-      <div class="ddv-select__dropdown" v-show="isShow">
+      <div 
+        class="ddv-select__dropdown" 
+        v-show="isShow">
         <div 
-          class="el-select__dropdown__item" 
           v-for="item in selectList"
-          :key="item.value"
-          @click="selectItem(item.label)">
-          {{item.label}}
+          :key="item.id"
+          @click.stop="selectItem(item)"
+          class="el-select__dropdown__item"
+          :class="{
+            'el-select__highlight': multipleList.indexOf(item) > -1 || (id === item.id),
+            'el-select__disabled': item.disabled
+          }">
+          {{item.name}}
         </div>
       </div>
+      
     </transition>
   </div>
 </template>
@@ -42,7 +89,15 @@ export default {
       type: Array
     },
     value: {
-      type: String
+      type: [String, Array, Number]
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    multiple: {
+      type: Boolean,
+      default: false
     },
     props: {
       type: Object,
@@ -54,28 +109,60 @@ export default {
   data () {
     return {
       isShow: false,
+      isIconShow: false,
       arrow: '',
+      id: '',
       selectprops: {
-        value: 'value',
-        label: 'label'
+        id: 'id',
+        name: 'name'
       },
-      selectList: []
+      selectList: [],
+      multipleList: []
     }
   },
   methods: {
-    showItem () {
-      this.isShow = !this.isShow
+    delMultipleItem (index) {
+      this.multipleList.splice(index, 1)
     },
-    selectItem (value) {
-      this.isShow = false
-      this.$emit('update:value', value)
+    iconShow () {
+      if (this.value && !this.multiple) {
+        this.isIconShow = true
+      }
+    },
+    emptyValue () {
+      this.$emit('update:value', '')
+    },
+    showItem () {
+      if (!this.disabled) {
+        this.isShow = !this.isShow
+      }
+    },
+    selectItem (item) {
+      if (!item.disabled) {
+        if (this.multiple) {
+          let index = this.multipleList.indexOf(item)
+          if (index > -1) {
+            this.multipleList.splice(index, 1)
+          } else {
+            this.multipleList.push(item)
+          }
+          this.$emit('update:value', this.multipleList)
+        } else {
+          this.isShow = false
+          this.id = item.id
+          this.$emit('update:value', item.name)
+        }
+      }
     },
     init () {
       this.selectprops = Object.assign(this.selectprops, this.props)
       this.list.forEach(item => {
         let obj = {
-          label: item[this.selectprops.label],
-          value: item[this.selectprops.value]
+          id: item[this.selectprops.id],
+          name: item[this.selectprops.name]
+        }
+        if (item.disabled) {
+          obj.disabled = item.disabled
         }
         this.selectList.push(obj)
       })
@@ -83,6 +170,7 @@ export default {
   },
   created () {
     this.init()
-  }
+  },
+  mounted () {}
 }
 </script>

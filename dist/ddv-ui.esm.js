@@ -9294,7 +9294,15 @@ var script$4 = {
       type: Array
     },
     value: {
-      type: String
+      type: [String, Array, Number]
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    multiple: {
+      type: Boolean,
+      default: false
     },
     props: {
       type: Object,
@@ -9306,21 +9314,50 @@ var script$4 = {
   data: function data () {
     return {
       isShow: false,
+      isIconShow: false,
       arrow: '',
+      id: '',
       selectprops: {
-        value: 'value',
-        label: 'label'
+        id: 'id',
+        name: 'name'
       },
-      selectList: []
+      selectList: [],
+      multipleList: []
     }
   },
   methods: {
-    showItem: function showItem () {
-      this.isShow = !this.isShow;
+    delMultipleItem: function delMultipleItem (index) {
+      this.multipleList.splice(index, 1);
     },
-    selectItem: function selectItem (value) {
-      this.isShow = false;
-      this.$emit('update:value', value);
+    iconShow: function iconShow () {
+      if (this.value && !this.multiple) {
+        this.isIconShow = true;
+      }
+    },
+    emptyValue: function emptyValue () {
+      this.$emit('update:value', '');
+    },
+    showItem: function showItem () {
+      if (!this.disabled) {
+        this.isShow = !this.isShow;
+      }
+    },
+    selectItem: function selectItem (item) {
+      if (!item.disabled) {
+        if (this.multiple) {
+          var index = this.multipleList.indexOf(item);
+          if (index > -1) {
+            this.multipleList.splice(index, 1);
+          } else {
+            this.multipleList.push(item);
+          }
+          this.$emit('update:value', this.multipleList);
+        } else {
+          this.isShow = false;
+          this.id = item.id;
+          this.$emit('update:value', item.name);
+        }
+      }
     },
     init: function init () {
       var this$1 = this;
@@ -9328,16 +9365,20 @@ var script$4 = {
       this.selectprops = Object.assign(this.selectprops, this.props);
       this.list.forEach(function (item) {
         var obj = {
-          label: item[this$1.selectprops.label],
-          value: item[this$1.selectprops.value]
+          id: item[this$1.selectprops.id],
+          name: item[this$1.selectprops.name]
         };
+        if (item.disabled) {
+          obj.disabled = item.disabled;
+        }
         this$1.selectList.push(obj);
       });
     }
   },
   created: function created () {
     this.init();
-  }
+  },
+  mounted: function mounted () {}
 }
 
 /* script */
@@ -9350,46 +9391,157 @@ var __vue_render__$4 = function() {
   var _c = _vm._self._c || _h;
   return _c(
     "div",
-    { staticClass: "ddv-select" },
+    {
+      staticClass: "ddv-select",
+      class: {
+        "ddv-select__disabled": _vm.disabled,
+        "ddv-select__border": _vm.isShow && !_vm.disabled
+      },
+      on: { click: _vm.showItem }
+    },
     [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.value,
-            expression: "value"
-          }
-        ],
-        staticClass: "ddv-select__input",
-        class: { "ddv-select__border": _vm.isShow },
-        attrs: {
-          type: "text",
-          placeholder: "请选择",
-          autocomplete: "off",
-          readonly: "readonly"
-        },
-        domProps: { value: _vm.value },
-        on: {
-          click: _vm.showItem,
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+      _vm.multiple
+        ? _c(
+            "div",
+            [
+              _c(
+                "span",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !_vm.multipleList.length,
+                      expression: "!multipleList.length"
+                    }
+                  ],
+                  staticClass: "ddv-select__text"
+                },
+                [_vm._v("\n      请选择\n    ")]
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.multipleList, function(item, index) {
+                return _c(
+                  "span",
+                  { key: item.id, staticClass: "ddv-select__tag" },
+                  [
+                    _c("span", { staticClass: "ddv-select__tag__text" }, [
+                      _vm._v(_vm._s(item.name))
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        on: {
+                          click: function($event) {
+                            $event.stopPropagation();
+                            _vm.delMultipleItem(index);
+                          }
+                        }
+                      },
+                      [
+                        _c("i", {
+                          staticClass: "ddv-select__tag iconfont icon-danger"
+                        })
+                      ]
+                    )
+                  ]
+                )
+              })
+            ],
+            2
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.multiple
+        ? _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.value,
+                expression: "value"
+              }
+            ],
+            staticClass: "ddv-select__input",
+            class: { "ddv-select__disabled": _vm.disabled },
+            attrs: {
+              type: "text",
+              placeholder: "请选择",
+              autocomplete: "off",
+              readonly: "readonly"
+            },
+            domProps: { value: _vm.value },
+            on: {
+              mouseenter: _vm.iconShow,
+              mouseleave: function($event) {
+                _vm.isIconShow = false;
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.value = $event.target.value;
+              }
             }
-            _vm.value = $event.target.value;
-          }
-        }
-      }),
+          })
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "div",
         {
           staticClass: "ddv-select__icon",
           class: {
-            "ddv-select__up": _vm.isShow
+            "ddv-select__notAllowed": _vm.disabled,
+            "ddv-select__pointer": !_vm.disabled
+          },
+          on: {
+            mouseenter: _vm.iconShow,
+            mouseleave: function($event) {
+              _vm.isIconShow = false;
+            }
           }
         },
-        [_c("i", { staticClass: "ddv-select__iconfont iconfont icon-jiantou" })]
+        [
+          _c(
+            "div",
+            {
+              staticClass: "ddv-select__transition",
+              class: { "ddv-select__up": _vm.isShow && !_vm.isIconShow }
+            },
+            [
+              _c("i", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !_vm.isIconShow,
+                    expression: "!isIconShow"
+                  }
+                ],
+                staticClass: "ddv-select__iconfont iconfont icon-jiantou"
+              }),
+              _vm._v(" "),
+              _c("i", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.isIconShow,
+                    expression: "isIconShow"
+                  }
+                ],
+                staticClass: "ddv-select__iconfont iconfont icon-danger",
+                on: {
+                  click: function($event) {
+                    $event.stopPropagation();
+                    return _vm.emptyValue($event)
+                  }
+                }
+              })
+            ]
+          )
+        ]
       ),
       _vm._v(" "),
       _c("transition", { attrs: { name: "ddv-select-fade" } }, [
@@ -9410,15 +9562,21 @@ var __vue_render__$4 = function() {
             return _c(
               "div",
               {
-                key: item.value,
+                key: item.id,
                 staticClass: "el-select__dropdown__item",
+                class: {
+                  "el-select__highlight":
+                    _vm.multipleList.indexOf(item) > -1 || _vm.id === item.id,
+                  "el-select__disabled": item.disabled
+                },
                 on: {
                   click: function($event) {
-                    _vm.selectItem(item.label);
+                    $event.stopPropagation();
+                    _vm.selectItem(item);
                   }
                 }
               },
-              [_vm._v("\n        " + _vm._s(item.label) + "\n      ")]
+              [_vm._v("\n        " + _vm._s(item.name) + "\n      ")]
             )
           })
         )
@@ -9539,9 +9697,150 @@ Select.install = function (Vue) {
   Vue.component(Select.name, Select);
 };
 
+//
+
+var script$5 = {
+  props: {
+
+  },
+  data: function data () {
+    return {
+
+    }
+  },
+  methods: {
+  },
+  created: function created () {
+  },
+  mounted: function mounted () {}
+}
+
+/* script */
+            var __vue_script__$5 = script$5;
+            
+/* template */
+var __vue_render__$5 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", [_vm._v(" sss")])
+};
+var __vue_staticRenderFns__$5 = [];
+__vue_render__$5._withStripped = true;
+
+  /* style */
+  var __vue_inject_styles__$5 = undefined;
+  /* scoped */
+  var __vue_scope_id__$5 = undefined;
+  /* module identifier */
+  var __vue_module_identifier__$5 = undefined;
+  /* functional template */
+  var __vue_is_functional_template__$5 = false;
+  /* component normalizer */
+  function __vue_normalize__$5(
+    template, style, script,
+    scope, functional, moduleIdentifier,
+    createInjector, createInjectorSSR
+  ) {
+    var component = (typeof script === 'function' ? script.options : script) || {};
+
+    // For security concerns, we use only base name in production mode.
+    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/button/src/button.vue";
+
+    if (!component.render) {
+      component.render = template.render;
+      component.staticRenderFns = template.staticRenderFns;
+      component._compiled = true;
+
+      if (functional) { component.functional = true; }
+    }
+
+    component._scopeId = scope;
+
+    
+
+    return component
+  }
+  /* style inject */
+  function __vue_create_injector__$5() {
+    var head = document.head || document.getElementsByTagName('head')[0];
+    var styles = __vue_create_injector__$5.styles || (__vue_create_injector__$5.styles = {});
+    var isOldIE =
+      typeof navigator !== 'undefined' &&
+      /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
+
+    return function addStyle(id, css) {
+      if (document.querySelector('style[data-vue-ssr-id~="' + id + '"]')) { return } // SSR styles are present.
+
+      var group = isOldIE ? css.media || 'default' : id;
+      var style = styles[group] || (styles[group] = { ids: [], parts: [], element: undefined });
+
+      if (!style.ids.includes(id)) {
+        var code = css.source;
+        var index = style.ids.length;
+
+        style.ids.push(id);
+
+        if (isOldIE) {
+          style.element = style.element || document.querySelector('style[data-group=' + group + ']');
+        }
+
+        if (!style.element) {
+          var el = style.element = document.createElement('style');
+          el.type = 'text/css';
+
+          if (css.media) { el.setAttribute('media', css.media); }
+          if (isOldIE) {
+            el.setAttribute('data-group', group);
+            el.setAttribute('data-next-index', '0');
+          }
+
+          head.appendChild(el);
+        }
+
+        if (isOldIE) {
+          index = parseInt(style.element.getAttribute('data-next-index'));
+          style.element.setAttribute('data-next-index', index + 1);
+        }
+
+        if (style.element.styleSheet) {
+          style.parts.push(code);
+          style.element.styleSheet.cssText = style.parts
+            .filter(Boolean)
+            .join('\n');
+        } else {
+          var textNode = document.createTextNode(code);
+          var nodes = style.element.childNodes;
+          if (nodes[index]) { style.element.removeChild(nodes[index]); }
+          if (nodes.length) { style.element.insertBefore(textNode, nodes[index]); }
+          else { style.element.appendChild(textNode); }
+        }
+      }
+    }
+  }
+  /* style inject SSR */
+  
+
+  
+  var Button = __vue_normalize__$5(
+    { render: __vue_render__$5, staticRenderFns: __vue_staticRenderFns__$5 },
+    __vue_inject_styles__$5,
+    __vue_script__$5,
+    __vue_scope_id__$5,
+    __vue_is_functional_template__$5,
+    __vue_module_identifier__$5,
+    __vue_create_injector__$5,
+    undefined
+  )
+
+Button.install = function (Vue) {
+  Vue.component(Button.name, Button);
+};
+
 var components = [
   Tree,
-  Select
+  Select,
+  Button
 ];
 
 var install = function (Vue, opts) {
@@ -9567,7 +9866,8 @@ module.exports = {
   install: install,
   Tree: Tree,
   Message: Message,
-  Select: Select
+  Select: Select,
+  Button: Button
 };
 
 module.exports.default = module.exports;

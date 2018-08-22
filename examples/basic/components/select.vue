@@ -1,10 +1,13 @@
 <template>
-  <div>
+  <div class="ml50 mt50">
     <ddv-select 
       :list="options" 
       :value.sync="value" 
       :props="defaultProps">
       </ddv-select>
+      <!-- <span v-for="item in value">{{item}}</span> -->
+      <!-- :multiple="multiple" -->
+      <!-- :disabled="disabled" -->
   </div>
 </template>
 
@@ -24,20 +27,30 @@ export default {
         xx: '选项2',
         name: '双皮奶'
       }, {
-        xx: '选项3',
-        name: '蚵仔煎'
+        value: '选项3',
+        name: '蚵仔煎',
+        disabled: true
       }, {
         xx: '选项4',
         name: '龙须面'
       }, {
         xx: '选项5',
+        name: '北京烤鸭',
+        disabled: true
+      }, {
+        xx: '选项7',
+        name: '北京烤鸭'
+      }, {
+        xx: '选项6',
         name: '北京烤鸭'
       }],
       defaultProps: {
-        value: 'xx',
-        label: 'name'
+        id: 'xx',
+        name: 'name'
       },
-      value: ''
+      value: '',
+      multiple: true,
+      disabled: true
     }
   }
 }
