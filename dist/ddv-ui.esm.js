@@ -8560,8 +8560,6 @@ var script$1 = {
           obj.node.level = level;
           obj.node.indent = this$1.indent * level;
           obj.node.expanded = this$1.defaultExpandAll;
-          this$1.xx[obj.nodeKey] = [];
-          this$1.xx[obj.nodeKey].push(obj.nodeKey);
 
           if (!obj.node.expanded && this$1.defaultExpandedKeys.length) {
             obj.node.expanded = this$1.defaultExpandedKeys.indexOf(obj.nodeKey) > -1;
@@ -8576,9 +8574,7 @@ var script$1 = {
         });
         return childNoteLists
       };
-      this.xx = {};
       this.lists = childData(1, this.data);
-      // console.log(this.xx)
     }
   },
   watch: {

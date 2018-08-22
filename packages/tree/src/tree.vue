@@ -83,8 +83,6 @@ export default {
           obj.node.level = level
           obj.node.indent = this.indent * level
           obj.node.expanded = this.defaultExpandAll
-          this.xx[obj.nodeKey] = []
-          this.xx[obj.nodeKey].push(obj.nodeKey)
 
           if (!obj.node.expanded && this.defaultExpandedKeys.length) {
             obj.node.expanded = this.defaultExpandedKeys.indexOf(obj.nodeKey) > -1
@@ -99,9 +97,7 @@ export default {
         })
         return childNoteLists
       }
-      this.xx = {}
       this.lists = childData(1, this.data)
-      // console.log(this.xx)
     }
   },
   watch: {
