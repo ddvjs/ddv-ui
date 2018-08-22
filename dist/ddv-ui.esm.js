@@ -9255,9 +9255,13 @@ var script$4 = {
       type: Array
     },
     value: {
-      type: [String, Array]
+      type: [String, Array, Number]
     },
     disabled: {
+      type: Boolean,
+      default: false
+    },
+    multiple: {
       type: Boolean,
       default: false
     },
@@ -9273,16 +9277,21 @@ var script$4 = {
       isShow: false,
       isIconShow: false,
       arrow: '',
+      id: '',
       selectprops: {
-        value: 'value',
-        label: 'label'
+        id: 'id',
+        name: 'name'
       },
-      selectList: []
+      selectList: [],
+      multipleList: []
     }
   },
   methods: {
+    delMultipleItem: function delMultipleItem (index) {
+      this.multipleList.splice(index, 1);
+    },
     iconShow: function iconShow () {
-      if (this.value) {
+      if (this.value && !this.multiple) {
         this.isIconShow = true;
       }
     },
@@ -9296,8 +9305,19 @@ var script$4 = {
     },
     selectItem: function selectItem (item) {
       if (!item.disabled) {
-        this.isShow = false;
-        this.$emit('update:value', item.label);
+        if (this.multiple) {
+          var index = this.multipleList.indexOf(item);
+          if (index > -1) {
+            this.multipleList.splice(index, 1);
+          } else {
+            this.multipleList.push(item);
+          }
+          this.$emit('update:value', this.multipleList);
+        } else {
+          this.isShow = false;
+          this.id = item.id;
+          this.$emit('update:value', item.name);
+        }
       }
     },
     init: function init () {
@@ -9306,8 +9326,8 @@ var script$4 = {
       this.selectprops = Object.assign(this.selectprops, this.props);
       this.list.forEach(function (item) {
         var obj = {
-          label: item[this$1.selectprops.label],
-          value: item[this$1.selectprops.value]
+          id: item[this$1.selectprops.id],
+          name: item[this$1.selectprops.name]
         };
         if (item.disabled) {
           obj.disabled = item.disabled;
@@ -9319,8 +9339,7 @@ var script$4 = {
   created: function created () {
     this.init();
   },
-  mounted: function mounted () {
-  }
+  mounted: function mounted () {}
 }
 
 /* script */
@@ -9333,45 +9352,101 @@ var __vue_render__$4 = function() {
   var _c = _vm._self._c || _h;
   return _c(
     "div",
-    { staticClass: "ddv-select" },
+    {
+      staticClass: "ddv-select",
+      class: {
+        "ddv-select__disabled": _vm.disabled,
+        "ddv-select__border": _vm.isShow && !_vm.disabled
+      },
+      on: { click: _vm.showItem }
+    },
     [
-      _c("div", [_vm._v("\n    adsasadasdasda\n  ")]),
+      _vm.multiple
+        ? _c(
+            "div",
+            [
+              _c(
+                "span",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !_vm.multipleList.length,
+                      expression: "!multipleList.length"
+                    }
+                  ],
+                  staticClass: "ddv-select__text"
+                },
+                [_vm._v("\n      请选择\n    ")]
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.multipleList, function(item, index) {
+                return _c(
+                  "span",
+                  { key: item.id, staticClass: "ddv-select__tag" },
+                  [
+                    _c("span", { staticClass: "ddv-select__tag__text" }, [
+                      _vm._v(_vm._s(item.name))
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        on: {
+                          click: function($event) {
+                            $event.stopPropagation();
+                            _vm.delMultipleItem(index);
+                          }
+                        }
+                      },
+                      [
+                        _c("i", {
+                          staticClass: "ddv-select__tag iconfont icon-danger"
+                        })
+                      ]
+                    )
+                  ]
+                )
+              })
+            ],
+            2
+          )
+        : _vm._e(),
       _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.value,
-            expression: "value"
-          }
-        ],
-        staticClass: "ddv-select__input",
-        class: {
-          "ddv-select__disabled": _vm.disabled,
-          "ddv-select__border": _vm.isShow && !_vm.disabled
-        },
-        attrs: {
-          type: "text",
-          placeholder: "请选择",
-          autocomplete: "off",
-          readonly: "readonly"
-        },
-        domProps: { value: _vm.value },
-        on: {
-          mouseenter: _vm.iconShow,
-          mouseleave: function($event) {
-            _vm.isIconShow = false;
-          },
-          click: _vm.showItem,
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+      !_vm.multiple
+        ? _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.value,
+                expression: "value"
+              }
+            ],
+            staticClass: "ddv-select__input",
+            class: { "ddv-select__disabled": _vm.disabled },
+            attrs: {
+              type: "text",
+              placeholder: "请选择",
+              autocomplete: "off",
+              readonly: "readonly"
+            },
+            domProps: { value: _vm.value },
+            on: {
+              mouseenter: _vm.iconShow,
+              mouseleave: function($event) {
+                _vm.isIconShow = false;
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.value = $event.target.value;
+              }
             }
-            _vm.value = $event.target.value;
-          }
-        }
-      }),
+          })
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "div",
@@ -9379,8 +9454,7 @@ var __vue_render__$4 = function() {
           staticClass: "ddv-select__icon",
           class: {
             "ddv-select__notAllowed": _vm.disabled,
-            "ddv-select__pointer": !_vm.disabled,
-            "ddv-select__up": _vm.isShow && !_vm.isIconShow
+            "ddv-select__pointer": !_vm.disabled
           },
           on: {
             mouseenter: _vm.iconShow,
@@ -9390,30 +9464,44 @@ var __vue_render__$4 = function() {
           }
         },
         [
-          _c("i", {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: !_vm.isIconShow,
-                expression: "!isIconShow"
-              }
-            ],
-            staticClass: "ddv-select__iconfont iconfont icon-jiantou"
-          }),
-          _vm._v(" "),
-          _c("i", {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.isIconShow,
-                expression: "isIconShow"
-              }
-            ],
-            staticClass: "ddv-select__iconfont iconfont icon-danger",
-            on: { click: _vm.emptyValue }
-          })
+          _c(
+            "div",
+            {
+              staticClass: "ddv-select__transition",
+              class: { "ddv-select__up": _vm.isShow && !_vm.isIconShow }
+            },
+            [
+              _c("i", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !_vm.isIconShow,
+                    expression: "!isIconShow"
+                  }
+                ],
+                staticClass: "ddv-select__iconfont iconfont icon-jiantou"
+              }),
+              _vm._v(" "),
+              _c("i", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.isIconShow,
+                    expression: "isIconShow"
+                  }
+                ],
+                staticClass: "ddv-select__iconfont iconfont icon-danger",
+                on: {
+                  click: function($event) {
+                    $event.stopPropagation();
+                    return _vm.emptyValue($event)
+                  }
+                }
+              })
+            ]
+          )
         ]
       ),
       _vm._v(" "),
@@ -9435,19 +9523,21 @@ var __vue_render__$4 = function() {
             return _c(
               "div",
               {
-                key: item.value,
+                key: item.id,
                 staticClass: "el-select__dropdown__item",
                 class: {
-                  "el-select__highlight": _vm.value === item.label,
+                  "el-select__highlight":
+                    _vm.multipleList.indexOf(item) > -1 || _vm.id === item.id,
                   "el-select__disabled": item.disabled
                 },
                 on: {
                   click: function($event) {
+                    $event.stopPropagation();
                     _vm.selectItem(item);
                   }
                 }
               },
-              [_vm._v("\n        " + _vm._s(item.label) + "\n      ")]
+              [_vm._v("\n        " + _vm._s(item.name) + "\n      ")]
             )
           })
         )
