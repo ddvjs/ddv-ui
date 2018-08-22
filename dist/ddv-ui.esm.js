@@ -8226,12 +8226,9 @@ var script = {
         return {}
       }
     },
-    level: {
-      type: Number,
-      default: 0
-    },
-    indent: {
-      type: Number
+    showIcon: {
+      type: Boolean,
+      default: true
     }
   },
   components: {
@@ -8248,12 +8245,33 @@ var script = {
       render: function render (h) {
         var parent = this.$parent;
         var tree = parent.tree;
+
+        var renderIcon = h('span', {
+          staticClass: 'ddv-tree_node__icon',
+          class: {
+            'ddv-tree_node__icon__noChild': !parent.node.children || parent.node.children.length === 0,
+            'ddv-tree_node__icon__rotate': parent.expanded
+          },
+          style: {
+            display: parent.showIcon ? 'inline-block' : 'none'
+          }
+        }, [
+          h('i', {
+            staticClass: 'iconfont icon-arrow-right'
+          })
+        ]);
+
         return (
-          tree.$scopedSlots.default
-            ? tree.$scopedSlots.default({ node: this.node, data: this.data })
-            : h('span', {
-              class: ['ddv-tree_node__label']
-            }, this.node.label)
+          h('span', {
+            staticClass: 'ddv-tree_node__col'
+          }, [
+            renderIcon,
+            tree.$scopedSlots.default
+              ? tree.$scopedSlots.default({ node: this.node, data: this.data })
+              : h('span', {
+                staticClass: 'ddv-tree_node__label'
+              }, this.node.label)
+          ])
         )
       }
     }
@@ -8266,7 +8284,22 @@ var script = {
   },
   methods: {
     handleClick: function handleClick () {
-      this.expanded = !this.expanded;
+      this.node.expanded = !this.node.expanded;
+    }
+  },
+  watch: {
+    'node.expanded': function node_expanded (val) {
+      var this$1 = this;
+
+      this.$nextTick(function () { this$1.expanded = val; });
+
+      if (val) {
+        this.childNodeRendered = true;
+
+        if (this.$parent && this.$parent.node) {
+          this.$parent.node.expanded = true;
+        }
+      }
     }
   },
   created: function created () {
@@ -8282,9 +8315,12 @@ var script = {
     if (!tree) {
       console.warn('Can not find node\'s tree.');
     }
-    this.childNodeRendered = true;
-  },
-  mounted: function mounted () {}
+
+    if (this.node.expanded) {
+      this.expanded = true;
+      this.childNodeRendered = true;
+    }
+  }
 }
 
 /* script */
@@ -8304,26 +8340,11 @@ var __vue_render__ = function() {
         {
           staticClass: "ddv-tree_node__content",
           style: {
-            paddingLeft: _vm.indent + "px"
+            paddingLeft: _vm.node.indent + "px"
           },
           on: { click: _vm.handleClick }
         },
-        [
-          _c(
-            "span",
-            {
-              staticClass: "ddv-tree_node__icon",
-              class: {
-                "ddv-tree_node__icon__noChild":
-                  !_vm.node.children || _vm.node.children.length === 0,
-                "ddv-tree_node__icon__rotate": _vm.expanded
-              }
-            },
-            [_c("i", { staticClass: "iconfont icon-arrow-right" })]
-          ),
-          _vm._v(" "),
-          _c("node-content", { attrs: { node: _vm.node, data: _vm.data } })
-        ],
+        [_c("node-content", { attrs: { node: _vm.node, data: _vm.data } })],
         1
       ),
       _vm._v(" "),
@@ -8348,8 +8369,7 @@ var __vue_render__ = function() {
                   attrs: {
                     node: item.node,
                     data: item.data,
-                    level: item.level,
-                    indent: item.indent
+                    "show-icon": _vm.showIcon
                   }
                 })
               : _vm._e()
@@ -8489,10 +8509,22 @@ var script$1 = {
         return {}
       }
     },
+    // 是否默认展开
     defaultExpandAll: {
       type: Boolean,
       default: false
-    }
+    },
+    // 默认展开的key
+    defaultExpandedKeys: {
+      type: Array,
+      default: function () { return []; }
+    },
+    showIcon: {
+      type: Boolean,
+      default: true
+    },
+    nodeKey: String,
+    lazy: Boolean
   },
   data: function data () {
     return {
@@ -8521,12 +8553,17 @@ var script$1 = {
           var obj = {
             data: item,
             node: {},
-            level: level,
-            indent: this$1.indent * level,
-            nodeKey: index + '-' + level
+            nodeKey: this$1.nodeKey ? item[this$1.nodeKey] : index + '-' + level
           };
           obj.node.children = [];
           obj.node.label = item[this$1.treeprops.label];
+          obj.node.level = level;
+          obj.node.indent = this$1.indent * level;
+          obj.node.expanded = this$1.defaultExpandAll;
+
+          if (!obj.node.expanded && this$1.defaultExpandedKeys.length) {
+            obj.node.expanded = this$1.defaultExpandedKeys.indexOf(obj.nodeKey) > -1;
+          }
 
           if (Array.isArray(item[this$1.treeprops.children]) && item[this$1.treeprops.children].length) {
             var childLevel = level;
@@ -8545,8 +8582,11 @@ var script$1 = {
       this.setProps();
       this.setData();
     },
-    data: function data () {
-      this.setData();
+    data: {
+      deep: true,
+      handler: function handler () {
+        this.setData();
+      }
     }
   },
   created: function created () {
@@ -8572,12 +8612,7 @@ var __vue_render__$1 = function() {
       _vm._l(_vm.lists, function(node) {
         return _c("ddv-tree-node", {
           key: node.nodeKey,
-          attrs: {
-            node: node.node,
-            data: node.data,
-            level: node.level,
-            indent: node.indent
-          }
+          attrs: { node: node.node, data: node.data, "show-icon": _vm.showIcon }
         })
       })
     )

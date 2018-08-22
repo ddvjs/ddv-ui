@@ -4,16 +4,8 @@
       class="ddv-tree_node__content"
       @click="handleClick"
       :style="{
-        paddingLeft: indent + 'px'
+        paddingLeft: node.indent + 'px'
       }">
-      <span
-        class="ddv-tree_node__icon"
-        :class="{
-          'ddv-tree_node__icon__noChild': !node.children || node.children.length === 0,
-          'ddv-tree_node__icon__rotate': expanded
-        }">
-        <i class="iconfont icon-arrow-right"></i>
-      </span>
       <node-content :node="node" :data="data"></node-content>
     </div>
     <ddv-collapse-transition>
@@ -24,8 +16,7 @@
           :key="item.nodeKey"
           :node="item.node"
           :data="item.data"
-          :level="item.level"
-          :indent="item.indent" />
+          :show-icon="showIcon"/>
       </div>
     </ddv-collapse-transition>
   </div>
@@ -50,12 +41,9 @@ export default {
         return {}
       }
     },
-    level: {
-      type: Number,
-      default: 0
-    },
-    indent: {
-      type: Number
+    showIcon: {
+      type: Boolean,
+      default: true
     }
   },
   components: {
@@ -72,12 +60,33 @@ export default {
       render (h) {
         const parent = this.$parent
         const tree = parent.tree
+
+        const renderIcon = h('span', {
+          staticClass: 'ddv-tree_node__icon',
+          class: {
+            'ddv-tree_node__icon__noChild': !parent.node.children || parent.node.children.length === 0,
+            'ddv-tree_node__icon__rotate': parent.expanded
+          },
+          style: {
+            display: parent.showIcon ? 'inline-block' : 'none'
+          }
+        }, [
+          h('i', {
+            staticClass: 'iconfont icon-arrow-right'
+          })
+        ])
+
         return (
-          tree.$scopedSlots.default
-            ? tree.$scopedSlots.default({ node: this.node, data: this.data })
-            : h('span', {
-              class: ['ddv-tree_node__label']
-            }, this.node.label)
+          h('span', {
+            staticClass: 'ddv-tree_node__col'
+          }, [
+            renderIcon,
+            tree.$scopedSlots.default
+              ? tree.$scopedSlots.default({ node: this.node, data: this.data })
+              : h('span', {
+                staticClass: 'ddv-tree_node__label'
+              }, this.node.label)
+          ])
         )
       }
     }
@@ -90,7 +99,20 @@ export default {
   },
   methods: {
     handleClick () {
-      this.expanded = !this.expanded
+      this.node.expanded = !this.node.expanded
+    }
+  },
+  watch: {
+    'node.expanded' (val) {
+      this.$nextTick(() => { this.expanded = val })
+
+      if (val) {
+        this.childNodeRendered = true
+
+        if (this.$parent && this.$parent.node) {
+          this.$parent.node.expanded = true
+        }
+      }
     }
   },
   created () {
@@ -106,8 +128,11 @@ export default {
     if (!tree) {
       console.warn('Can not find node\'s tree.')
     }
-    this.childNodeRendered = true
-  },
-  mounted () {}
+
+    if (this.node.expanded) {
+      this.expanded = true
+      this.childNodeRendered = true
+    }
+  }
 }
 </script>
