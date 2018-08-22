@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="ml50 mt50">
     <ddv-select 
       :list="options" 
       :value.sync="value" 

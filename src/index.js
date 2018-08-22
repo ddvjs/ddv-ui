@@ -2,10 +2,12 @@ import isBrowser from './utils/isBrowser.js'
 import Tree from '../packages/tree/index.js'
 import Message from '../packages/message/index.js'
 import Select from '../packages/select/index.js'
+import Button from '../packages/button/index.js'
 
 const components = [
   Tree,
-  Select
+  Select,
+  Button
 ]
 
 const install = (Vue, opts = {}) => {
@@ -29,7 +31,8 @@ module.exports = {
   install,
   Tree,
   Message,
-  Select
+  Select,
+  Button
 }
 
 module.exports.default = module.exports

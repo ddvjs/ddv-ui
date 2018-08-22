@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Tree from './components/tree.vue'
 import Message from './components/Message.vue'
 import Select from './components/select.vue'
+import Button from './components/button.vue'
 
 Vue.use(VueRouter)
 
@@ -38,6 +39,10 @@ const router = new VueRouter({
     {
       path: '/select',
       component: Select
+    },
+    {
+      path: '/button',
+      component: Button
     }
   ]
 })
