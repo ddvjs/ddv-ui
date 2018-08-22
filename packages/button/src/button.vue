@@ -1,6 +1,18 @@
 <template>
-  <div> sss</div>
-
+  <span> 
+    <button 
+      type="button" 
+      class="ddv-button"
+      :class="[
+        buttonType,
+        buttonSize,
+        {'ddv-button__round':round},
+        {'ddv-button__circle':circle},
+      ]">
+      <i class="iconfont" :class="icon"></i>
+      <slot></slot>
+    </button>
+  </span>
 </template>
 
 <script>
@@ -10,17 +22,42 @@ import '../../style/src/iconfont/iconfont.css'
 
 export default {
   props: {
-
+    type: {
+      type: String,
+      default: 'default'
+    },
+    icon: {
+      type: String
+    },
+    size: {
+      type: String,
+      default: 'normal'
+    },
+    plain: Boolean,
+    round: Boolean,
+    circle: Boolean
   },
-  data () {
-    return {
-
+  computed: {
+    buttonType () {
+      if (this.plain) {
+        return `ddv-button__${this.type}__plain`
+      } else {
+        return `ddv-button__${this.type}`
+      }
+    },
+    buttonSize () {
+      switch (this.size) {
+        case 'normal':
+          return 'ddv-button__normal'
+        case 'medium':
+          return 'ddv-button__medium'
+        case 'small':
+          return 'ddv-button__small'
+        case 'mini':
+          return 'ddv-button__mini'
+      }
     }
-  },
-  methods: {
-  },
-  created () {
-  },
-  mounted () {}
+
+  }
 }
 </script>

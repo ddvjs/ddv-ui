@@ -1,0 +1,132 @@
+.ddv-button{
+  display: inline-block;
+  font-size: 14px;
+  color: #606266;
+  text-align: center;
+  cursor: pointer; 
+  border: 1px solid #dcdfe6;
+  box-sizing: border-box;
+  border-radius: 4px;
+  background: #fff;
+}
+.ddv-button__normal{
+  padding: 10px 20px;
+}
+.ddv-button__medium{
+  padding: 8px 20px;
+}
+.ddv-button__small{
+  padding: 6px 15px;
+  font-size:12px;
+}
+.ddv-button__mini{
+  padding: 5px 15px;
+  font-size:12px;
+}
+.ddv-button:hover{
+  opacity:0.8;
+}
+.ddv-button__default{
+  border-color: #dcdfe6;  
+}
+.ddv-button__default:hover{
+  color: #409eff;
+  background-color: #ecf5ff;
+  border-color: #b3d8ff;
+}
+.ddv-button__primary{
+  color: #fff;
+  background-color: #409eff;
+  border-color: #409eff;
+}
+.ddv-button__success{
+  color: #fff;
+  background-color: #67c23a;
+  border-color: #67c23a;
+}
+.ddv-button__info{
+  color: #fff;
+  background-color: #909399;
+  border-color: #909399;
+}
+.ddv-button__warning{
+  color: #fff;
+  background-color: #e6a23c;
+  border-color: #e6a23c;
+}
+.ddv-button__danger{
+  color: #fff;
+  background-color: #f56c6c;
+  border-color: #f56c6c;
+}
+.ddv-button__default__plain:hover{
+  color: #409eff;
+  border-color: #409eff;
+  opacity:1;
+}
+.ddv-button__primary__plain{
+  color: #409eff;
+  background: #ecf5ff;
+  border-color: #b3d8ff;
+}
+.ddv-button__primary__plain:hover{
+  color: #fff;
+  background-color: #409eff;
+  border-color: #409eff;
+  opacity:1;
+}
+.ddv-button__success__plain{
+  color: #67c23a;
+  background: #f0f9eb;
+  border-color: #c2e7b0;
+}
+.ddv-button__success__plain:hover{
+  color: #fff;
+  background-color: #67c23a;
+  border-color: #67c23a;
+  opacity:1;
+}
+.ddv-button__info__plain{
+  color: #909399;
+  background: #f4f4f5;
+  border-color: #d3d4d6;
+}
+.ddv-button__info__plain:hover{
+  color: #fff;
+  background-color: #909399;
+  border-color: #909399;
+  opacity:1;
+}
+.ddv-button__warning__plain{
+  color: #e6a23c;
+  background: #fdf6ec;
+  border-color: #f5dab1;
+}
+.ddv-button__warning__plain:hover{
+  color: #fff;
+  background-color: #e6a23c;
+  border-color: #e6a23c;
+  opacity:1;
+}
+.ddv-button__danger__plain{
+  color: #f56c6c;
+  background: #fef0f0;
+  border-color: #fbc4c4;
+}
+.ddv-button__danger__plain:hover{
+  color: #fff;
+  background-color: #f56c6c;
+  border-color: #f56c6c;
+  opacity:1;
+}
+.ddv-button__round{
+  border-radius: 20px;
+  padding: 10px 23px;
+}
+.ddv-button__circle{
+  border-radius: 50%;
+  padding: 12px;
+}
+.ddv-button__size{
+
+}

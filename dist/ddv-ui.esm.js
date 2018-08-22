@@ -9257,14 +9257,8 @@ var script$4 = {
     value: {
       type: [String, Array, Number]
     },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    multiple: {
-      type: Boolean,
-      default: false
-    },
+    disabled: Boolean,
+    multiple: Boolean,
     props: {
       type: Object,
       default: function default$1 () {
@@ -9662,18 +9656,43 @@ Select.install = function (Vue) {
 
 var script$5 = {
   props: {
-
+    type: {
+      type: String,
+      default: 'default'
+    },
+    icon: {
+      type: String
+    },
+    size: {
+      type: String,
+      default: 'normal'
+    },
+    plain: Boolean,
+    round: Boolean,
+    circle: Boolean
   },
-  data: function data () {
-    return {
-
+  computed: {
+    buttonType: function buttonType () {
+      if (this.plain) {
+        return ("ddv-button__" + (this.type) + "__plain")
+      } else {
+        return ("ddv-button__" + (this.type))
+      }
+    },
+    buttonSize: function buttonSize () {
+      switch (this.size) {
+        case 'normal':
+          return 'ddv-button__normal'
+        case 'medium':
+          return 'ddv-button__medium'
+        case 'small':
+          return 'ddv-button__small'
+        case 'mini':
+          return 'ddv-button__mini'
+      }
     }
-  },
-  methods: {
-  },
-  created: function created () {
-  },
-  mounted: function mounted () {}
+
+  }
 }
 
 /* script */
@@ -9684,7 +9703,27 @@ var __vue_render__$5 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("div", [_vm._v(" sss")])
+  return _c("span", [
+    _c(
+      "button",
+      {
+        staticClass: "ddv-button",
+        class: [
+          _vm.buttonType,
+          _vm.buttonSize,
+          { "ddv-button__round": _vm.round },
+          { "ddv-button__circle": _vm.circle }
+        ],
+        attrs: { type: "button" }
+      },
+      [
+        _c("i", { staticClass: "iconfont", class: _vm.icon }),
+        _vm._v(" "),
+        _vm._t("default")
+      ],
+      2
+    )
+  ])
 };
 var __vue_staticRenderFns__$5 = [];
 __vue_render__$5._withStripped = true;

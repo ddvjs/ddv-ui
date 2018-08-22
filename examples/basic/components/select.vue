@@ -2,12 +2,12 @@
   <div class="ml50 mt50">
     <ddv-select 
       :list="options" 
-      :value.sync="value" 
+      :value.sync="value"
+      multiple
       :props="defaultProps">
       </ddv-select>
+      <!-- disabled -->
       <!-- <span v-for="item in value">{{item}}</span> -->
-      <!-- :multiple="multiple" -->
-      <!-- :disabled="disabled" -->
   </div>
 </template>
 
@@ -48,9 +48,7 @@ export default {
         id: 'xx',
         name: 'name'
       },
-      value: '',
-      multiple: true,
-      disabled: true
+      value: ''
     }
   }
 }

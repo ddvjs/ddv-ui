@@ -91,14 +91,8 @@ export default {
     value: {
       type: [String, Array, Number]
     },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    multiple: {
-      type: Boolean,
-      default: false
-    },
+    disabled: Boolean,
+    multiple: Boolean,
     props: {
       type: Object,
       default () {
