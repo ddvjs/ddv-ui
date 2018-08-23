@@ -23,6 +23,7 @@ import '../../style/src/button.css'
 import '../../style/src/iconfont/iconfont.css'
 
 export default {
+  name: 'DdvButton',
   props: {
     type: {
       type: String,
@@ -60,7 +61,6 @@ export default {
           return 'ddv-button__mini'
       }
     }
-
   }
 }
 </script>

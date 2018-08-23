@@ -10,12 +10,12 @@
     </div>
 
     <div class="mt20">
-      <ddv-button plain>朴素按钮</ddv-button>
+      <ddv-button plain disabled>朴素按钮</ddv-button>
       <ddv-button type="primary" plain disabled>主要按钮</ddv-button>
-      <ddv-button type="success" plain>成功按钮</ddv-button>
-      <ddv-button type="info" plain>信息按钮</ddv-button>
-      <ddv-button type="warning" plain>警告按钮</ddv-button>
-      <ddv-button type="danger" plain>危险按钮</ddv-button>
+      <ddv-button type="success" plain disabled>成功按钮</ddv-button>
+      <ddv-button type="info" plain disabled>信息按钮</ddv-button>
+      <ddv-button type="warning" plain disabled >警告按钮</ddv-button>
+      <ddv-button type="danger" plain disabled>危险按钮</ddv-button>
     </div>
 
     <div class="mt20">
@@ -29,7 +29,7 @@
 
     <div class="mt20">
       <ddv-button icon="icon-search" circle></ddv-button>
-      <ddv-button type="primary" icon="icon-edit" circle></ddv-button>
+      <ddv-button type="primary" icon="icon-edit" circle disabled></ddv-button>
       <ddv-button type="success" icon="icon-check" circle></ddv-button>
       <ddv-button type="info" icon="icon-message" circle></ddv-button>
       <ddv-button type="warning" icon="icon-star-off" circle></ddv-button>
@@ -45,11 +45,6 @@ import { Button } from 'ddv-ui'
 export default {
   components: {
     'ddv-button': Button
-  },
-  data () {
-    return {
-
-    }
   }
 }
 </script>
