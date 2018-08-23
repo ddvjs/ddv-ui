@@ -8400,7 +8400,7 @@ __vue_render__._withStripped = true;
     var component = (typeof script$$1 === 'function' ? script$$1.options : script$$1) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/tree/src/tree-node.vue";
+    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/tree/src/tree-node.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -8638,7 +8638,7 @@ __vue_render__$1._withStripped = true;
     var component = (typeof script === 'function' ? script.options : script) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/tree/src/tree.vue";
+    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/tree/src/tree.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -8880,7 +8880,7 @@ __vue_render__$2._withStripped = true;
     var component = (typeof script === 'function' ? script.options : script) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/message/src/pc/message.vue";
+    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/message/src/pc/message.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -9092,7 +9092,7 @@ __vue_render__$3._withStripped = true;
     var component = (typeof script === 'function' ? script.options : script) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/message/src/wap/message.vue";
+    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/message/src/wap/message.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -9595,7 +9595,7 @@ __vue_render__$4._withStripped = true;
     var component = (typeof script === 'function' ? script.options : script) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/select/src/select.vue";
+    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/select/src/select.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -9739,30 +9739,28 @@ var __vue_render__$5 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("span", [
-    _c(
-      "button",
-      {
-        staticClass: "ddv-button",
-        class: [
-          _vm.buttonType,
-          _vm.buttonSize,
-          {
-            "ddv-button__round": _vm.round,
-            "ddv-button__circle": _vm.circle,
-            "ddv-button__disabled": _vm.disabled
-          }
-        ],
-        attrs: { type: "button", disabled: _vm.disabled }
-      },
-      [
-        _c("i", { staticClass: "iconfont", class: _vm.icon }),
-        _vm._v(" "),
-        _vm._t("default")
+  return _c(
+    "button",
+    {
+      staticClass: "ddv-button",
+      class: [
+        _vm.buttonType,
+        _vm.buttonSize,
+        {
+          "ddv-button__round": _vm.round,
+          "ddv-button__circle": _vm.circle,
+          "ddv-button__disabled": _vm.disabled
+        }
       ],
-      2
-    )
-  ])
+      attrs: { type: "button", disabled: _vm.disabled }
+    },
+    [
+      _c("i", { staticClass: "iconfont", class: _vm.icon }),
+      _vm._v(" "),
+      _vm._t("default")
+    ],
+    2
+  )
 };
 var __vue_staticRenderFns__$5 = [];
 __vue_render__$5._withStripped = true;
@@ -9784,7 +9782,7 @@ __vue_render__$5._withStripped = true;
     var component = (typeof script === 'function' ? script.options : script) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/button/src/button.vue";
+    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/button/src/button.vue";
 
     if (!component.render) {
       component.render = template.render;
