@@ -3,11 +3,15 @@
     <button 
       type="button" 
       class="ddv-button"
+      :disabled="disabled"
       :class="[
         buttonType,
         buttonSize,
-        {'ddv-button__round':round},
-        {'ddv-button__circle':circle},
+        {
+          'ddv-button__round': round,
+          'ddv-button__circle': circle,
+          'ddv-button__disabled': disabled
+        }
       ]">
       <i class="iconfont" :class="icon"></i>
       <slot></slot>
@@ -35,7 +39,8 @@ export default {
     },
     plain: Boolean,
     round: Boolean,
-    circle: Boolean
+    circle: Boolean,
+    disabled: Boolean
   },
   computed: {
     buttonType () {

@@ -9704,7 +9704,8 @@ var script$5 = {
     },
     plain: Boolean,
     round: Boolean,
-    circle: Boolean
+    circle: Boolean,
+    disabled: Boolean
   },
   computed: {
     buttonType: function buttonType () {
@@ -9746,10 +9747,13 @@ var __vue_render__$5 = function() {
         class: [
           _vm.buttonType,
           _vm.buttonSize,
-          { "ddv-button__round": _vm.round },
-          { "ddv-button__circle": _vm.circle }
+          {
+            "ddv-button__round": _vm.round,
+            "ddv-button__circle": _vm.circle,
+            "ddv-button__disabled": _vm.disabled
+          }
         ],
-        attrs: { type: "button" }
+        attrs: { type: "button", disabled: _vm.disabled }
       },
       [
         _c("i", { staticClass: "iconfont", class: _vm.icon }),

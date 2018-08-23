@@ -127,6 +127,9 @@
   border-radius: 50%;
   padding: 12px;
 }
-.ddv-button__size{
-
+.ddv-button__disabled {
+  cursor: not-allowed;
+  opacity:0.8;
+}
+.ddv-button__disabled:hover {
 }

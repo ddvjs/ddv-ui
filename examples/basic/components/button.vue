@@ -11,7 +11,7 @@
 
     <div class="mt20">
       <ddv-button plain>朴素按钮</ddv-button>
-      <ddv-button type="primary" plain>主要按钮</ddv-button>
+      <ddv-button type="primary" plain disabled>主要按钮</ddv-button>
       <ddv-button type="success" plain>成功按钮</ddv-button>
       <ddv-button type="info" plain>信息按钮</ddv-button>
       <ddv-button type="warning" plain>警告按钮</ddv-button>
