@@ -1,6 +1,6 @@
 <template>
   <button 
-    type="button" 
+    type="button"
     class="ddv-button"
     :disabled="disabled"
     :class="[
@@ -9,7 +9,7 @@
       {
         'ddv-button__round': round,
         'ddv-button__circle': circle,
-        'ddv-button__disabled': disabled,
+        'ddv-button__disabled': disabled
       }
     ]">
     <i class="iconfont" :class="icon"></i>
