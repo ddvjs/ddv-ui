@@ -1,10 +1,12 @@
 <template>
   <div>
     <ddv-dialog 
+      ref="xxx"
       title="提示"
       :visible.sync="dialogVisible">
       <div>
         这是一段信息
+
         <ddv-dialog title="dddd" :visible.sync="xxx" width="30%">
           sssss
         </ddv-dialog>
@@ -13,7 +15,8 @@
         <ddv-button type="primary" @click="pp">ssss</ddv-button>
       </div>
     </ddv-dialog>
-    <ddv-dialog title="dddd" :visible.sync="xoo" width="30%" :closeOnClickModal="false">
+
+    <ddv-dialog title="dddd" :visible.sync="xoo" width="30%" :closeOnClickModal="false" ref="xoo">
       kkkk
     </ddv-dialog>
   </div>

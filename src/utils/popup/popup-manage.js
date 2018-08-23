@@ -1,6 +1,5 @@
 import Vue from 'vue'
 
-let hasModal = false
 let hasInitZIndex = false
 let zIndex = 2000
 
