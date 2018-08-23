@@ -26,45 +26,52 @@
 .ddv-button:hover{
   opacity:0.8;
 }
-.ddv-button__default{
+.ddv-button__default, .ddv-button__default.ddv-button__disabled:hover{
+  color: #606266;
   border-color: #dcdfe6;  
+  background: #fff;
 }
 .ddv-button__default:hover{
   color: #409eff;
   background-color: #ecf5ff;
   border-color: #b3d8ff;
 }
-.ddv-button__primary{
+.ddv-button__primary, .ddv-button__primary.ddv-button__disabled:hover{
   color: #fff;
   background-color: #409eff;
   border-color: #409eff;
 }
-.ddv-button__success{
+.ddv-button__success, .ddv-button__success.ddv-button__disabled:hover{
   color: #fff;
   background-color: #67c23a;
   border-color: #67c23a;
 }
-.ddv-button__info{
+.ddv-button__info, .ddv-button__info.ddv-button__disabled:hover{
   color: #fff;
   background-color: #909399;
   border-color: #909399;
 }
-.ddv-button__warning{
+.ddv-button__warning, .ddv-button__warning.ddv-button__disabled:hover{
   color: #fff;
   background-color: #e6a23c;
   border-color: #e6a23c;
 }
-.ddv-button__danger{
+.ddv-button__danger, .ddv-button__danger.ddv-button__disabled:hover{
   color: #fff;
   background-color: #f56c6c;
   border-color: #f56c6c;
+}
+.ddv-button__default__plain.ddv-button__disabled:hover{
+  color: #606266;
+  border-color: #dcdfe6;  
+  background: #fff;
 }
 .ddv-button__default__plain:hover{
   color: #409eff;
   border-color: #409eff;
   opacity:1;
 }
-.ddv-button__primary__plain{
+.ddv-button__primary__plain, .ddv-button__primary__plain.ddv-button__disabled:hover{
   color: #409eff;
   background: #ecf5ff;
   border-color: #b3d8ff;
@@ -75,7 +82,7 @@
   border-color: #409eff;
   opacity:1;
 }
-.ddv-button__success__plain{
+.ddv-button__success__plain, .ddv-button__success__plain.ddv-button__disabled:hover{
   color: #67c23a;
   background: #f0f9eb;
   border-color: #c2e7b0;
@@ -86,7 +93,7 @@
   border-color: #67c23a;
   opacity:1;
 }
-.ddv-button__info__plain{
+.ddv-button__info__plain, .ddv-button__info__plain.ddv-button__disabled:hover{
   color: #909399;
   background: #f4f4f5;
   border-color: #d3d4d6;
@@ -97,7 +104,7 @@
   border-color: #909399;
   opacity:1;
 }
-.ddv-button__warning__plain{
+.ddv-button__warning__plain, .ddv-button__warning__plain.ddv-button__disabled:hover{
   color: #e6a23c;
   background: #fdf6ec;
   border-color: #f5dab1;
@@ -108,7 +115,7 @@
   border-color: #e6a23c;
   opacity:1;
 }
-.ddv-button__danger__plain{
+.ddv-button__danger__plain, .ddv-button__danger__plain.ddv-button__disabled:hover{
   color: #f56c6c;
   background: #fef0f0;
   border-color: #fbc4c4;
@@ -127,9 +134,7 @@
   border-radius: 50%;
   padding: 12px;
 }
-.ddv-button__disabled {
+.ddv-button:disabled {
   cursor: not-allowed;
-  opacity:0.8;
-}
-.ddv-button__disabled:hover {
+  opacity:0.5;
 }

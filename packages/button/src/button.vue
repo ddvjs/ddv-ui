@@ -1,22 +1,20 @@
 <template>
-  <span> 
-    <button 
-      type="button" 
-      class="ddv-button"
-      :disabled="disabled"
-      :class="[
-        buttonType,
-        buttonSize,
-        {
-          'ddv-button__round': round,
-          'ddv-button__circle': circle,
-          'ddv-button__disabled': disabled
-        }
-      ]">
-      <i class="iconfont" :class="icon"></i>
-      <slot></slot>
-    </button>
-  </span>
+  <button 
+    type="button" 
+    class="ddv-button"
+    :disabled="disabled"
+    :class="[
+      buttonType,
+      buttonSize,
+      {
+        'ddv-button__round': round,
+        'ddv-button__circle': circle,
+        'ddv-button__disabled': disabled,
+      }
+    ]">
+    <i class="iconfont" :class="icon"></i>
+    <slot></slot>
+  </button>
 </template>
 
 <script>
@@ -25,6 +23,7 @@ import '../../style/src/button.css'
 import '../../style/src/iconfont/iconfont.css'
 
 export default {
+  name: 'DdvButton',
   props: {
     type: {
       type: String,
@@ -62,7 +61,6 @@ export default {
           return 'ddv-button__mini'
       }
     }
-
   }
 }
 </script>

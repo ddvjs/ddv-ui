@@ -84,6 +84,7 @@ import '../../style/src/select.css'
 import '../../style/src/iconfont/iconfont.css'
 
 export default {
+  name: 'DdvSelect',
   props: {
     list: {
       type: Array

@@ -9285,6 +9285,7 @@ Message.closeAll = function () {
 //
 
 var script$4 = {
+  name: 'DdvSelect',
   props: {
     list: {
       type: Array
@@ -9690,6 +9691,7 @@ Select.install = function (Vue) {
 //
 
 var script$5 = {
+  name: 'DdvButton',
   props: {
     type: {
       type: String,
@@ -9727,7 +9729,6 @@ var script$5 = {
           return 'ddv-button__mini'
       }
     }
-
   }
 }
 
@@ -9739,30 +9740,28 @@ var __vue_render__$5 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("span", [
-    _c(
-      "button",
-      {
-        staticClass: "ddv-button",
-        class: [
-          _vm.buttonType,
-          _vm.buttonSize,
-          {
-            "ddv-button__round": _vm.round,
-            "ddv-button__circle": _vm.circle,
-            "ddv-button__disabled": _vm.disabled
-          }
-        ],
-        attrs: { type: "button", disabled: _vm.disabled }
-      },
-      [
-        _c("i", { staticClass: "iconfont", class: _vm.icon }),
-        _vm._v(" "),
-        _vm._t("default")
+  return _c(
+    "button",
+    {
+      staticClass: "ddv-button",
+      class: [
+        _vm.buttonType,
+        _vm.buttonSize,
+        {
+          "ddv-button__round": _vm.round,
+          "ddv-button__circle": _vm.circle,
+          "ddv-button__disabled": _vm.disabled
+        }
       ],
-      2
-    )
-  ])
+      attrs: { type: "button", disabled: _vm.disabled }
+    },
+    [
+      _c("i", { staticClass: "iconfont", class: _vm.icon }),
+      _vm._v(" "),
+      _vm._t("default")
+    ],
+    2
+  )
 };
 var __vue_staticRenderFns__$5 = [];
 __vue_render__$5._withStripped = true;
