@@ -5,7 +5,6 @@
   bottom:0;
   right:0;
   overflow: auto;
-  background:rgba(125,125,125,0.7);
 }
 .ddv-dialog{
   position: relative;
@@ -14,10 +13,14 @@
   border-radius: 2px;
   box-shadow: 0 1px 3px rgb(125, 125, 125);
   box-sizing: border-box;
+  width: 50%;
 }
 .ddv-dialog__header{
   padding: 20px;
   padding-bottom: 10px;
+}
+.ddv-dialog__header.has-close {
+  padding-right: 44px;
 }
 .ddv-dialog__title{
   line-height: 24px;
@@ -44,21 +47,21 @@
   box-sizing: border-box;
 }
 .ddv-dialog__button{
-    display: inline-block;
-    line-height: 1;
-    white-space: nowrap;
-    cursor: pointer;
-    background: #fff;
-    border: 1px solid #dcdfe6;
-    border-color: #dcdfe6;
-    color: #606266;
-    text-align: center;
-    box-sizing: border-box;
-    outline: none;
-    font-weight: 500;
-    padding: 12px 20px;
-    font-size: 14px;
-    border-radius: 4px;
+  display: inline-block;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #dcdfe6;
+  border-color: #dcdfe6;
+  color: #606266;
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  font-weight: 500;
+  padding: 12px 20px;
+  font-size: 14px;
+  border-radius: 4px;
 }
 .ddv-dialog__submit{
   margin-left:10px;
@@ -66,4 +69,69 @@
   background-color: #409eff;
   border-color: #409eff;
 }
-    
+
+.dialog-fade-enter-active {
+	-webkit-animation: dialog-fade-in .3s;
+	animation: dialog-fade-in .3s
+}
+
+.dialog-fade-leave-active {
+	-webkit-animation: dialog-fade-out .3s;
+	animation: dialog-fade-out .3s
+}
+
+@-webkit-keyframes dialog-fade-in {
+	0% {
+		-webkit-transform: translate3d(0,-20px,0);
+		transform: translate3d(0,-20px,0);
+		opacity: 0
+	}
+
+	100% {
+		-webkit-transform: translate3d(0,0,0);
+		transform: translate3d(0,0,0);
+		opacity: 1
+	}
+}
+
+@keyframes dialog-fade-in {
+	0% {
+		-webkit-transform: translate3d(0,-20px,0);
+		transform: translate3d(0,-20px,0);
+		opacity: 0
+	}
+
+	100% {
+		-webkit-transform: translate3d(0,0,0);
+		transform: translate3d(0,0,0);
+		opacity: 1
+	}
+}
+
+@-webkit-keyframes dialog-fade-out {
+	0% {
+		-webkit-transform: translate3d(0,0,0);
+		transform: translate3d(0,0,0);
+		opacity: 1
+	}
+
+	100% {
+		-webkit-transform: translate3d(0,-20px,0);
+		transform: translate3d(0,-20px,0);
+		opacity: 0
+	}
+}
+
+@keyframes dialog-fade-out {
+	0% {
+		-webkit-transform: translate3d(0,0,0);
+		transform: translate3d(0,0,0);
+		opacity: 1
+	}
+
+	100% {
+		-webkit-transform: translate3d(0,-20px,0);
+		transform: translate3d(0,-20px,0);
+		opacity: 0
+	}
+}

@@ -17,7 +17,7 @@ const Message = function (opts) {
 
   let userOnClose = opts.onClose
   let id = 'message_' + seed++
-  opts.zIndex = 2000 + seed
+  opts.zIndex = (opts.zIndex || (Vue.prototype.$DDVUI && Vue.prototype.$DDVUI.zIndex) || 2000) + seed
 
   opts.onClose = function () {
     Message.close(id, userOnClose)

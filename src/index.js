@@ -18,7 +18,8 @@ const install = (Vue, opts = {}) => {
   })
 
   Vue.prototype.$DDVUI = {
-    client: opts.client || 'pc'
+    client: opts.client || 'pc',
+    zIndex: opts.zIndex || 2000
   }
 
   Vue.prototype.$message = Message

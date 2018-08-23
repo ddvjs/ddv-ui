@@ -3,6 +3,7 @@
     type="button"
     class="ddv-button"
     :disabled="disabled"
+    @click="$emit('click', $event)"
     :class="[
       buttonType,
       buttonSize,
