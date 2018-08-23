@@ -8400,7 +8400,7 @@ __vue_render__._withStripped = true;
     var component = (typeof script$$1 === 'function' ? script$$1.options : script$$1) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/tree/src/tree-node.vue";
+    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/tree/src/tree-node.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -8638,7 +8638,7 @@ __vue_render__$1._withStripped = true;
     var component = (typeof script === 'function' ? script.options : script) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/tree/src/tree.vue";
+    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/tree/src/tree.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -8880,7 +8880,7 @@ __vue_render__$2._withStripped = true;
     var component = (typeof script === 'function' ? script.options : script) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/message/src/pc/message.vue";
+    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/message/src/pc/message.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -9092,7 +9092,7 @@ __vue_render__$3._withStripped = true;
     var component = (typeof script === 'function' ? script.options : script) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/message/src/wap/message.vue";
+    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/message/src/wap/message.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -9285,6 +9285,7 @@ Message.closeAll = function () {
 //
 
 var script$4 = {
+  name: 'DdvSelect',
   props: {
     list: {
       type: Array
@@ -9595,7 +9596,7 @@ __vue_render__$4._withStripped = true;
     var component = (typeof script === 'function' ? script.options : script) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/select/src/select.vue";
+    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/select/src/select.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -9690,6 +9691,7 @@ Select.install = function (Vue) {
 //
 
 var script$5 = {
+  name: 'DdvButton',
   props: {
     type: {
       type: String,
@@ -9727,7 +9729,6 @@ var script$5 = {
           return 'ddv-button__mini'
       }
     }
-
   }
 }
 
@@ -9782,7 +9783,7 @@ __vue_render__$5._withStripped = true;
     var component = (typeof script === 'function' ? script.options : script) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/button/src/button.vue";
+    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/button/src/button.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -9874,10 +9875,472 @@ Button.install = function (Vue) {
   Vue.component(Button.name, Button);
 };
 
+//
+
+var script$6 = {
+  name: 'DdvDialog',
+  props: {
+    title: [String, Number],
+    width: String,
+    visible: {
+      type: Boolean
+    }
+  },
+  methods: {
+    close: function close () {
+      console.log(2222);
+      this.$emit('update:visible', false);
+    }
+  },
+  computed: {
+
+  }
+}
+
+/* script */
+            var __vue_script__$6 = script$6;
+            
+/* template */
+var __vue_render__$6 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    {
+      directives: [
+        {
+          name: "show",
+          rawName: "v-show",
+          value: _vm.visible,
+          expression: "visible"
+        }
+      ],
+      staticClass: "ddv-dialog__wrap"
+    },
+    [
+      _c("div", { staticClass: "ddv-dialog", style: { width: _vm.width } }, [
+        _c("div", { staticClass: "ddv-dialog__header" }, [
+          _c("span", { staticClass: "ddv-dialog__title" }, [
+            _vm._v(_vm._s(_vm.title))
+          ]),
+          _vm._v(" "),
+          _c("i", {
+            staticClass: "ddv-dialog__icon iconfont icon-cuo",
+            on: { click: _vm.close }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "ddv-dialog__body" }, [_vm._t("default")], 2),
+        _vm._v(" "),
+        _vm._m(0)
+      ])
+    ]
+  )
+};
+var __vue_staticRenderFns__$6 = [
+  function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("div", { staticClass: "ddv-dialog__footer" }, [
+      _c(
+        "button",
+        { staticClass: "ddv-dialog__button", attrs: { type: "button" } },
+        [_vm._v("取消")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "ddv-dialog__button ddv-dialog__submit",
+          attrs: { type: "button" }
+        },
+        [_vm._v("确定")]
+      )
+    ])
+  }
+];
+__vue_render__$6._withStripped = true;
+
+  /* style */
+  var __vue_inject_styles__$6 = undefined;
+  /* scoped */
+  var __vue_scope_id__$6 = undefined;
+  /* module identifier */
+  var __vue_module_identifier__$6 = undefined;
+  /* functional template */
+  var __vue_is_functional_template__$6 = false;
+  /* component normalizer */
+  function __vue_normalize__$6(
+    template, style, script,
+    scope, functional, moduleIdentifier,
+    createInjector, createInjectorSSR
+  ) {
+    var component = (typeof script === 'function' ? script.options : script) || {};
+
+    // For security concerns, we use only base name in production mode.
+    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/dialog/src/dialog.vue";
+
+    if (!component.render) {
+      component.render = template.render;
+      component.staticRenderFns = template.staticRenderFns;
+      component._compiled = true;
+
+      if (functional) { component.functional = true; }
+    }
+
+    component._scopeId = scope;
+
+    
+
+    return component
+  }
+  /* style inject */
+  function __vue_create_injector__$6() {
+    var head = document.head || document.getElementsByTagName('head')[0];
+    var styles = __vue_create_injector__$6.styles || (__vue_create_injector__$6.styles = {});
+    var isOldIE =
+      typeof navigator !== 'undefined' &&
+      /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
+
+    return function addStyle(id, css) {
+      if (document.querySelector('style[data-vue-ssr-id~="' + id + '"]')) { return } // SSR styles are present.
+
+      var group = isOldIE ? css.media || 'default' : id;
+      var style = styles[group] || (styles[group] = { ids: [], parts: [], element: undefined });
+
+      if (!style.ids.includes(id)) {
+        var code = css.source;
+        var index = style.ids.length;
+
+        style.ids.push(id);
+
+        if (isOldIE) {
+          style.element = style.element || document.querySelector('style[data-group=' + group + ']');
+        }
+
+        if (!style.element) {
+          var el = style.element = document.createElement('style');
+          el.type = 'text/css';
+
+          if (css.media) { el.setAttribute('media', css.media); }
+          if (isOldIE) {
+            el.setAttribute('data-group', group);
+            el.setAttribute('data-next-index', '0');
+          }
+
+          head.appendChild(el);
+        }
+
+        if (isOldIE) {
+          index = parseInt(style.element.getAttribute('data-next-index'));
+          style.element.setAttribute('data-next-index', index + 1);
+        }
+
+        if (style.element.styleSheet) {
+          style.parts.push(code);
+          style.element.styleSheet.cssText = style.parts
+            .filter(Boolean)
+            .join('\n');
+        } else {
+          var textNode = document.createTextNode(code);
+          var nodes = style.element.childNodes;
+          if (nodes[index]) { style.element.removeChild(nodes[index]); }
+          if (nodes.length) { style.element.insertBefore(textNode, nodes[index]); }
+          else { style.element.appendChild(textNode); }
+        }
+      }
+    }
+  }
+  /* style inject SSR */
+  
+
+  
+  var Dialog = __vue_normalize__$6(
+    { render: __vue_render__$6, staticRenderFns: __vue_staticRenderFns__$6 },
+    __vue_inject_styles__$6,
+    __vue_script__$6,
+    __vue_scope_id__$6,
+    __vue_is_functional_template__$6,
+    __vue_module_identifier__$6,
+    __vue_create_injector__$6,
+    undefined
+  )
+
+Dialog.install = function (Vue) {
+  Vue.component(Dialog.name, Dialog);
+};
+
+//
+
+var script$7 = {
+  name: 'DdvInput',
+  props: {
+    value: [String, Number],
+    readonly: Boolean,
+    disabled: Boolean,
+    placeholder: String,
+    clearable: Boolean,
+    rows: Number,
+    autocomplete: {
+      type: String,
+      default: 'off'
+    },
+    type: {
+      type: String,
+      default: 'text'
+    },
+    autosize: {
+      type: [Boolean, Object],
+      default: false
+    }
+  },
+  data: function data () {
+    return {
+      isFocus: false,
+      hovering: false,
+      textareaCalcStyle: {}
+    }
+  },
+  computed: {
+    showClearer: function showClearer () {
+      return this.clearable && !this.disabled && !this.readonly && this.value && (this.isFocus || this.hovering)
+    }
+  },
+  methods: {
+    iconShow: function iconShow () {
+      if (this.value) {
+        this.isIconShow = true;
+      }
+    },
+    handleFocus: function handleFocus (ev) {
+      this.isFocus = true;
+      this.$emit('focus', ev);
+    },
+    handleBlur: function handleBlur (ev) {
+      this.isFocus = false;
+      this.$emit('blur', ev);
+    },
+    handleChange: function handleChange (ev) {
+      this.$emit('change', ev.target.value);
+    },
+    handleInput: function handleInput (ev) {
+      this.$emit('input', ev.target.value);
+    },
+    setCurrentValue: function setCurrentValue (val) {
+      this.$refs.ddvInput.value = val || '';
+    },
+    clear: function clear () {
+      this.$emit('clear');
+    },
+    clearVal: function clearVal () {
+      this.$emit('input', '');
+      this.$emit('change', '');
+      this.setCurrentValue('');
+      this.clear();
+    }
+  },
+  watch: {
+    value: function value (val) {
+      this.setCurrentValue(val);
+    }
+  }
+}
+
+/* script */
+            var __vue_script__$7 = script$7;
+            
+/* template */
+var __vue_render__$7 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    {
+      staticClass: "ddv-inputWrap",
+      on: {
+        mouseenter: function($event) {
+          _vm.hovering = true;
+        },
+        mouseleave: function($event) {
+          _vm.hovering = false;
+        }
+      }
+    },
+    [
+      _vm.type === "text"
+        ? _c("span", [
+            _vm.$slots.prepend
+              ? _c(
+                  "div",
+                  { staticClass: "ddv-input__prepend" },
+                  [_vm._t("prepend")],
+                  2
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _c("input", {
+              ref: "ddvInput",
+              staticClass: "ddv-input ddv-input__text",
+              class: {
+                "ddv-input__disabled": _vm.disabled
+              },
+              attrs: {
+                type: _vm.type,
+                readonly: _vm.readonly,
+                disabled: _vm.disabled,
+                placeholder: _vm.placeholder,
+                autocomplete: _vm.autocomplete
+              },
+              domProps: { value: _vm.value },
+              on: {
+                input: _vm.handleInput,
+                change: _vm.handleChange,
+                focus: _vm.handleFocus,
+                blur: _vm.handleBlur
+              }
+            }),
+            _vm._v(" "),
+            _vm.clearable && _vm.showClearer
+              ? _c("i", {
+                  staticClass: "ddv-input__icon iconfont icon-danger",
+                  on: { click: _vm.clearVal }
+                })
+              : _vm._e()
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.type === "textarea"
+        ? _c("span", [
+            _c("textarea", {
+              ref: "textarea",
+              staticClass: "ddv-input ddv-input__textarea"
+            })
+          ])
+        : _vm._e()
+    ]
+  )
+};
+var __vue_staticRenderFns__$7 = [];
+__vue_render__$7._withStripped = true;
+
+  /* style */
+  var __vue_inject_styles__$7 = undefined;
+  /* scoped */
+  var __vue_scope_id__$7 = undefined;
+  /* module identifier */
+  var __vue_module_identifier__$7 = undefined;
+  /* functional template */
+  var __vue_is_functional_template__$7 = false;
+  /* component normalizer */
+  function __vue_normalize__$7(
+    template, style, script,
+    scope, functional, moduleIdentifier,
+    createInjector, createInjectorSSR
+  ) {
+    var component = (typeof script === 'function' ? script.options : script) || {};
+
+    // For security concerns, we use only base name in production mode.
+    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/input/src/input.vue";
+
+    if (!component.render) {
+      component.render = template.render;
+      component.staticRenderFns = template.staticRenderFns;
+      component._compiled = true;
+
+      if (functional) { component.functional = true; }
+    }
+
+    component._scopeId = scope;
+
+    
+
+    return component
+  }
+  /* style inject */
+  function __vue_create_injector__$7() {
+    var head = document.head || document.getElementsByTagName('head')[0];
+    var styles = __vue_create_injector__$7.styles || (__vue_create_injector__$7.styles = {});
+    var isOldIE =
+      typeof navigator !== 'undefined' &&
+      /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
+
+    return function addStyle(id, css) {
+      if (document.querySelector('style[data-vue-ssr-id~="' + id + '"]')) { return } // SSR styles are present.
+
+      var group = isOldIE ? css.media || 'default' : id;
+      var style = styles[group] || (styles[group] = { ids: [], parts: [], element: undefined });
+
+      if (!style.ids.includes(id)) {
+        var code = css.source;
+        var index = style.ids.length;
+
+        style.ids.push(id);
+
+        if (isOldIE) {
+          style.element = style.element || document.querySelector('style[data-group=' + group + ']');
+        }
+
+        if (!style.element) {
+          var el = style.element = document.createElement('style');
+          el.type = 'text/css';
+
+          if (css.media) { el.setAttribute('media', css.media); }
+          if (isOldIE) {
+            el.setAttribute('data-group', group);
+            el.setAttribute('data-next-index', '0');
+          }
+
+          head.appendChild(el);
+        }
+
+        if (isOldIE) {
+          index = parseInt(style.element.getAttribute('data-next-index'));
+          style.element.setAttribute('data-next-index', index + 1);
+        }
+
+        if (style.element.styleSheet) {
+          style.parts.push(code);
+          style.element.styleSheet.cssText = style.parts
+            .filter(Boolean)
+            .join('\n');
+        } else {
+          var textNode = document.createTextNode(code);
+          var nodes = style.element.childNodes;
+          if (nodes[index]) { style.element.removeChild(nodes[index]); }
+          if (nodes.length) { style.element.insertBefore(textNode, nodes[index]); }
+          else { style.element.appendChild(textNode); }
+        }
+      }
+    }
+  }
+  /* style inject SSR */
+  
+
+  
+  var Input = __vue_normalize__$7(
+    { render: __vue_render__$7, staticRenderFns: __vue_staticRenderFns__$7 },
+    __vue_inject_styles__$7,
+    __vue_script__$7,
+    __vue_scope_id__$7,
+    __vue_is_functional_template__$7,
+    __vue_module_identifier__$7,
+    __vue_create_injector__$7,
+    undefined
+  )
+
+Input.install = function (Vue) {
+  Vue.component(Input.name, Input);
+};
+
 var components = [
   Tree,
   Select,
-  Button
+  Button,
+  Dialog,
+  Input
 ];
 
 var install = function (Vue, opts) {
@@ -9904,7 +10367,9 @@ module.exports = {
   Tree: Tree,
   Message: Message,
   Select: Select,
-  Button: Button
+  Button: Button,
+  Dialog: Dialog,
+  Input: Input
 };
 
 module.exports.default = module.exports;
