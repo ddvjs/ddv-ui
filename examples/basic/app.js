@@ -4,6 +4,7 @@ import Tree from './components/tree.vue'
 import Message from './components/Message.vue'
 import Select from './components/select.vue'
 import Button from './components/button.vue'
+import Dialog from './components/dialog.vue'
 
 Vue.use(VueRouter)
 
@@ -43,6 +44,10 @@ const router = new VueRouter({
     {
       path: '/button',
       component: Button
+    },
+    {
+      path: '/dialog',
+      component: Dialog
     }
   ]
 })

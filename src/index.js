@@ -3,11 +3,13 @@ import Tree from '../packages/tree/index.js'
 import Message from '../packages/message/index.js'
 import Select from '../packages/select/index.js'
 import Button from '../packages/button/index.js'
+import Dialog from '../packages/dialog/index.js'
 
 const components = [
   Tree,
   Select,
-  Button
+  Button,
+  Dialog
 ]
 
 const install = (Vue, opts = {}) => {
@@ -32,7 +34,8 @@ module.exports = {
   Tree,
   Message,
   Select,
-  Button
+  Button,
+  Dialog
 }
 
 module.exports.default = module.exports
