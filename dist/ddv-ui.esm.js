@@ -9883,14 +9883,20 @@ Button.install = function (Vue) {
 var hasInitZIndex = false;
 var zIndex = 2000;
 
-var popupInstances = {};
+var instances$1 = {};
 
 var PopupManager = {
   nextZIndex: function nextZIndex () {
     return PopupManager.zIndex++
   },
-  getPopup: function getPopup (id) {
-    return popupInstances[id]
+  getInstances: function getInstances (id) {
+    return instances$1[id]
+  },
+  destroy: function destroy (id) {
+    if (id) {
+      instances$1[id] = null;
+      delete instances$1[id];
+    }
   }
 };
 
