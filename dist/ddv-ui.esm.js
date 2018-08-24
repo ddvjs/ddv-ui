@@ -10512,12 +10512,184 @@ Input.install = function (Vue) {
   Vue.component(Input.name, Input);
 };
 
+//
+
+var script$8 = {
+  name: 'DdvInput',
+  components: {
+    // 'ddv-input': Input
+  },
+  props: {
+    readonly: Boolean,
+    size: {
+      type: String,
+      default: 'normal'
+    }
+  },
+  data: function data () {
+    return {
+      value: ''
+    }
+  },
+  computed: {
+
+  },
+  methods: {
+
+  },
+  watch: {
+
+  },
+  mounted: function mounted () {
+
+  }
+}
+
+/* script */
+            var __vue_script__$8 = script$8;
+            
+/* template */
+var __vue_render__$8 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    { staticClass: "ddv-inputNumber" },
+    [
+      _c("ddv-input", {
+        attrs: { type: "text" },
+        model: {
+          value: _vm.value,
+          callback: function($$v) {
+            _vm.value = $$v;
+          },
+          expression: "value"
+        }
+      })
+    ],
+    1
+  )
+};
+var __vue_staticRenderFns__$8 = [];
+__vue_render__$8._withStripped = true;
+
+  /* style */
+  var __vue_inject_styles__$8 = undefined;
+  /* scoped */
+  var __vue_scope_id__$8 = undefined;
+  /* module identifier */
+  var __vue_module_identifier__$8 = undefined;
+  /* functional template */
+  var __vue_is_functional_template__$8 = false;
+  /* component normalizer */
+  function __vue_normalize__$8(
+    template, style, script,
+    scope, functional, moduleIdentifier,
+    createInjector, createInjectorSSR
+  ) {
+    var component = (typeof script === 'function' ? script.options : script) || {};
+
+    // For security concerns, we use only base name in production mode.
+    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/inputNumber/src/inputNumber.vue";
+
+    if (!component.render) {
+      component.render = template.render;
+      component.staticRenderFns = template.staticRenderFns;
+      component._compiled = true;
+
+      if (functional) { component.functional = true; }
+    }
+
+    component._scopeId = scope;
+
+    
+
+    return component
+  }
+  /* style inject */
+  function __vue_create_injector__$8() {
+    var head = document.head || document.getElementsByTagName('head')[0];
+    var styles = __vue_create_injector__$8.styles || (__vue_create_injector__$8.styles = {});
+    var isOldIE =
+      typeof navigator !== 'undefined' &&
+      /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
+
+    return function addStyle(id, css) {
+      if (document.querySelector('style[data-vue-ssr-id~="' + id + '"]')) { return } // SSR styles are present.
+
+      var group = isOldIE ? css.media || 'default' : id;
+      var style = styles[group] || (styles[group] = { ids: [], parts: [], element: undefined });
+
+      if (!style.ids.includes(id)) {
+        var code = css.source;
+        var index = style.ids.length;
+
+        style.ids.push(id);
+
+        if (isOldIE) {
+          style.element = style.element || document.querySelector('style[data-group=' + group + ']');
+        }
+
+        if (!style.element) {
+          var el = style.element = document.createElement('style');
+          el.type = 'text/css';
+
+          if (css.media) { el.setAttribute('media', css.media); }
+          if (isOldIE) {
+            el.setAttribute('data-group', group);
+            el.setAttribute('data-next-index', '0');
+          }
+
+          head.appendChild(el);
+        }
+
+        if (isOldIE) {
+          index = parseInt(style.element.getAttribute('data-next-index'));
+          style.element.setAttribute('data-next-index', index + 1);
+        }
+
+        if (style.element.styleSheet) {
+          style.parts.push(code);
+          style.element.styleSheet.cssText = style.parts
+            .filter(Boolean)
+            .join('\n');
+        } else {
+          var textNode = document.createTextNode(code);
+          var nodes = style.element.childNodes;
+          if (nodes[index]) { style.element.removeChild(nodes[index]); }
+          if (nodes.length) { style.element.insertBefore(textNode, nodes[index]); }
+          else { style.element.appendChild(textNode); }
+        }
+      }
+    }
+  }
+  /* style inject SSR */
+  
+
+  
+  var InputNumber = __vue_normalize__$8(
+    { render: __vue_render__$8, staticRenderFns: __vue_staticRenderFns__$8 },
+    __vue_inject_styles__$8,
+    __vue_script__$8,
+    __vue_scope_id__$8,
+    __vue_is_functional_template__$8,
+    __vue_module_identifier__$8,
+    __vue_create_injector__$8,
+    undefined
+  )
+
+InputNumber.install = function (Vue) {
+  Vue.component(InputNumber.name, InputNumber);
+};
+
 var components = [
   Tree,
   Select,
   Button,
   Dialog,
-  Input
+  Input,
+  InputNumber
 ];
 
 var install = function (Vue, opts) {
@@ -10547,7 +10719,8 @@ module.exports = {
   Select: Select,
   Button: Button,
   Dialog: Dialog,
-  Input: Input
+  Input: Input,
+  InputNumber: InputNumber
 };
 
 module.exports.default = module.exports;

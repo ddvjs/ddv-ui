@@ -35,7 +35,7 @@
       </span>
     </span>
   
-    <span v-if="type==='textarea'">
+    <span v-if="type === 'textarea'">
       <textarea 
         ref="textarea"
         :value="value"

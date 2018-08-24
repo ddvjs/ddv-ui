@@ -5,13 +5,15 @@ import Select from '../packages/select/index.js'
 import Button from '../packages/button/index.js'
 import Dialog from '../packages/dialog/index.js'
 import Input from '../packages/input/index.js'
+import InputNumber from '../packages/inputNumber/index.js'
 
 const components = [
   Tree,
   Select,
   Button,
   Dialog,
-  Input
+  Input,
+  InputNumber
 ]
 
 const install = (Vue, opts = {}) => {
@@ -39,7 +41,8 @@ module.exports = {
   Select,
   Button,
   Dialog,
-  Input
+  Input,
+  InputNumber
 }
 
 module.exports.default = module.exports

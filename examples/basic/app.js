@@ -6,6 +6,7 @@ import Select from './components/select.vue'
 import Button from './components/button.vue'
 import Dialog from './components/dialog.vue'
 import Input from './components/input.vue'
+import InputNumber from './components/inputNumber.vue'
 
 Vue.use(VueRouter)
 
@@ -53,6 +54,10 @@ const router = new VueRouter({
     {
       path: '/input',
       component: Input
+    },
+    {
+      path: '/inputNumber',
+      component: InputNumber
     }
   ]
 })
