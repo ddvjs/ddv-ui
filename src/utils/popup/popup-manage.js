@@ -3,14 +3,20 @@ import Vue from 'vue'
 let hasInitZIndex = false
 let zIndex = 2000
 
-const popupInstances = {}
+const instances = {}
 
 const PopupManager = {
   nextZIndex () {
     return PopupManager.zIndex++
   },
-  getPopup (id) {
-    return popupInstances[id]
+  getInstances (id) {
+    return instances[id]
+  },
+  destroy (id) {
+    if (id) {
+      instances[id] = null
+      delete instances[id]
+    }
   }
 }
 
