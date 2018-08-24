@@ -8400,7 +8400,7 @@ __vue_render__._withStripped = true;
     var component = (typeof script$$1 === 'function' ? script$$1.options : script$$1) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/tree/src/tree-node.vue";
+    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/tree/src/tree-node.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -8638,7 +8638,7 @@ __vue_render__$1._withStripped = true;
     var component = (typeof script === 'function' ? script.options : script) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/tree/src/tree.vue";
+    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/tree/src/tree.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -8880,7 +8880,7 @@ __vue_render__$2._withStripped = true;
     var component = (typeof script === 'function' ? script.options : script) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/message/src/pc/message.vue";
+    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/message/src/pc/message.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -9092,7 +9092,7 @@ __vue_render__$3._withStripped = true;
     var component = (typeof script === 'function' ? script.options : script) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/message/src/wap/message.vue";
+    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/message/src/wap/message.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -9596,7 +9596,7 @@ __vue_render__$4._withStripped = true;
     var component = (typeof script === 'function' ? script.options : script) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/select/src/select.vue";
+    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/select/src/select.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -9788,7 +9788,7 @@ __vue_render__$5._withStripped = true;
     var component = (typeof script === 'function' ? script.options : script) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/button/src/button.vue";
+    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/button/src/button.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -10097,7 +10097,7 @@ __vue_render__$6._withStripped = true;
     var component = (typeof script === 'function' ? script.options : script) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/dialog/src/dialog.vue";
+    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/dialog/src/dialog.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -10302,7 +10302,8 @@ var __vue_render__$7 = function() {
               ref: "ddvInput",
               staticClass: "ddv-input ddv-input__text",
               class: {
-                "ddv-input__disabled": _vm.disabled
+                "ddv-input__disabled": _vm.disabled,
+                "ddv-input__prepend": _vm.$slots.prepend
               },
               attrs: {
                 type: _vm.type,
@@ -10360,7 +10361,7 @@ __vue_render__$7._withStripped = true;
     var component = (typeof script === 'function' ? script.options : script) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "/Users/sicmouse/Documents/GitHub/ddv-ui/packages/input/src/input.vue";
+    component.__file = "/Users/sicmouse/Documents/github-project/ddv-ui/packages/input/src/input.vue";
 
     if (!component.render) {
       component.render = template.render;

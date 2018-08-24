@@ -20,7 +20,8 @@
         @blur="handleBlur"
         class="ddv-input ddv-input__text"
         :class="{
-          'ddv-input__disabled': disabled
+          'ddv-input__disabled': disabled,
+          'ddv-input__borderRadius':$slots.prepend
         }" >
       <i
         v-if="clearable && showClearer"
