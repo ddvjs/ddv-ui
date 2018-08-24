@@ -2,6 +2,22 @@
   position: relative;
   display: inline-block;
 }
+.ddv-input__normal{
+  height: 40px;
+  line-height: 40px;
+}
+.ddv-input__medium{
+  height:36px;
+  line-height:36px;
+}
+.ddv-input__small{
+  height:32px;
+  line-height:32px;
+}
+.ddv-input__mini{
+  height:28px;
+  line-height:28px;
+}
 .ddv-input{  
   display: inline-block;
   font-size: 14px;
@@ -21,10 +37,9 @@
 }
 .ddv-input__text{
   width: 180px;
-  height: 40px;
-  line-height: 40px;
+  height: 100%;
 }
-.ddv-input__text:focus{
+.ddv-input__text:focus,.ddv-input__textarea:focus{
   border-color:#409eff;
 }
 .ddv-input__disabled{
@@ -35,11 +50,12 @@
 }
 .ddv-input__icon{
   position:absolute;
-  top:13px;
+  top:50%;
   right:12px;
   font-size:14px;
   color:#c0c4cc;
   cursor:pointer;
+  transform:translateY(-50%);
 }
 .ddv-input__textarea{
   width: 414px;
@@ -47,9 +63,7 @@
 }
 .ddv-input__prepend{
   display:inline-block;
-  width: 80px;
-  height: 40px;
-  line-height: 40px;
+  height: 100%;
   margin-right:-6px;
   background-color: #f5f7fa;
   font-size:14px;
@@ -60,7 +74,28 @@
   padding: 0 20px;
   white-space: nowrap;
 }
-.ddv-input__borderRadius{
+.ddv-input__prependChange{
   width:600px;
   border-radius: 0 4px 4px 0;
+}
+.ddv-input__appendChange{
+  width:600px;
+  border-radius: 4px 0 0 4px;
+}
+.ddv-input__append{
+  display:inline-block;
+  height: 100%;
+  margin-left:-4px;
+  background-color: #f5f7fa;
+  font-size:14px;
+  color: #909399;
+  border: 1px solid #dcdfe6;
+  border-left:none;
+  border-radius: 0 4px 4px 0;
+  padding: 0 10px;
+  white-space: nowrap;
+}
+.ddv-input__all{
+  margin-left:2px;
+  border-radius:0;
 }

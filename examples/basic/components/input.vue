@@ -5,9 +5,11 @@
       :rows="10"
       v-model="input" 
       placeholder="请输入内容"
+      size="medium"
       clearable
       >
-      <template slot="prepend">Http://</template>
+      <template slot="prepend">dsdp://</template>
+      <template slot="append">.com</template>
       </ddv-input>
       <!-- :disabled="true" -->
       <!-- autocomplete="off" -->
@@ -24,7 +26,7 @@ export default {
   },
   data () {
     return {
-      input: '4566565'
+      input: 454545
     }
   },
   methods: {

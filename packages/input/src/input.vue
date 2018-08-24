@@ -1,5 +1,6 @@
 <template>
   <div class="ddv-inputWrap"
+    :class="inputSize"
     @mouseenter="hovering = true"
     @mouseleave="hovering = false">
     <span v-if="type==='text'">
@@ -9,7 +10,6 @@
       <input
         ref="ddvInput"
         :value="value"
-        :type="type" 
         :readonly="readonly"
         :disabled="disabled"
         :placeholder="placeholder"
@@ -21,19 +21,31 @@
         class="ddv-input ddv-input__text"
         :class="{
           'ddv-input__disabled': disabled,
-          'ddv-input__borderRadius':$slots.prepend
+          'ddv-input__prependChange':$slots.prepend,
+          'ddv-input__appendChange':$slots.append,
+          'ddv-input__all':$slots.append && $slots.prepend,
         }" >
       <i
         v-if="clearable && showClearer"
         class="ddv-input__icon iconfont icon-danger" 
         @click="clearVal">
       </i>
+      <span class="ddv-input__append" v-if="$slots.append">
+        <slot name="append"></slot>
+      </span>
     </span>
   
     <span v-if="type==='textarea'">
       <textarea 
         ref="textarea"
-        class="ddv-input ddv-input__textarea">
+        :value="value"
+        class="ddv-input ddv-input__textarea"
+        :rows="rows"
+        @input="handleInput"
+        @change="handleChange"
+        @focus="handleFocus"
+        @blur="handleBlur"
+        :placeholder="placeholder">
       </textarea>
     </span>
   </div>
@@ -53,6 +65,10 @@ export default {
     placeholder: String,
     clearable: Boolean,
     rows: Number,
+    size: {
+      type: String,
+      default: 'normal'
+    },
     autocomplete: {
       type: String,
       default: 'off'
@@ -75,7 +91,25 @@ export default {
   },
   computed: {
     showClearer () {
-      return this.clearable && !this.disabled && !this.readonly && this.value && (this.isFocus || this.hovering)
+      return this.clearable &&
+      !this.disabled &&
+      !this.readonly &&
+      this.value &&
+      (this.isFocus || this.hovering) &&
+      !this.$slots.append &&
+      !this.$slots.prepend
+    },
+    inputSize () {
+      switch (this.size) {
+        case 'normal':
+          return 'ddv-input__normal'
+        case 'medium':
+          return 'ddv-input__medium'
+        case 'small':
+          return 'ddv-input__small'
+        case 'mini':
+          return 'ddv-input__mini'
+      }
     }
   },
   methods: {
@@ -93,13 +127,25 @@ export default {
       this.$emit('blur', ev)
     },
     handleChange (ev) {
-      this.$emit('change', ev.target.value)
+      if (this.type === 'textarea') {
+        this.$emit('change', this.$refs.textarea.value)
+      } else {
+        this.$emit('change', ev.target.value)
+      }
     },
     handleInput (ev) {
-      this.$emit('input', ev.target.value)
+      if (this.type === 'textarea') {
+        this.$emit('input', this.$refs.textarea.value)
+      } else {
+        this.$emit('input', ev.target.value)
+      }
     },
     setCurrentValue (val) {
-      this.$refs.ddvInput.value = val || ''
+      if (this.type === 'textarea') {
+        this.$refs.textarea.value = val || ''
+      } else {
+        this.$refs.ddvInput.value = val || ''
+      }
     },
     clear () {
       this.$emit('clear')

@@ -10200,6 +10200,10 @@ var script$7 = {
     placeholder: String,
     clearable: Boolean,
     rows: Number,
+    size: {
+      type: String,
+      default: 'normal'
+    },
     autocomplete: {
       type: String,
       default: 'off'
@@ -10222,7 +10226,25 @@ var script$7 = {
   },
   computed: {
     showClearer: function showClearer () {
-      return this.clearable && !this.disabled && !this.readonly && this.value && (this.isFocus || this.hovering)
+      return this.clearable &&
+      !this.disabled &&
+      !this.readonly &&
+      this.value &&
+      (this.isFocus || this.hovering) &&
+      !this.$slots.append &&
+      !this.$slots.prepend
+    },
+    inputSize: function inputSize () {
+      switch (this.size) {
+        case 'normal':
+          return 'ddv-input__normal'
+        case 'medium':
+          return 'ddv-input__medium'
+        case 'small':
+          return 'ddv-input__small'
+        case 'mini':
+          return 'ddv-input__mini'
+      }
     }
   },
   methods: {
@@ -10240,13 +10262,25 @@ var script$7 = {
       this.$emit('blur', ev);
     },
     handleChange: function handleChange (ev) {
-      this.$emit('change', ev.target.value);
+      if (this.type === 'textarea') {
+        this.$emit('change', this.$refs.textarea.value);
+      } else {
+        this.$emit('change', ev.target.value);
+      }
     },
     handleInput: function handleInput (ev) {
-      this.$emit('input', ev.target.value);
+      if (this.type === 'textarea') {
+        this.$emit('input', this.$refs.textarea.value);
+      } else {
+        this.$emit('input', ev.target.value);
+      }
     },
     setCurrentValue: function setCurrentValue (val) {
-      this.$refs.ddvInput.value = val || '';
+      if (this.type === 'textarea') {
+        this.$refs.textarea.value = val || '';
+      } else {
+        this.$refs.ddvInput.value = val || '';
+      }
     },
     clear: function clear () {
       this.$emit('clear');
@@ -10277,6 +10311,7 @@ var __vue_render__$7 = function() {
     "div",
     {
       staticClass: "ddv-inputWrap",
+      class: _vm.inputSize,
       on: {
         mouseenter: function($event) {
           _vm.hovering = true;
@@ -10303,10 +10338,11 @@ var __vue_render__$7 = function() {
               staticClass: "ddv-input ddv-input__text",
               class: {
                 "ddv-input__disabled": _vm.disabled,
-                "ddv-input__prepend": _vm.$slots.prepend
+                "ddv-input__prependChange": _vm.$slots.prepend,
+                "ddv-input__appendChange": _vm.$slots.append,
+                "ddv-input__all": _vm.$slots.append && _vm.$slots.prepend
               },
               attrs: {
-                type: _vm.type,
                 readonly: _vm.readonly,
                 disabled: _vm.disabled,
                 placeholder: _vm.placeholder,
@@ -10326,6 +10362,15 @@ var __vue_render__$7 = function() {
                   staticClass: "ddv-input__icon iconfont icon-danger",
                   on: { click: _vm.clearVal }
                 })
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.$slots.append
+              ? _c(
+                  "span",
+                  { staticClass: "ddv-input__append" },
+                  [_vm._t("append")],
+                  2
+                )
               : _vm._e()
           ])
         : _vm._e(),
@@ -10334,7 +10379,15 @@ var __vue_render__$7 = function() {
         ? _c("span", [
             _c("textarea", {
               ref: "textarea",
-              staticClass: "ddv-input ddv-input__textarea"
+              staticClass: "ddv-input ddv-input__textarea",
+              attrs: { rows: _vm.rows, placeholder: _vm.placeholder },
+              domProps: { value: _vm.value },
+              on: {
+                input: _vm.handleInput,
+                change: _vm.handleChange,
+                focus: _vm.handleFocus,
+                blur: _vm.handleBlur
+              }
             })
           ])
         : _vm._e()
