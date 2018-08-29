@@ -1,6 +1,12 @@
 <template>
   <div class="ml50 mt50">
-    <ddv-inputNumber></ddv-inputNumber>
+    <ddv-input-number  
+      v-model="num"
+      @change="handleChange"
+      :min="1" 
+      :max="10">
+    </ddv-input-number>
+    {{num}}
   </div>
 </template>
 
@@ -9,15 +15,22 @@ import { InputNumber } from 'ddv-ui'
 
 export default {
   components: {
-    'ddv-inputNumber': InputNumber
+    'ddv-input-number': InputNumber
   },
   data () {
     return {
+      num: 1
     }
   },
   methods: {
+    handleChange (value) {
+      console.log(value)
+    }
   },
   watch: {
+  },
+  mounted () {
+
   }
 }
 </script>
